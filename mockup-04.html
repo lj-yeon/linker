@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINKER - 시안 1 (공공·기관 모던 스타일)</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #0b50bc; --sub: #e6f0ff; --text: #2d3748; --gray: #718096; --orange: #F97316; --orange-sub: #fff7ed; --green: #16A34A; --green-sub: #f0fdf4; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard', sans-serif; }
+        body { color: var(--text); background: #f8fafc; padding-top: 80px; }
+        .container { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { height: 80px; background: #fff; border-bottom: 1px solid #e2e8f0; position: fixed; top:0; left:0; width:100%; z-index:1000; }
+        .header-in { display:flex; align-items:center; height:100%; gap:0; position:relative; }
+        .logo-img { height: 45px; display: block; object-fit: contain; }
+        .gnb { display:flex; gap:40px; list-style:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); }
+        .gnb a { font-weight:600; color:#4a5568; text-decoration:none; font-size:16px; white-space:nowrap; }
+        .gnb a:hover { color:var(--primary); }
+        .util { display:flex; gap:15px; color:#a0aec0; font-size:14px; align-items:center; margin-left:auto; }
+        .util a { color:#718096; text-decoration:none; white-space:nowrap; }
+        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; margin-left:16px; }
+        .hamburger span { display:block; width:22px; height:2px; background:#4a5568; border-radius:2px; transition:0.3s; }
+
+        /* 가로형 아이콘 메뉴 바 */
+        .quick-menu { background: #fff; padding: 25px 0; border-top: 1px solid #edf2f7; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .quick-grid { display: flex; justify-content: space-between; }
+        .quick-item { width: 11%; text-align: center; cursor: pointer; }
+        .quick-item .icon-circle { width: 55px; height: 55px; background: #f7fafc; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto; color: var(--primary); font-size: 22px; transition: 0.2s; border: 1px solid #e2e8f0; }
+        .quick-item:hover .icon-circle { background: var(--primary); color: #fff; transform: translateY(-3px); }
+        .quick-item span { font-size: 13px; font-weight: 600; color: #4a5568; }
+
+        /* 메인 히어로 영역 */
+        .hero { padding: 60px 0; background: #fff; }
+        .hero-grid { display: flex; justify-content: space-between; align-items: center; }
+        .hero-left { width: 50%; }
+        .hero-left h1 { font-size: 42px; font-weight: 800; color: #1a202c; line-height: 1.3; margin-bottom: 20px; }
+        .hero-left p { font-size: 18px; color: var(--gray); margin-bottom: 35px; line-height: 1.6; }
+        .btn-group .btn { padding: 14px 30px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; margin-right: 12px; }
+        .btn-blue { background: var(--primary); color: #fff; box-shadow: 0 4px 14px rgba(11,80,188,0.3); }
+        .btn-white { background: #fff; color: var(--primary); border: 1px solid #cbd5e0; }
+        
+        /* 우측 서비스 카테고리 그래픽 박스 */
+        .hero-right { width: 45%; background: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%); padding: 35px; border-radius: 24px; border: 1px solid #e2e8f0; }
+        .graphic-title { font-size:16px; font-weight:700; color:var(--primary); margin-bottom:20px; display:flex; align-items:center; gap:8px;}
+        .graphic-row { background:#fff; padding:18px; border-radius:12px; margin-bottom:12px; border-left:5px solid var(--primary); display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 6px rgba(0,0,0,0.02);}
+        .graphic-row strong { font-size:15px; color:#1a202c; display:flex; align-items:center; gap:10px; }
+        .graphic-row strong i { color: var(--primary); }
+        .graphic-row span { font-size:13px; color:var(--gray); font-weight:600; }
+
+        /* 프로세스 섹션 */
+        .sec-wrap { padding: 80px 0; }
+        .sec-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:35px; border-bottom:2px solid #e2e8f0; padding-bottom:15px;}
+        .sec-title { font-size: 26px; font-weight: 800; color: #1a202c; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        
+        .status-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 30px; position: relative; transition: 0.3s; }
+        .status-card:hover { transform:translateY(-5px); box-shadow:0 12px 20px rgba(0,0,0,0.05); }
+        .card-icon { width: 45px; height: 45px; background: var(--sub); color: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 15px; }
+        .badge { position: absolute; top: 25px; right: 30px; background: #e2e8f0; color: #4a5568; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .badge.active { background: var(--primary); color: #fff; }
+        .status-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 12px; color: #1a202c; }
+        .status-card p { font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 20px; }
+        .status-card .foot-val { font-size: 14px; font-weight: 700; color: var(--primary); border-top: 1px dashed #edf2f7; padding-top: 15px; display:flex; justify-content:space-between;}
+
+        /* 하단 2분할 레이아웃 */
+        .bottom-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 0; }
+        .split-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 35px; }
+        .split-box h2 { font-size: 22px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .split-box h2 i { color: var(--primary); }
+        
+        .data-list { display: flex; flex-direction: column; gap: 12px; }
+        .data-item { display: flex; justify-content: space-between; padding: 14px; background: #f7fafc; border-radius: 8px; font-size: 14px; align-items: center; }
+        .data-item .region { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .data-item .count { color: var(--primary); font-weight: 700; }
+
+        /* ── 주황·초록 포인트 믹스 ── */
+        /* 퀵메뉴 아이콘 색상 교체 */
+        .quick-item:nth-child(2) .icon-circle { color: var(--orange); border-color: #fed7aa; }
+        .quick-item:nth-child(4) .icon-circle { color: var(--green); border-color: #bbf7d0; }
+        .quick-item:nth-child(6) .icon-circle { color: var(--orange); border-color: #fed7aa; }
+        /* 히어로 그래픽 카드 accent */
+        .graphic-row:nth-child(3) { border-left-color: var(--orange); }
+        .graphic-row:nth-child(3) strong i { color: var(--orange); }
+        .graphic-row:nth-child(4) { border-left-color: var(--green); }
+        .graphic-row:nth-child(4) strong i { color: var(--green); }
+        /* 스텝 카드 아이콘·뱃지 교체 */
+        .status-card:nth-child(2) .card-icon { background: var(--orange-sub); color: var(--orange); }
+        .status-card:nth-child(2) .badge.active { background: var(--orange); }
+        .status-card:nth-child(3) .card-icon { background: var(--green-sub); color: var(--green); }
+        .status-card:nth-child(4) .card-icon { background: var(--orange-sub); color: var(--orange); }
+        .status-card:nth-child(5) .card-icon { background: var(--green-sub); color: var(--green); }
+        .status-card:nth-child(6) .card-icon { background: var(--orange-sub); color: var(--orange); }
+        .status-card:nth-child(2) .foot-val { color: var(--orange); }
+        .status-card:nth-child(3) .foot-val { color: var(--green); }
+        .status-card:nth-child(5) .foot-val { color: var(--green); }
+        /* 하단 데이터 분할 박스 헤더 */
+        .split-box:first-child h2 i { color: var(--orange); }
+        .split-box:last-child h2 i { color: var(--green); }
+        .data-item:nth-child(2) .count { color: var(--orange); }
+        .data-item:nth-child(3) .count { color: var(--green); }
+        /* sec-head 액센트 */
+        .sec-head { border-bottom-color: var(--orange); }
+
+        /* ── 반응형 ── */
+        @media (max-width: 960px) {
+          .quick-item { width: calc(100% / 4); }
+        }
+        @media (max-width: 768px) {
+          body { padding-top: 60px; }
+          header { height: 60px; }
+          .logo-img { height: 34px; }
+          .gnb {
+            display: none; position: fixed; top: 60px; left: 0; width: 100%;
+            background: #fff; flex-direction: column; gap: 0;
+            border-top: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(0,0,0,.1);
+            z-index: 999; padding: 8px 0;
+            transform: none;
+          }
+          .gnb li a { display:block; padding:13px 20px; font-size:15px; border-bottom:1px solid #f1f5f9; }
+          header.open .gnb { display: flex; }
+          .util { display: none; }
+          header.open .util { display: flex; flex-direction: column; align-items: flex-start; padding: 12px 20px 16px; border-top: 1px solid #f1f5f9; position: fixed; top: 60px; left: 0; width: 100%; background: #fff; z-index: 998; margin-top: calc(6 * 48px + 8px); }
+          .hamburger { display: flex; }
+
+          .quick-menu { padding: 18px 0; }
+          .quick-item { width: calc(100% / 4); }
+          .quick-item .icon-circle { width: 44px; height: 44px; font-size: 18px; border-radius: 12px; }
+          .quick-item span { font-size: 11px; }
+
+          .hero { padding: 36px 0; }
+          .hero-grid { flex-direction: column; gap: 28px; }
+          .hero-left { width: 100%; }
+          .hero-left h1 { font-size: clamp(26px, 6vw, 36px); }
+          .hero-left p { font-size: 15px; margin-bottom: 24px; }
+          .hero-right { width: 100%; padding: 24px; }
+          .btn-group { display:flex; flex-wrap:wrap; gap:10px; }
+          .btn-group .btn { margin-right:0; white-space:nowrap; }
+
+          .sec-wrap { padding: 48px 0; }
+          .grid-3 { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+          .status-card { padding: 22px 18px; }
+
+          .bottom-split { grid-template-columns: 1fr; gap: 20px; padding: 36px 0; }
+        }
+        @media (max-width: 480px) {
+          .quick-item { width: calc(100% / 4); }
+          .quick-item span { font-size: 10px; }
+          .grid-3 { grid-template-columns: 1fr; }
+          .sec-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+        }
+
+        /* ── 푸터 (공공·기관 스타일) ── */
+        footer { background: #f8fafc; padding: 40px 20px; color: #4a5568; border-top: 2px solid #e2e8f0; }
+        .footer__inner { max-width: 1200px; margin: 0 auto; position: relative; }
+        .fnb { position: absolute; top: 0; right: 0; }
+        .fnb__wrap { display: flex; list-style: none; align-items: center; padding: 0; margin: 0; }
+        .fnb__wrap li + li::before { content: '|'; margin: 0 12px; color: #cbd5e0; font-weight: 400; }
+        .fnb__link { font-size: 14px; font-weight: 700; color: #4a5568; text-decoration: none; }
+        .fnb__link:hover { color: var(--primary); }
+        .footer__logo { display: block; min-height: 40px; }
+        .footer__logo img { height: 34px; width: auto; object-fit: contain; }
+        .footer__info-row { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 28px; }
+        .site-address { font-size: 14px; line-height: 22px; color: #718096; font-style: normal; }
+        .footer__info-row select { border: 1px solid #e2e8f0; background: #fff; color: #4a5568; padding: 0 16px; font-size: 14px; width: 210px; height: 40px; border-radius: 6px; cursor: pointer; outline: none; flex-shrink: 0; }
+        .copyright { margin-top: 20px; font-size: 12px; color: #a0aec0; }
+        @media (max-width: 768px) {
+          .fnb { position: static; margin-bottom: 20px; }
+          .fnb__wrap { flex-wrap: wrap; gap: 6px; }
+          .fnb__wrap li + li::before { margin: 0 6px; }
+          .fnb__link { font-size: 13px; }
+          .footer__logo { min-height: auto; margin-bottom: 16px; }
+          .footer__info-row { flex-direction: column; gap: 14px; margin-top: 20px; }
+          .footer__info-row select { width: 100%; max-width: 320px; }
+          .site-address { font-size: 14px; line-height: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header (지정 로고 이미지 반영) -->
+    <header>
+        <div class="container header-in">
+            <a href="#"><img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="충남테크노파크" class="logo-img"></a>
+            <ul class="gnb">
+                <li><a href="#">빅바이어 마케팅</a></li>
+                <li><a href="#">수출바우처 컨설팅</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+            <div class="util"><a href="#">로그인</a><span>|</span><a href="#">회원가입</a></div>
+            <button class="hamburger" aria-label="메뉴열기">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-left">
+                <h1>마케팅 서비스</h1>
+                <p>NICE D&B가 축적한 5억 개 이상의 방대한 글로벌 DB POOL을 완벽하게 핸들링하여 국내 기업의 잠재 바이어 매칭 및 수출 판로 개척을 원스톱으로 지원합니다.</p>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-blue">마케팅 시작하기</a>
+                    <a href="#" class="btn btn-white">서비스 매뉴얼 다운로드</a>
+                </div>
+            </div>
+            
+            <div class="hero-right">
+                <div class="graphic-title"><i class="fa-solid fa-circle-check"></i> LINKER 핵심 서비스 카테고리</div>
+                <div class="graphic-row"><strong><i class="fa-solid fa-chart-bar"></i> 빅바이어 마케팅 솔루션</strong><span>/bm-service</span></div>
+                <div class="graphic-row"><strong><i class="fa-solid fa-handshake"></i> 수출바우처 맞춤형 컨설팅</strong><span>/consulting</span></div>
+                <div class="graphic-row"><strong><i class="fa-solid fa-file-contract"></i> 글로벌 신용 보고서 발급</strong><span>D&B Network</span></div>
+                <div class="graphic-row"><strong><i class="fa-solid fa-shield-halved"></i> 사기 바이어 사전 검증 시스템</strong><span>/risk-check</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-menu">
+        <div class="container quick-grid">
+            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-magnifying-glass"></i></div><span>빅바이어 발굴</span></div>
+            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-paper-plane"></i></div><span>메시지 발송</span></div>
+            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-folder-open"></i></div><span>임시저장함</span></div>
+            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-paste"></i></div><span>컨설팅 신청</span></div>
+            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-file-shield"></i></div><span>사기바이어 확인</span></div>
+            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-chart-line"></i></div><span>결제 우량정보</span></div>
+            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-headset"></i></div><span>고객센터 FAQ</span></div>
+        </div>
+    </section>
+
+    <section class="sec-wrap" style="background:#f7fafc;">
+        <div class="container">
+            <div class="sec-head">
+                <div class="sec-title">서비스 소개 (6단계 프로세스)</div>
+            </div>
+            <div class="grid-3">
+                <div class="status-card">
+                    <div class="badge active">STEP 01</div>
+                    <div class="card-icon"><i class="fa-solid fa-database"></i></div>
+                    <h3>빅데이터 발굴</h3>
+                    <p>세계 최대 규모(5억 건 이상)의 글로벌 기업 빅데이터를 실시간 웹데이터와 정밀 결합시켜 최적의 맞춤 바이어를 추출합니다.</p>
+                    <div class="foot-val"><span>정확도 지표</span><span>98.2% 수렴</span></div>
+                </div>
+                <div class="status-card">
+                    <div class="badge active">STEP 02</div>
+                    <div class="card-icon"><i class="fa-solid fa-bezier-curve"></i></div>
+                    <h3>AI 추천 로직</h3>
+                    <p>실제 무역 거래 데이터를 학습한 AI가 독자 알고리즘을 가동하여, 유효 거래 성사 확률이 극대화된 진성 바이어를 선별합니다.</p>
+                    <div class="foot-val"><span>매칭 알고리즘</span><span>실시간 분석중</span></div>
+                </div>
+                <div class="status-card">
+                    <div class="badge">STEP 03</div>
+                    <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <h3>마케팅 메시지 작성</h3>
+                    <p>발굴된 타겟 바이어군에 전송할 eDM을 간편하게 빌딩합니다. 자주 쓰이는 프리셋 포맷은 템플릿에 저장하여 즉시 사용 가능합니다.</p>
+                    <div class="foot-val"><span>스마트 메시지</span><span>템플릿 제공</span></div>
+                </div>
+                <div class="status-card">
+                    <div class="badge">STEP 04</div>
+                    <div class="card-icon"><i class="fa-solid fa-paper-plane"></i></div>
+                    <h3>마케팅 메시지 발송</h3>
+                    <p>작성이 완료된 타겟형 eDM을 전 세계 바이어 메일망으로 안전하게 다이렉트 발송합니다. A/B 테스트를 통한 회신율 모니터링을 제공합니다.</p>
+                    <div class="foot-val"><span>서버 발송 상태</span><span>안정성 100%</span></div>
+                </div>
+                <div class="status-card">
+                    <div class="badge">STEP 05</div>
+                    <div class="card-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                    <h3>바이어 확인 및 열람</h3>
+                    <p>수출 기업의 핵심 Selling Point가 정밀하게 조율되어 담긴 eDM을 수신한 글로벌 바이어가 실시간으로 내용을 오픈하고 검토합니다.</p>
+                    <div class="foot-val"><span>추적 코드 연동</span><span>실시간 추적</span></div>
+                </div>
+                <div class="status-card">
+                    <div class="badge">STEP 06</div>
+                    <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
+                    <h3>바이어 답변 메시지 확인</h3>
+                    <p>일반적인 무차별 대량 메일 발송 케이스 대비 타겟팅을 통해 최대 5배 이상 도출되는 압도적인 글로벌 바이어의 피드백 답변을 확인합니다.</p>
+                    <div class="foot-val"><span>평균 피드백률</span><span>5배 상승 도달</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="bottom-split">
+            <div class="split-box">
+                <h2><i class="fa-solid fa-earth-americas"></i> 글로벌 신용조사 규모 (컨설팅)</h2>
+                <div class="data-list" style="margin-top:20px;">
+                    <div class="data-item"><span class="region"><i class="fa-solid fa-caret-right"></i> Asia Pacific (아시아 태평양)</span><span class="count">180,161,374 건</span></div>
+                    <div class="data-item"><span class="region"><i class="fa-solid fa-caret-right"></i> Europe (유럽 연합)</span><span class="count">156,229,203 건</span></div>
+                    <div class="data-item"><span class="region"><i class="fa-solid fa-caret-right"></i> North America (북미 대륙)</span><span class="count">117,948,961 건</span></div>
+                    <div class="data-item" style="background:var(--sub);"><span class="region" style="color:var(--primary)"><i class="fa-solid fa-globe"></i> Global Total (전세계 총합)</span><span class="count" style="color:var(--primary)">553,609,651 건</span></div>
+                </div>
+            </div>
+            <div class="split-box">
+                <h2><i class="fa-solid fa-building-shield"></i> 해외 리스크 기업조회 서비스</h2>
+                <div class="data-list" style="margin-top:20px;">
+                    <div class="data-item"><span class="region"><i class="fa-solid fa-ban" style="color:#e53e3e;"></i> 금융기관 위험 정보</span><span class="count" style="color:#e53e3e;">무역사기 / 대금지연 리스크</span></div>
+                    <div class="data-item"><span class="region"><i class="fa-solid fa-circle-check" style="color:#38a169;"></i> 우량 상태 지표</span><span class="count" style="color:#38a169;">적기 결제 / 활성 무역 활동 지수</span></div>
+                    <div class="data-item"><span class="region"><i class="fa-solid fa-star" style="color:#dd6b20;"></i> 글로벌 등급 정보</span><span class="count" style="color:#dd6b20;">D&B Rating / PAYDEX 점수</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer__inner">
+            <div class="fnb">
+                <ul class="fnb__wrap">
+                    <li><a href="#" class="fnb__link" style="color:red;">개인정보처리방침</a></li>
+                    <li><a href="/policy-details" class="fnb__link">이용약관</a></li>
+                    <li><a href="/credit-usage-notice" class="fnb__link">신용정보활용체제공시</a></li>
+                    <li><a href="/email-no-collection" class="fnb__link">이메일무단수집거부</a></li>
+                </ul>
+            </div>
+            <div class="footer__logo">
+                <img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스">
+            </div>
+            <div class="footer__info-row">
+                <address class="site-address">
+                    (04535) 서울특별시 중구 소공로 70, 포스트타워 16층 (주)NICE디앤비<br>
+                    통신판매업신고: 제2024-서울중구-1736호 사업자등록번호: 107-86-24874 TEL: 02-2122-0233 FAX: 02-2122-2591
+                </address>
+                <select id="familySite" name="familySite">
+                    <option value="" disabled selected>Family site</option>
+                    <option value="https://www.nicednb.com">나이스디앤비 홈페이지</option>
+                    <option value="https://global.nicednb.com"> 나이스디앤비 글로벌 홈페이지 </option>
+                </select>
+            </div>
+            <p class="copyright">ⓒ 2023. NICE D&amp;B Co.,Ltd. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+
+<script>
+  document.querySelector('.hamburger').addEventListener('click', function() {
+    this.closest('header').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
