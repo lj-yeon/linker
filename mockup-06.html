@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LINKER - 시안 3 (트렌디 SaaS 플랫폼 스타일)</title>
+    <title>mockup-06</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --main: #2563eb; --light: #f0f6ff; --dark: #0f172a; --border: #e2e8f0; --orange: #F97316; --orange-light: #fff7ed; --green: #16A34A; --green-light: #f0fdf4; }
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard', sans-serif; }
-        body { color: #334155; background: #fff; padding-top: 80px; }
+        html { overflow-x: hidden; }
+        body { color: #334155; background: #fff; padding-top: 66px; overflow-x: hidden; }
+        img { max-width: 100%; }
         .container { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 20px; }
 
         /* Header */
-        header { height: 80px; background: #fff; border-bottom: 1px solid #e2e8f0; position: fixed; top:0; left:0; width:100%; z-index:1000; }
+        header { height: 66px; background: #fff; border-bottom: 1px solid #e2e8f0; position: fixed; top:0; left:0; width:100%; z-index:1000; }
         .header-in { display:flex; align-items:center; height:100%; gap:0; position:relative; }
         .logo-img { height: 45px; display: block; object-fit: contain; }
         .gnb { display:flex; gap:40px; list-style:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); }
@@ -21,8 +23,11 @@
         .gnb a:hover { color: var(--main); }
         .util { display:flex; gap:15px; color:#a0aec0; font-size:14px; align-items:center; margin-left:auto; }
         .util a { color:#718096; text-decoration:none; white-space:nowrap; }
-        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; margin-left:16px; }
-        .hamburger span { display:block; width:22px; height:2px; background:#4a5568; border-radius:2px; transition:0.3s; }
+        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:9px 10px; background:var(--light); border-radius:12px; border:none; margin-left:16px; }
+        .hamburger span { display:block; height:2px; background:var(--main); border-radius:3px; transition:0.3s; }
+        .hamburger span:nth-child(1) { width:20px; }
+        .hamburger span:nth-child(2) { width:14px; }
+        .hamburger span:nth-child(3) { width:20px; }
 
         /* 상단 둥근 배경 히어로 배너 */
         .hero-banner { background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%); padding: 70px 0 120px 0; border-radius: 0 0 50px 50px; }
@@ -34,6 +39,7 @@
         
         /* 모던 도넛 라이브 인덱스 차트 컴포넌트 */
         .hero-right { width: 42%; background: #fff; border-radius: 24px; padding: 30px; box-shadow: 0 20px 40px rgba(15,23,42,0.08); border: 1px solid var(--border); }
+        .hero-stats { display: flex; justify-content: space-around; font-size: 12px; text-align: center; margin-top: 10px; flex-wrap: wrap; gap: 8px; }
         .chart-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid #f1f5f9; padding-bottom:15px;}
         .chart-circle { width: 140px; height: 140px; border: 16px solid var(--light); border-top-color: var(--main); border-radius: 50%; margin: 20px auto; position: relative; display:flex; align-items:center; justify-content:center;}
         .chart-circle::after { content: '5.5억+'; font-weight: 800; font-size: 18px; color: var(--dark); }
@@ -63,8 +69,8 @@
         
         .row-bar { display: flex; flex-direction: column; gap: 14px; }
         .bar-item { background: #f8fafc; padding: 14px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
-        .bar-item .name { font-weight: 700; color: #334155; display: flex; align-items: center; gap: 8px; }
-        .bar-item .val { font-weight: 700; color: var(--main); }
+        .bar-item .name { font-weight: 700; color: #334155; display: flex; align-items: center; gap: 8px; word-break: break-word; overflow-wrap: break-word; min-width: 0; }
+        .bar-item .val { font-weight: 700; color: var(--main); word-break: break-word; overflow-wrap: break-word; flex-shrink: 0; }
 
         /* ── 주황·초록 포인트 믹스 ── */
         /* 히어로 배지 */
@@ -99,8 +105,8 @@
           .flow-container { flex-wrap: wrap; gap: 20px; justify-content: center; }
         }
         @media (max-width: 768px) {
-          body { padding-top: 60px; }
-          header { height: 60px; }
+          body { padding-top: 66px; }
+          header { height: 66px; }
           .logo-img { height: 34px; }
           .gnb {
             display: none; position: fixed; top: 60px; left: 0; width: 100%;
@@ -112,7 +118,7 @@
           .gnb li a { display:block; padding:13px 20px; font-size:15px; border-bottom:1px solid #f1f5f9; }
           header.open .gnb { display: flex; }
           .util { display: none; }
-          .hamburger { display: flex; }
+          .hamburger { display: flex; margin-left: auto; }
 
           .hero-banner { padding: 48px 0 80px; border-radius: 0 0 30px 30px; }
           .hero-grid { flex-direction: column; gap: 28px; }
@@ -132,13 +138,23 @@
 
           .double-grid { grid-template-columns: 1fr; padding-bottom: 60px; gap: 20px; }
           .grid-box { padding: 24px 20px; }
+          .grid-box h3 { font-size: 18px; }
+          .v-card h3 { font-size: 17px; }
+          .bar-item { flex-wrap: wrap; gap: 6px; }
+          .bar-item .val { flex-shrink: 1; }
         }
         @media (max-width: 480px) {
           .float-cards-grid { grid-template-columns: 1fr; }
           .flow-node { width: calc(50% - 14px); }
           .hero-left h1 { font-size: clamp(24px, 7vw, 34px); }
+          .v-card h3 { font-size: 16px; }
+          .v-card { padding: 20px 16px; }
+          .grid-box h3 { font-size: 16px; }
           .bar-item { flex-direction: column; align-items: flex-start; gap: 4px; }
-          .bar-item .val { font-size: 13px; }
+          .bar-item .val { font-size: 13px; flex-shrink: unset; }
+          .hero-stats { justify-content: center; gap: 12px; }
+          .hero-stats > div { min-width: 80px; }
+          .hero-right { padding: 20px; }
         }
 
         /* ── 푸터 (모던 SaaS 스타일) ── */
@@ -165,6 +181,56 @@
           .footer__info-row select { width: 100%; max-width: 320px; }
           .site-address { font-size: 14px; line-height: 22px; }
         }
+        /* ── 컨설팅 서비스 섹션 (도넛 차트) ── */
+        .donut-sec { background: var(--light); padding: 80px 0; }
+        .sec-heading { text-align: center; margin-bottom: 56px; }
+        .sec-badge { display: inline-block; background: #fff; border: 1px solid #bfdbfe; color: var(--main); font-weight: 700; font-size: 13px; padding: 6px 16px; border-radius: 30px; margin-bottom: 14px; }
+        .sec-heading h2 { font-size: 34px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+        .sec-heading p { font-size: 16px; color: #64748b; }
+        .donut-wrap { display: flex; flex-direction: column; align-items: center; gap: 40px; }
+        .donut-svg-box { width: 300px; height: 300px; flex-shrink: 0; }
+        .legend-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 28px; width: 100%; max-width: 720px; }
+        .legend-item { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 12px; padding: 14px 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+        .legend-region { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+        .legend-val { font-size: 12px; color: #64748b; font-weight: 600; }
+
+        /* ── 기업조회 서비스 섹션 (피처 카드) ── */
+        .lookup-sec { background: #fff; padding: 80px 0; }
+        .lookup-sec .sec-badge { background: var(--green-light); border-color: #bbf7d0; color: var(--green); }
+        .feature-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .feature-card { border-radius: 20px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,.08); }
+        .feat-header { padding: 36px 32px 28px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+        .feat-header i { font-size: 36px; color: #fff; }
+        .feat-header h3 { font-size: 24px; font-weight: 800; color: #fff; margin: 0; }
+        .feat-body { background: #fff; padding: 28px 32px 36px; }
+        .feat-list { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+        .feat-list li { font-size: 15px; color: #334155; display: flex; align-items: center; gap: 10px; }
+        .feat-list li i { font-size: 17px; flex-shrink: 0; }
+
+        @media (max-width: 960px) {
+          .legend-grid { grid-template-columns: repeat(2, 1fr); }
+          .feature-cards { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+          .donut-sec { padding: 56px 0; }
+          .lookup-sec { padding: 56px 0; }
+          .sec-heading h2 { font-size: 26px; }
+          .legend-grid { grid-template-columns: repeat(2, 1fr); gap: 12px 16px; }
+          .donut-svg-box { width: 260px; height: 260px; }
+        }
+        @media (max-width: 480px) {
+          .legend-grid { grid-template-columns: 1fr; }
+          .feat-header { padding: 28px 24px 20px; }
+          .feat-body { padding: 22px 24px 28px; }
+        }
+        .snav-pill { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 500; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 50px; padding: 10px 18px; box-shadow: 0 4px 24px rgba(15,23,42,.1); border: 1px solid #f1f5f9; }
+        .spill-dot { display: block; width: 8px; height: 8px; border-radius: 50%; background: #e2e8f0; text-decoration: none; transition: all 0.3s ease; position: relative; cursor: pointer; }
+        .spill-dot:hover { background: #93c5fd; }
+        .spill-dot.active { width: 24px; border-radius: 4px; background: var(--main); box-shadow: 0 2px 8px rgba(37,99,235,.4); }
+        .spill-dot::before { content: attr(data-label); position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: var(--dark); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+        .spill-dot:hover::before, .spill-dot.active::before { opacity: 1; }
+        @media (max-width: 767px) { .snav-pill { display: none; } }
     </style>
 </head>
 <body>
@@ -185,7 +251,7 @@
         </div>
     </header>
 
-    <section class="hero-banner">
+    <section class="hero-banner" id="s-hero">
         <div class="container hero-grid">
             <div class="hero-left">
                 <div class="hero-badge">INTELLIGENT EXPORT PLATFORM</div>
@@ -196,7 +262,7 @@
             <div class="hero-right">
                 <div class="chart-head"><strong>글로벌 바이어 인덱스</strong><span style="font-size:12px; color:var(--main); font-weight:700;"><i class="fa-solid fa-circle-dot"></i> LIVE</span></div>
                 <div class="chart-circle"></div>
-                <div style="display:flex; justify-content:space-around; font-size:12px; text-align:center; margin-top:10px;">
+                <div class="hero-stats">
                     <div><span style="color:#64748b;">유럽 Network</span><br><strong>1.5억 건</strong></div>
                     <div><span style="color:#64748b;">아시아 DB</span><br><strong>1.8억 건</strong></div>
                     <div><span style="color:#64748b;">북미 Profile</span><br><strong>1.1억 건</strong></div>
@@ -230,7 +296,7 @@
         </div>
     </div>
 
-    <section class="container">
+    <section class="container" id="s-flow">
         <div class="flow-sec">
             <div class="center-title">LINKER 6단계 원스톱 워크플로우</div>
             
@@ -250,23 +316,124 @@
         </div>
     </section>
 
-    <section class="container double-grid">
-        <div class="grid-box">
-            <h3><i class="fa-solid fa-chart-simple" style="color:var(--main)"></i> 글로벌 데이터 보유 규모</h3>
-            <div class="row-bar">
-                <div class="bar-item"><span class="name"><i class="fa-solid fa-circle-chevron-right" style="color:var(--main)"></i> Asia Pacific</span><span class="val">180,161,374 건</span></div>
-                <div class="bar-item"><span class="name"><i class="fa-solid fa-circle-chevron-right" style="color:var(--main)"></i> Europe</span><span class="val">156,229,203 건</span></div>
-                <div class="bar-item"><span class="name"><i class="fa-solid fa-circle-chevron-right" style="color:var(--main)"></i> North America</span><span class="val">117,948,961 건</span></div>
-                <div class="bar-item" style="background:var(--light);"><span class="name" style="color:var(--main)"><i class="fa-solid fa-globe"></i> Global Total Index</span><span class="val" style="color:var(--main)">553,609,651 건</span></div>
+    <section class="donut-sec" id="s-donut">
+        <div class="container">
+            <div class="sec-heading">
+                <div><span class="sec-badge">컨설팅 서비스</span></div>
+                <h2>해외기업 신용조사</h2>
+                <p>글로벌 데이터 현황 &nbsp;총 6개 지역 &nbsp;553,609,651건</p>
+            </div>
+            <div class="donut-wrap">
+                <div class="donut-svg-box">
+                    <svg viewBox="0 0 300 300" width="300" height="300">
+                        <g transform="rotate(-90 150 150)">
+                            <circle cx="150" cy="150" r="80" fill="none" stroke="#2563eb" stroke-width="44" stroke-dasharray="163.86 502.65" stroke-dashoffset="0"/>
+                            <circle cx="150" cy="150" r="80" fill="none" stroke="#60a5fa" stroke-width="44" stroke-dasharray="141.75 502.65" stroke-dashoffset="-163.86"/>
+                            <circle cx="150" cy="150" r="80" fill="none" stroke="#F97316" stroke-width="44" stroke-dasharray="107.06 502.65" stroke-dashoffset="-305.61"/>
+                            <circle cx="150" cy="150" r="80" fill="none" stroke="#16A34A" stroke-width="44" stroke-dasharray="76.40 502.65" stroke-dashoffset="-412.67"/>
+                            <circle cx="150" cy="150" r="80" fill="none" stroke="#94a3b8" stroke-width="44" stroke-dasharray="10.56 502.65" stroke-dashoffset="-489.07"/>
+                            <circle cx="150" cy="150" r="80" fill="none" stroke="#cbd5e1" stroke-width="44" stroke-dasharray="3.52 502.65" stroke-dashoffset="-499.63"/>
+                        </g>
+                        <text x="150" y="144" text-anchor="middle" font-size="24" font-weight="800" fill="#0f172a" font-family="Pretendard, sans-serif">5.5억+</text>
+                        <text x="150" y="166" text-anchor="middle" font-size="13" fill="#64748b" font-family="Pretendard, sans-serif">전 세계 기업 DB</text>
+                    </svg>
+                </div>
+                <div class="legend-grid">
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background:#2563eb;"></span>
+                        <div>
+                            <div class="legend-region">Asia Pacific</div>
+                            <div class="legend-val">180,161,374건 · 32.6%</div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background:#60a5fa;"></span>
+                        <div>
+                            <div class="legend-region">Europe</div>
+                            <div class="legend-val">156,229,203건 · 28.2%</div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background:#F97316;"></span>
+                        <div>
+                            <div class="legend-region">North America</div>
+                            <div class="legend-val">117,948,961건 · 21.3%</div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background:#16A34A;"></span>
+                        <div>
+                            <div class="legend-region">Latin America</div>
+                            <div class="legend-val">83,850,324건 · 15.2%</div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background:#94a3b8;"></span>
+                        <div>
+                            <div class="legend-region">Africa</div>
+                            <div class="legend-val">11,564,797건 · 2.1%</div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background:#cbd5e1;"></span>
+                        <div>
+                            <div class="legend-region">Middle East</div>
+                            <div class="legend-val">3,854,992건 · 0.7%</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="grid-box">
-            <h3><i class="fa-solid fa-magnifying-glass-location" style="color:var(--main)"></i> 해외 거래기업 리스크 정보</h3>
-            <div class="row-bar">
-                <div class="bar-item"><span class="name"><i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 금융기관 신용 위협 스크리닝</span><span class="val" style="color:#ef4444;">무역사기 / 대금지연 리스크 예방</span></div>
-                <div class="bar-item"><span class="name"><i class="fa-solid fa-square-check" style="color:#10b981;"></i> 우량 기업 거래 정보 매칭</span><span class="val" style="color:#10b981;">적기 결제 현황 및 무역 지수</span></div>
-                <div class="bar-item"><span class="name"><i class="fa-solid fa-shield" style="color:#f59e0b;"></i> 글로벌 표준 안심 등급 산출</span><span class="val" style="color:#f59e0b;">D&B Rating / PAYDEX 점수</span></div>
+    </section>
+
+    <section class="lookup-sec" id="s-lookup">
+        <div class="container">
+            <div class="sec-heading">
+                <div><span class="sec-badge">기업조회 서비스</span></div>
+                <h2>거래기업 등록상태 확인</h2>
+                <p>공공/민간 각 부문이 보유한 해외기업의 중요 거래정보(불량/우량정보, 위험정보 등)를 실시간 공유합니다.</p>
+            </div>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feat-header" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i class="fa-solid fa-landmark"></i>
+                        <h3>금융기관</h3>
+                    </div>
+                    <div class="feat-body">
+                        <ul class="feat-list">
+                            <li><i class="fa-solid fa-circle-check" style="color:#ef4444;"></i>무역사기</li>
+                            <li><i class="fa-solid fa-circle-check" style="color:#ef4444;"></i>대금지급 지연</li>
+                            <li><i class="fa-solid fa-circle-check" style="color:#ef4444;"></i>부정당 체제</li>
+                            <li><i class="fa-solid fa-circle-check" style="color:#ef4444;"></i>탈세</li>
+                            <li><i class="fa-solid fa-circle-check" style="color:#ef4444;"></i>자금세탁</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feat-header" style="background: linear-gradient(135deg, #16A34A, #15803d);">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h3>우량정보</h3>
+                    </div>
+                    <div class="feat-body">
+                        <ul class="feat-list">
+                            <li><i class="fa-solid fa-circle-check" style="color:#16A34A;"></i>적기 결제</li>
+                            <li><i class="fa-solid fa-circle-check" style="color:#16A34A;"></i>무역활동 지수</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feat-header" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h3>등급정보</h3>
+                    </div>
+                    <div class="feat-body">
+                        <ul class="feat-list">
+                            <li><i class="fa-solid fa-circle-check" style="color:#2563eb;"></i>D&amp;B Rating</li>
+                            <li><i class="fa-solid fa-circle-check" style="color:#2563eb;"></i>PAYDEX</li>
+                            <li><i class="fa-solid fa-circle-check" style="color:#2563eb;"></i>수출거래 위험지표</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -301,10 +468,33 @@
     </footer>
 
 
+<nav class="snav-pill" id="sectionNav">
+  <a href="#s-hero" class="spill-dot active" data-label="메인"></a>
+  <a href="#s-flow" class="spill-dot" data-label="워크플로우"></a>
+  <a href="#s-donut" class="spill-dot" data-label="컨설팅 서비스"></a>
+  <a href="#s-lookup" class="spill-dot" data-label="기업조회 서비스"></a>
+</nav>
+
 <script>
   document.querySelector('.hamburger').addEventListener('click', function() {
     this.closest('header').classList.toggle('open');
   });
+
+  (function() {
+    var sections = ['s-hero', 's-flow', 's-donut', 's-lookup'];
+    var dots = document.querySelectorAll('#sectionNav .spill-dot');
+    function onScroll() {
+      var scrollY = window.scrollY + window.innerHeight / 3;
+      var active = 0;
+      for (var i = 0; i < sections.length; i++) {
+        var el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollY) active = i;
+      }
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === active); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
 </script>
 </body>
 </html>

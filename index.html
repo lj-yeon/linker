@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LINKER – 시안 목록</title>
+<title>index</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -27,142 +27,401 @@ body {
 header {
   background: #fff;
   border-bottom: 1px solid var(--gray-2);
-  padding: 20px 32px;
+  padding: 22px 32px;
+  display: flex; align-items: center; justify-content: space-between;
 }
-header h1 {
-  font-size: 20px; font-weight: 900; color: var(--dark);
-  display: flex; align-items: center; gap: 10px;
+.hd-brand { display: flex; align-items: center; gap: 12px; }
+.hd-logo {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
 }
-header h1 span { color: var(--blue); }
-header p { font-size: 13px; color: var(--gray-4); margin-top: 4px; }
+.hd-logo svg { width: 20px; height: 20px; }
+.hd-text h1 { font-size: 18px; font-weight: 900; color: var(--dark); }
+.hd-text p  { font-size: 12px; color: var(--gray-4); margin-top: 1px; }
+.hd-badge {
+  font-size: 11px; font-weight: 700; color: var(--blue);
+  background: var(--blue-l); padding: 5px 12px; border-radius: 20px;
+}
 
 main {
   flex: 1;
-  width: min(880px, calc(100% - 40px));
-  margin: 48px auto;
+  width: min(1000px, calc(100% - 40px));
+  margin: 44px auto 60px;
 }
-.list-title {
-  font-size: 13px; font-weight: 700; color: var(--gray-4);
-  letter-spacing: .08em; text-transform: uppercase;
-  margin-bottom: 16px;
+.section-label {
+  font-size: 11px; font-weight: 800; color: var(--gray-4);
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 20px;
 }
-.mockup-list { display: flex; flex-direction: column; gap: 12px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
 
-.mockup-item {
+.card {
   background: #fff;
   border: 1px solid var(--gray-2);
-  border-radius: 14px;
-  padding: 20px 24px;
-  display: flex; align-items: center; gap: 20px;
+  border-radius: 16px;
+  overflow: hidden;
   text-decoration: none; color: inherit;
-  transition: box-shadow .2s, transform .2s, border-color .2s;
+  transition: box-shadow .22s, transform .22s, border-color .22s;
+  display: flex; flex-direction: column;
 }
-.mockup-item:hover {
-  box-shadow: 0 8px 28px rgba(26,111,216,.1);
-  transform: translateY(-2px);
+.card:hover {
+  box-shadow: 0 10px 32px rgba(26,111,216,.12);
+  transform: translateY(-3px);
   border-color: var(--blue);
 }
-.item-num {
-  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+
+/* 썸네일 */
+.thumb {
+  width: 100%; aspect-ratio: 16/9;
+  position: relative; overflow: hidden;
+  background: var(--gray-2);
+}
+.thumb svg { width: 100%; height: 100%; }
+
+/* 카드 바디 */
+.card-body {
+  padding: 18px 20px 20px;
+  display: flex; align-items: flex-start; gap: 14px;
+  flex: 1;
+}
+.num {
+  width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 15px; font-weight: 900; color: #fff;
+  font-size: 13px; font-weight: 900; color: #fff;
+  margin-top: 1px;
 }
-.item-body { flex: 1; }
-.item-body strong { display: block; font-size: 15px; font-weight: 800; color: var(--dark); margin-bottom: 3px; }
-.item-body span  { font-size: 12px; color: var(--gray-4); }
-.item-arrow {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: var(--gray-1); display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; transition: background .2s;
+.card-info { flex: 1; }
+.card-info strong { display: block; font-size: 14px; font-weight: 800; color: var(--dark); margin-bottom: 4px; }
+.card-info span   { font-size: 12px; color: var(--gray-4); line-height: 1.6; display: block; }
+.card-arrow {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--gray-1); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px; transition: background .2s;
 }
-.mockup-item:hover .item-arrow { background: var(--blue-l); }
-.item-arrow svg { width: 16px; height: 16px; stroke: var(--blue); }
+.card:hover .card-arrow { background: var(--blue-l); }
+.card-arrow svg { width: 14px; height: 14px; stroke: var(--blue); }
 
 footer {
   text-align: center; padding: 24px;
   font-size: 12px; color: var(--gray-3);
+  border-top: 1px solid var(--gray-2);
+  background: #fff;
 }
 </style>
 </head>
 <body>
+
 <header>
-  <h1>LINKER <span>Mockup</span></h1>
-  <p>NTS 수출지원서비스 — 메인페이지 시안 6종</p>
+  <div class="hd-brand">
+    <div class="hd-logo">
+      <svg viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="7" stroke="#fff" stroke-width="2"/>
+        <path d="M6 10h8M10 6v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="hd-text">
+      <h1>LINKER</h1>
+      <p>NTS 수출지원서비스 메인페이지 시안</p>
+    </div>
+  </div>
+  <span class="hd-badge">시안 6종</span>
 </header>
 
 <main>
-  <p class="list-title">시안 목록</p>
-  <div class="mockup-list">
+  <p class="section-label">Mockup List</p>
+  <div class="grid">
 
-    <a href="mockup-01.html" class="mockup-item">
-      <div class="item-num" style="background:var(--blue);">01</div>
-      <div class="item-body">
-        <strong>Mockup 01</strong>
-        <span>클린 코퍼레이트 — 막대그래프 + 세계지도</span>
+    <!-- 01 -->
+    <a href="mockup-01.html" class="card">
+      <div class="thumb">
+        <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="225" fill="#EBF3FE"/>
+          <!-- 헤더 바 -->
+          <rect width="400" height="32" fill="#fff"/>
+          <rect x="12" y="10" width="52" height="12" rx="3" fill="#1A6FD8" opacity=".8"/>
+          <rect x="72" y="11" width="36" height="10" rx="2" fill="#C9D2DC"/>
+          <rect x="114" y="11" width="36" height="10" rx="2" fill="#C9D2DC"/>
+          <rect x="340" y="9" width="48" height="14" rx="7" fill="#1A6FD8"/>
+          <!-- 히어로 카피 -->
+          <rect x="20" y="50" width="80" height="8" rx="4" fill="#1A6FD8" opacity=".3"/>
+          <rect x="20" y="65" width="150" height="16" rx="4" fill="#1B2535" opacity=".85"/>
+          <rect x="20" y="86" width="130" height="16" rx="4" fill="#1B2535" opacity=".85"/>
+          <rect x="20" y="110" width="100" height="8" rx="3" fill="#8997A8" opacity=".7"/>
+          <rect x="20" y="130" width="72" height="22" rx="6" fill="#1A6FD8"/>
+          <rect x="98" y="130" width="60" height="22" rx="6" fill="none" stroke="#1A6FD8" stroke-width="1.5"/>
+          <!-- 막대 차트 (우측) -->
+          <rect x="220" y="42" width="160" height="120" rx="10" fill="#fff" opacity=".9"/>
+          <rect x="235" y="120" width="18" height="28" rx="3" fill="#BDD9F9"/>
+          <rect x="261" y="108" width="18" height="40" rx="3" fill="#7EB9F7"/>
+          <rect x="287" y="90"  width="18" height="58" rx="3" fill="#4898F0"/>
+          <rect x="313" y="72"  width="18" height="76" rx="3" fill="#1A6FD8"/>
+          <rect x="339" y="56"  width="18" height="92" rx="3" fill="url(#g1)"/>
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1A6FD8"/>
+              <stop offset="100%" stop-color="#F57C1E"/>
+            </linearGradient>
+          </defs>
+          <polyline points="244,120 270,108 296,90 322,72 348,56" stroke="#F57C1E" stroke-width="2" fill="none"/>
+          <!-- stats 배너 -->
+          <rect y="175" width="400" height="50" fill="#fff"/>
+          <rect x="30"  y="185" width="50" height="8" rx="3" fill="#1A6FD8" opacity=".7"/>
+          <rect x="130" y="185" width="50" height="8" rx="3" fill="#F57C1E" opacity=".7"/>
+          <rect x="230" y="185" width="50" height="8" rx="3" fill="#2DAA6A" opacity=".7"/>
+          <rect x="330" y="185" width="50" height="8" rx="3" fill="#1B2535" opacity=".4"/>
+          <rect x="30"  y="198" width="36" height="6" rx="3" fill="#C9D2DC"/>
+          <rect x="130" y="198" width="36" height="6" rx="3" fill="#C9D2DC"/>
+          <rect x="230" y="198" width="36" height="6" rx="3" fill="#C9D2DC"/>
+          <rect x="330" y="198" width="36" height="6" rx="3" fill="#C9D2DC"/>
+        </svg>
       </div>
-      <div class="item-arrow">
-        <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      <div class="card-body">
+        <div class="num" style="background:#1A6FD8;">01</div>
+        <div class="card-info">
+          <strong>글로벌 바이어를 AI로 발굴하세요</strong>
+          <span>클린 코퍼레이트 — 성장 막대그래프 + 세계지도 + stats 배너</span>
+        </div>
+        <div class="card-arrow">
+          <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
       </div>
     </a>
 
-    <a href="mockup-02.html" class="mockup-item">
-      <div class="item-num" style="background:#4898F0;">02</div>
-      <div class="item-body">
-        <strong>Mockup 02</strong>
-        <span>네이비 데이터 대시보드 — 도넛 차트 + 레이더</span>
+    <!-- 02 -->
+    <a href="mockup-02.html" class="card">
+      <div class="thumb">
+        <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="225" fill="#EFF2F5"/>
+          <rect width="400" height="32" fill="#0B1F3A"/>
+          <rect x="12" y="10" width="52" height="12" rx="3" fill="#1A6FD8"/>
+          <rect x="72" y="11" width="36" height="10" rx="2" fill="rgba(255,255,255,.2)"/>
+          <rect x="114" y="11" width="36" height="10" rx="2" fill="rgba(255,255,255,.2)"/>
+          <rect x="340" y="9" width="48" height="14" rx="7" fill="#1A6FD8"/>
+          <!-- 히어로 카피 -->
+          <rect x="20" y="50" width="70" height="8" rx="4" fill="#1A6FD8" opacity=".4"/>
+          <rect x="20" y="65" width="160" height="14" rx="4" fill="#0B1F3A" opacity=".9"/>
+          <rect x="20" y="84" width="120" height="14" rx="4" fill="#0B1F3A" opacity=".9"/>
+          <rect x="20" y="108" width="72" height="20" rx="6" fill="#1A6FD8"/>
+          <!-- 도넛 차트 -->
+          <circle cx="300" cy="115" r="58" fill="#fff" opacity=".9"/>
+          <circle cx="300" cy="115" r="48" fill="none" stroke="#EFF2F5" stroke-width="18"/>
+          <circle cx="300" cy="115" r="48" fill="none" stroke="#1A6FD8" stroke-width="18"
+            stroke-dasharray="98 204" stroke-dashoffset="0" transform="rotate(-90 300 115)"/>
+          <circle cx="300" cy="115" r="48" fill="none" stroke="#4898F0" stroke-width="18"
+            stroke-dasharray="72 230" stroke-dashoffset="-98" transform="rotate(-90 300 115)"/>
+          <circle cx="300" cy="115" r="48" fill="none" stroke="#F57C1E" stroke-width="18"
+            stroke-dasharray="52 250" stroke-dashoffset="-170" transform="rotate(-90 300 115)"/>
+          <circle cx="300" cy="115" r="48" fill="none" stroke="#2DAA6A" stroke-width="18"
+            stroke-dasharray="34 268" stroke-dashoffset="-222" transform="rotate(-90 300 115)"/>
+          <text x="300" y="111" text-anchor="middle" font-size="11" font-weight="900" fill="#0B1F3A">553M+</text>
+          <text x="300" y="123" text-anchor="middle" font-size="8"  fill="#8997A8">Global</text>
+          <!-- 지역 리스트 -->
+          <rect x="20"  y="145" width="180" height="10" rx="3" fill="#fff" opacity=".9"/>
+          <rect x="20"  y="162" width="180" height="10" rx="3" fill="#fff" opacity=".9"/>
+          <rect x="20"  y="179" width="180" height="10" rx="3" fill="#fff" opacity=".9"/>
+          <rect x="20"  y="145" width="60"  height="10" rx="3" fill="#1A6FD8" opacity=".7"/>
+          <rect x="20"  y="162" width="50"  height="10" rx="3" fill="#4898F0" opacity=".7"/>
+          <rect x="20"  y="179" width="38"  height="10" rx="3" fill="#F57C1E" opacity=".7"/>
+        </svg>
       </div>
-      <div class="item-arrow">
-        <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      <div class="card-body">
+        <div class="num" style="background:#0B1F3A;">02</div>
+        <div class="card-info">
+          <strong>수출 성공을 데이터로 증명합니다</strong>
+          <span>네이비 대시보드 — 도넛 차트 + 지역별 데이터 리스트</span>
+        </div>
+        <div class="card-arrow">
+          <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
       </div>
     </a>
 
-    <a href="mockup-03.html" class="mockup-item">
-      <div class="item-num" style="background:var(--dark);">03</div>
-      <div class="item-body">
-        <strong>Mockup 03</strong>
-        <span>매거진 에디토리얼 — 오비트 SVG + 카드</span>
+    <!-- 03 -->
+    <a href="mockup-03.html" class="card">
+      <div class="thumb">
+        <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="225" fill="#F8FAFB"/>
+          <rect width="400" height="32" fill="#fff"/>
+          <rect x="12" y="10" width="52" height="12" rx="3" fill="#1B2535" opacity=".8"/>
+          <rect x="72" y="11" width="36" height="10" rx="2" fill="#C9D2DC"/>
+          <rect x="114" y="11" width="36" height="10" rx="2" fill="#C9D2DC"/>
+          <rect x="156" y="11" width="36" height="10" rx="2" fill="#C9D2DC"/>
+          <rect x="340" y="9" width="48" height="14" rx="7" fill="#1B2535"/>
+          <!-- 히어로 카피 (좌) -->
+          <rect x="20" y="52" width="55" height="8" rx="4" fill="#1A6FD8" opacity=".35"/>
+          <rect x="20" y="67" width="140" height="18" rx="4" fill="#1A6FD8" opacity=".9"/>
+          <rect x="20" y="90" width="110" height="18" rx="4" fill="#F57C1E" opacity=".9"/>
+          <rect x="20" y="113" width="130" height="18" rx="4" fill="#2DAA6A" opacity=".9"/>
+          <rect x="20" y="140" width="72" height="20" rx="6" fill="#1B2535"/>
+          <rect x="98" y="140" width="58" height="20" rx="6" fill="none" stroke="#C9D2DC" stroke-width="1.5"/>
+          <!-- 오비트 SVG (우) -->
+          <circle cx="300" cy="115" r="65" fill="none" stroke="#E2E8F2" stroke-width="1"/>
+          <circle cx="300" cy="115" r="44" fill="none" stroke="#E2E8F2" stroke-width="1"/>
+          <circle cx="300" cy="115" r="23" fill="none" stroke="#E2E8F2" stroke-width="1"/>
+          <circle cx="300" cy="115" r="10" fill="#1A6FD8"/>
+          <circle cx="300" cy="50"  r="8"  fill="#F57C1E"/>
+          <circle cx="356" cy="137" r="6"  fill="#2DAA6A"/>
+          <circle cx="244" cy="137" r="5"  fill="#9C27B0"/>
+          <circle cx="300" cy="160" r="4"  fill="#F59E0B"/>
+          <line x1="300" y1="115" x2="300" y2="50"  stroke="#1A6FD8" stroke-width="1" stroke-dasharray="3 2" opacity=".5"/>
+          <line x1="300" y1="115" x2="356" y2="137" stroke="#2DAA6A" stroke-width="1" stroke-dasharray="3 2" opacity=".5"/>
+        </svg>
       </div>
-      <div class="item-arrow">
-        <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      <div class="card-body">
+        <div class="num" style="background:#1B2535;">03</div>
+        <div class="card-info">
+          <strong>발굴부터 마케팅, 조회까지</strong>
+          <span>매거진 에디토리얼 — 오비트 SVG + 매거진 카드 레이아웃</span>
+        </div>
+        <div class="card-arrow">
+          <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
       </div>
     </a>
 
-    <a href="mockup-04.html" class="mockup-item">
-      <div class="item-num" style="background:var(--orange);">04</div>
-      <div class="item-body">
-        <strong>Mockup 04</strong>
-        <span>다이내믹 오렌지 — 퀵메뉴 + 히어로 배너</span>
+    <!-- 04 -->
+    <a href="mockup-04.html" class="card">
+      <div class="thumb">
+        <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="225" fill="#f6f9fc"/>
+          <!-- 헤더 -->
+          <rect width="400" height="56" fill="#0b50bc"/>
+          <rect x="12" y="20" width="60" height="16" rx="3" fill="#fff" opacity=".9"/>
+          <rect x="90"  y="22" width="40" height="12" rx="2" fill="rgba(255,255,255,.3)"/>
+          <rect x="138" y="22" width="40" height="12" rx="2" fill="rgba(255,255,255,.3)"/>
+          <rect x="186" y="22" width="40" height="12" rx="2" fill="rgba(255,255,255,.3)"/>
+          <rect x="330" y="20" width="60" height="16" rx="8" fill="#fff" opacity=".2"/>
+          <!-- 히어로 좌 -->
+          <rect x="20" y="72" width="90" height="13" rx="4" fill="#0b50bc" opacity=".9"/>
+          <rect x="20" y="91" width="130" height="11" rx="3" fill="#718096" opacity=".6"/>
+          <rect x="20" y="108" width="64" height="20" rx="6" fill="#0b50bc"/>
+          <rect x="90" y="108" width="56" height="20" rx="6" fill="none" stroke="#0b50bc" stroke-width="1.5"/>
+          <!-- 히어로 우 (카드형) -->
+          <rect x="220" y="62" width="160" height="110" rx="12" fill="#fff"/>
+          <rect x="232" y="74"  width="60" height="8" rx="3" fill="#0b50bc" opacity=".7"/>
+          <rect x="232" y="88"  width="136" height="6" rx="3" fill="#e2e8f0"/>
+          <rect x="232" y="100" width="136" height="6" rx="3" fill="#e2e8f0"/>
+          <rect x="232" y="112" width="100" height="6" rx="3" fill="#e2e8f0"/>
+          <rect x="232" y="130" width="50" height="16" rx="4" fill="#0b50bc" opacity=".15"/>
+          <rect x="288" y="130" width="50" height="16" rx="4" fill="#F97316" opacity=".15"/>
+          <!-- 퀵메뉴 바 -->
+          <rect y="172" width="400" height="53" fill="#fff" opacity=".95"/>
+          <rect x="15"  y="182" width="64" height="34" rx="8" fill="#EBF0FF"/>
+          <rect x="87"  y="182" width="64" height="34" rx="8" fill="#FFF7ED"/>
+          <rect x="159" y="182" width="64" height="34" rx="8" fill="#F0FDF4"/>
+          <rect x="231" y="182" width="64" height="34" rx="8" fill="#EBF0FF"/>
+          <rect x="303" y="182" width="64" height="34" rx="8" fill="#FFF7ED"/>
+        </svg>
       </div>
-      <div class="item-arrow">
-        <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      <div class="card-body">
+        <div class="num" style="background:#0b50bc;">04</div>
+        <div class="card-info">
+          <strong>마케팅 서비스 — 공공·기관 모던 스타일</strong>
+          <span>블루 인스티튜셔널 — 퀵메뉴 바 + 2단 히어로 카드</span>
+        </div>
+        <div class="card-arrow">
+          <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
       </div>
     </a>
 
-    <a href="mockup-05.html" class="mockup-item">
-      <div class="item-num" style="background:var(--green);">05</div>
-      <div class="item-body">
-        <strong>Mockup 05</strong>
-        <span>그린 모던 — 타일 레이아웃 + 스탯 카드</span>
+    <!-- 05 -->
+    <a href="mockup-05.html" class="card">
+      <div class="thumb">
+        <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="225" fill="#030a1c"/>
+          <!-- 헤더 -->
+          <rect width="400" height="48" fill="#030a1c"/>
+          <rect x="0" y="47" width="400" height="1" fill="rgba(0,240,255,.15)"/>
+          <rect x="12" y="16" width="60" height="16" rx="3" fill="#00f0ff" opacity=".8"/>
+          <rect x="90"  y="18" width="40" height="12" rx="2" fill="rgba(0,240,255,.2)"/>
+          <rect x="138" y="18" width="40" height="12" rx="2" fill="rgba(0,240,255,.2)"/>
+          <rect x="186" y="18" width="40" height="12" rx="2" fill="rgba(0,240,255,.2)"/>
+          <rect x="330" y="16" width="60" height="16" rx="8" fill="rgba(0,240,255,.15)" stroke="#00f0ff" stroke-width="1" stroke-opacity=".3"/>
+          <!-- 히어로 카피 -->
+          <rect x="20" y="62" width="80" height="10" rx="3" fill="#00f0ff" opacity=".4"/>
+          <rect x="20" y="78" width="170" height="16" rx="4" fill="#fff" opacity=".9"/>
+          <rect x="20" y="100" width="140" height="16" rx="4" fill="#fff" opacity=".9"/>
+          <rect x="20" y="124" width="100" height="10" rx="3" fill="rgba(255,255,255,.3)"/>
+          <rect x="20" y="144" width="76" height="22" rx="6" fill="#00f0ff" opacity=".9"/>
+          <rect x="104" y="144" width="64" height="22" rx="6" fill="none" stroke="rgba(0,240,255,.4)" stroke-width="1.5"/>
+          <!-- 오른쪽 네온 UI -->
+          <rect x="228" y="58" width="152" height="116" rx="12" fill="rgba(11,24,56,.6)" stroke="rgba(0,240,255,.2)" stroke-width="1"/>
+          <circle cx="304" cy="106" r="38" fill="none" stroke="rgba(0,240,255,.15)" stroke-width="14"/>
+          <circle cx="304" cy="106" r="38" fill="none" stroke="#00f0ff" stroke-width="14"
+            stroke-dasharray="80 160" stroke-dashoffset="0" transform="rotate(-90 304 106)" opacity=".8"/>
+          <circle cx="304" cy="106" r="38" fill="none" stroke="#fb923c" stroke-width="14"
+            stroke-dasharray="50 190" stroke-dashoffset="-80" transform="rotate(-90 304 106)" opacity=".8"/>
+          <text x="304" y="102" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">553M</text>
+          <text x="304" y="114" text-anchor="middle" font-size="7"  fill="rgba(0,240,255,.6)">Global</text>
+        </svg>
       </div>
-      <div class="item-arrow">
-        <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      <div class="card-body">
+        <div class="num" style="background:#030a1c; border:1px solid rgba(0,240,255,.4);">05</div>
+        <div class="card-info">
+          <strong>AI 기반 빅바이어 발굴 마케팅 서비스</strong>
+          <span>테크니컬 다크 — 네온 사이언 포인트 + 글로우 차트</span>
+        </div>
+        <div class="card-arrow">
+          <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
       </div>
     </a>
 
-    <a href="mockup-06.html" class="mockup-item">
-      <div class="item-num" style="background:#9C27B0;">06</div>
-      <div class="item-body">
-        <strong>Mockup 06</strong>
-        <span>퍼플 그라디언트 — 프리미엄 다크 포인트</span>
+    <!-- 06 -->
+    <a href="mockup-06.html" class="card">
+      <div class="thumb">
+        <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="225" fill="#f0f6ff"/>
+          <!-- 헤더 -->
+          <rect width="400" height="52" fill="#fff"/>
+          <rect x="0" y="51" width="400" height="1" fill="#e2e8f0"/>
+          <rect x="12" y="18" width="60" height="16" rx="3" fill="#2563eb" opacity=".9"/>
+          <rect x="100" y="20" width="40" height="12" rx="2" fill="#e2e8f0"/>
+          <rect x="148" y="20" width="40" height="12" rx="2" fill="#e2e8f0"/>
+          <rect x="196" y="20" width="40" height="12" rx="2" fill="#e2e8f0"/>
+          <rect x="326" y="18" width="62" height="16" rx="8" fill="#2563eb"/>
+          <!-- 히어로 카피 -->
+          <rect x="20" y="68" width="70" height="9" rx="4" fill="#2563eb" opacity=".3"/>
+          <rect x="20" y="83" width="160" height="15" rx="4" fill="#0f172a" opacity=".9"/>
+          <rect x="20" y="103" width="130" height="15" rx="4" fill="#0f172a" opacity=".9"/>
+          <rect x="20" y="128" width="72" height="20" rx="8" fill="#2563eb"/>
+          <rect x="100" y="128" width="62" height="20" rx="8" fill="none" stroke="#e2e8f0" stroke-width="1.5"/>
+          <!-- 우측 SaaS UI 카드들 -->
+          <rect x="224" y="62" width="158" height="50" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+          <rect x="236" y="72"  width="28" height="28" rx="8" fill="#dbeafe"/>
+          <rect x="272" y="74"  width="70" height="8" rx="3" fill="#0f172a" opacity=".7"/>
+          <rect x="272" y="87"  width="50" height="6" rx="3" fill="#94a3b8"/>
+          <rect x="224" y="120" width="74" height="48" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+          <rect x="308" y="120" width="74" height="48" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+          <rect x="234" y="130" width="40" height="8" rx="3" fill="#2563eb" opacity=".6"/>
+          <rect x="234" y="143" width="26" height="12" rx="3" fill="#2563eb" opacity=".9"/>
+          <rect x="318" y="130" width="40" height="8" rx="3" fill="#F97316" opacity=".6"/>
+          <rect x="318" y="143" width="26" height="12" rx="3" fill="#F97316" opacity=".9"/>
+        </svg>
       </div>
-      <div class="item-arrow">
-        <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      <div class="card-body">
+        <div class="num" style="background:#2563eb;">06</div>
+        <div class="card-info">
+          <strong>바이어 AI 발굴부터 마케팅 발송까지 한번에!</strong>
+          <span>트렌디 SaaS — 라이트 블루 + 대시보드 카드 UI</span>
+        </div>
+        <div class="card-arrow">
+          <svg fill="none" stroke-width="2" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
       </div>
     </a>
 
   </div>
 </main>
 
-<footer>ⓒ 2024. NICE D&amp;B Co.,Ltd. LINKER 시안</footer>
+<footer>ⓒ 2024. NICE D&amp;B Co.,Ltd. — LINKER 메인페이지 시안</footer>
 </body>
 </html>

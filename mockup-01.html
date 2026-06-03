@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LINKER – 빅바이어 마케팅 포털</title>
+<title>mockup-01</title>
 <style>
 /* ── 리셋 & 변수 ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -81,20 +81,16 @@ header {
   padding: 7px 14px; border-radius: 6px; transition: all var(--trans);
   white-space: nowrap; }
 .util a:hover { background: var(--gray-1); color: var(--blue); }
-.util .btn-allmenu {
-  background: none; border: 1px solid var(--gray-3);
-  font-size: 13px; font-weight: 600; color: var(--text);
-  padding: 7px 14px; border-radius: 6px; cursor: pointer;
-  transition: all var(--trans); white-space: nowrap;
-}
-.util .btn-allmenu:hover { border-color: var(--blue); color: var(--blue); }
 .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer;
-  margin-left: auto; padding: 8px; }
-.hamburger span { display: block; width: 22px; height: 2px; background: var(--text);
+  margin-left: auto; padding: 9px 10px; background: var(--blue-l); border-radius: 8px; border: 1px solid rgba(26,111,216,.2); }
+.hamburger span { display: block; width: 20px; height: 2px; background: var(--blue);
   border-radius: 2px; }
 @media (min-width: 768px) {
   .gnb { display: flex; }
   .hamburger { display: none; }
+}
+@media (max-width: 767px) {
+  .util { display: none; }
 }
 
 /* ── 히어로 ── */
@@ -422,12 +418,41 @@ footer {
 .footer__info-row select:hover { border-color: var(--blue); }
 .copyright { margin-top: 18px; font-size: 11px; color: var(--gray-4); opacity: .75; }
 @media (max-width: 768px) {
+  .proc-svg-wrap { display: none; }
   .fnb { position: static; margin-bottom: 16px; }
   .fnb__wrap { flex-wrap: wrap; }
   .footer__info-row { flex-direction: column; gap: 14px; margin-top: 16px; }
   .footer__info-row select { width: 100%; max-width: 280px; }
   .site-address { font-size: 12px; }
 }
+
+@media (max-width: 480px) {
+  .hero-art { max-width: 100%; }
+  .bar-row { grid-template-columns: 72px 1fr auto; gap: 8px; }
+  .bar-label { font-size: 11px; }
+  .bar-val { font-size: 11px; }
+  .lookup-cards { grid-template-columns: 1fr; }
+  .consult-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 399px) {
+  .hstat { padding: 12px 6px; }
+  .hstat span { font-size: 10px; }
+  .hstat strong { font-size: clamp(15px, 4vw, 20px); }
+  .hero-copy h1 { font-size: clamp(22px, 7vw, 36px); }
+}
+
+.snav { position: fixed; right: 24px; top: 50%; transform: translateY(-50%); z-index: 500; display: flex; flex-direction: column; align-items: center; gap: 0; }
+.snav-item { display: flex; align-items: center; flex-direction: column; text-decoration: none; position: relative; cursor: pointer; }
+.snav-dot { width: 10px; height: 10px; border-radius: 50%; background: #cbd5e0; border: 2px solid #fff; box-shadow: 0 0 0 0px transparent; transition: all 0.25s; display: block; }
+.snav-line { width: 1px; height: 20px; background: #e2e8f0; display: block; }
+.snav-item:first-child .snav-line { display: none; }
+.snav-label { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); background: #fff; color: var(--blue); font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,.12); opacity: 0; pointer-events: none; transition: opacity 0.2s; border: 1px solid #e2e8f0; }
+.snav-item:hover .snav-label,
+.snav-item.active .snav-label { opacity: 1; }
+.snav-item.active .snav-dot { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,111,216,.2); }
+.snav-item:hover .snav-dot { background: #93c5fd; }
+@media (max-width: 767px) { .snav { display: none; } }
 </style>
 </head>
 <body>
@@ -453,12 +478,12 @@ footer {
             <li><a href="#">신청내역</a></li>
           </ul>
         </li>
+        <li><a href="#">공지사항</a></li>
       </ul>
     </nav>
     <div class="util">
       <a href="#">로그인</a>
       <a href="#">회원가입</a>
-      <button class="btn-allmenu">전체메뉴</button>
     </div>
     <div class="hamburger">
       <span></span><span></span><span></span>
@@ -467,7 +492,7 @@ footer {
 </header>
 
 <!-- ── 히어로 ── -->
-<section class="hero">
+<section class="hero" id="s-hero">
   <div class="wrap" style="position:relative;z-index:1;">
     <div class="hero-inner">
       <div class="hero-copy">
@@ -545,7 +570,7 @@ footer {
 
 
 <!-- ── 마케팅 서비스 ── -->
-<section>
+<section id="s-marketing">
   <div class="wrap">
     <div class="section-title">
       <div class="tag">Section 01</div>
@@ -606,7 +631,7 @@ footer {
 </section>
 
 <!-- ── 서비스 소개 (프로세스) ── -->
-<section class="process-sec">
+<section class="process-sec" id="s-process">
   <div class="wrap" style="position:relative;z-index:1;">
     <div class="section-title">
       <div class="tag" style="background:rgba(255,255,255,.1);color:#7DB8F7;">Section 02</div>
@@ -614,7 +639,7 @@ footer {
       <p>바이어 AI 발굴부터, 마케팅 메시지 발송까지 간편하게!</p>
     </div>
     <!-- 프로세스 SVG 흐름도 -->
-    <div style="margin-bottom:32px; overflow-x:auto;">
+    <div class="proc-svg-wrap" style="margin-bottom:32px; overflow-x:auto;">
       <svg viewBox="0 0 880 72" fill="none" xmlns="http://www.w3.org/2000/svg"
         style="min-width:600px; width:100%; display:block;">
         <!-- 연결선 -->
@@ -693,7 +718,7 @@ footer {
 </section>
 
 <!-- ── 컨설팅 서비스 ── -->
-<section class="consult-sec">
+<section class="consult-sec" id="s-consult">
   <div class="wrap">
     <div class="section-title">
       <div class="tag">Section 03</div>
@@ -805,7 +830,7 @@ footer {
 </section>
 
 <!-- ── 기업조회 서비스 ── -->
-<section class="lookup-sec">
+<section class="lookup-sec" id="s-lookup">
   <div class="wrap">
     <div class="section-title">
       <div class="tag">Section 04</div>
@@ -901,6 +926,52 @@ footer {
     <p class="copyright">ⓒ 2023. NICE D&amp;B Co.,Ltd. ALL RIGHTS RESERVED.</p>
   </div>
 </footer>
+
+
+<nav class="snav" id="sectionNav" aria-label="섹션 이동">
+  <a href="#s-hero" class="snav-item" data-label="메인">
+    <span class="snav-line"></span>
+    <span class="snav-dot"></span>
+    <span class="snav-label">메인</span>
+  </a>
+  <a href="#s-marketing" class="snav-item" data-label="마케팅 서비스">
+    <span class="snav-line"></span>
+    <span class="snav-dot"></span>
+    <span class="snav-label">마케팅 서비스</span>
+  </a>
+  <a href="#s-process" class="snav-item" data-label="서비스 소개">
+    <span class="snav-line"></span>
+    <span class="snav-dot"></span>
+    <span class="snav-label">서비스 소개</span>
+  </a>
+  <a href="#s-consult" class="snav-item" data-label="컨설팅 서비스">
+    <span class="snav-line"></span>
+    <span class="snav-dot"></span>
+    <span class="snav-label">컨설팅 서비스</span>
+  </a>
+  <a href="#s-lookup" class="snav-item" data-label="기업조회 서비스">
+    <span class="snav-line"></span>
+    <span class="snav-dot"></span>
+    <span class="snav-label">기업조회 서비스</span>
+  </a>
+</nav>
+
+<script>
+(function() {
+  const items = document.querySelectorAll('.snav-item');
+  const sectionIds = Array.from(items).map(i => i.getAttribute('href').slice(1));
+  function onScroll() {
+    let current = sectionIds[0];
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) current = id;
+    });
+    items.forEach(i => i.classList.toggle('active', i.getAttribute('href') === '#' + current));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 
 </body>
 </html>

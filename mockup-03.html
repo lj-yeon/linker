@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LINKER 수출 마케팅 플랫폼</title>
+<title>mockup-03</title>
 <style>
 /* ?? 由ъ뀑 & 蹂???? */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -81,21 +81,39 @@ header {
 .util a { font-size: 13px; color: var(--gray-4); font-weight: 500;
   padding: 7px 14px; border-radius: 6px; transition: all var(--trans); white-space: nowrap; }
 .util a:hover { background: var(--gray-1); color: var(--blue); }
-.util .btn-allmenu {
-  background: none; border: 1px solid var(--gray-3);
-  font-size: 13px; font-weight: 600; color: var(--text);
-  padding: 7px 14px; border-radius: 6px; cursor: pointer;
-  transition: all var(--trans); white-space: nowrap;
+.hamburger { display: flex; flex-direction: column; gap: 4px; cursor: pointer;
+  margin-left: auto; padding: 9px 10px; background: none; border: none; }
+.hamburger span { display: block; height: 3px; background: var(--text);
+  border-radius: 0; transition: transform .25s ease, opacity .25s ease; }
+.hamburger span:nth-child(1) { width: 22px; }
+.hamburger span:nth-child(2) { width: 16px; }
+.hamburger span:nth-child(3) { width: 10px; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 767px) {
+  .util { display: none; }
 }
-.util .btn-allmenu:hover { border-color: var(--blue); color: var(--blue); }
-.hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer;
-  margin-left: auto; padding: 8px; }
-.hamburger span { display: block; width: 22px; height: 2px; background: var(--text);
-  border-radius: 2px; }
 @media (min-width: 768px) {
   .gnb { display: flex; }
   .hamburger { display: none; }
 }
+.mobile-nav {
+  display: none; position: fixed;
+  top: 66px; left: 0; right: 0;
+  background: #fff; border-bottom: 1px solid var(--gray-2);
+  z-index: 99; box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  overflow-y: auto; max-height: calc(100vh - 66px);
+}
+.mobile-nav.open { display: block; }
+.mobile-nav > ul { list-style: none; padding: 8px 0; }
+.mobile-nav > ul > li > a {
+  display: block; padding: 14px 24px;
+  font-size: 15px; font-weight: 600; color: var(--text);
+  border-bottom: 1px solid var(--gray-2);
+}
+.mobile-nav > ul > li:last-child > a { border-bottom: none; }
+.mobile-nav > ul > li > a:hover { background: var(--gray-1); color: var(--blue); }
 
 /* ?? ?덉뼱濡??? */
 .hero {
@@ -405,6 +423,27 @@ footer {
 .site-address { font-size: 13px; line-height: 22px; color: var(--gray-4); font-style: normal; }
 .footer__info-row select { border: 1px solid var(--gray-3); background: #fff; color: var(--dark); padding: 0 16px; font-size: 13px; width: 210px; height: 42px; cursor: pointer; outline: none; flex-shrink: 0; border-radius: 0; }
 .copyright { margin-top: 20px; font-size: 11px; color: var(--gray-4); font-style: italic; letter-spacing: .02em; }
+@media (max-width: 767px) {
+  .fnb { position: static; margin-bottom: 20px; }
+  .fnb__wrap { justify-content: flex-start; flex-wrap: wrap; }
+  .footer__info-row { flex-direction: column; gap: 16px; }
+  .footer__info-row select { width: 100%; max-width: 100%; }
+}
+@media (max-width: 479px) {
+  .qs-grid { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns .btn-grad,
+  .hero-btns .btn-outline { width: 100%; text-align: center; justify-content: center; }
+}
+.snav-ed { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 500; height: 240px; display: flex; align-items: center; }
+.sed-track { position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: #e2e8f0; border-radius: 1px; }
+.sed-fill { width: 100%; background: var(--blue); transition: height 0.3s; height: 0%; border-radius: 1px; }
+.sed-mark { position: absolute; left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 8px; height: 8px; background: #e2e8f0; border: 2px solid #fff; text-decoration: none; transition: all 0.2s; display: block; }
+.sed-mark:hover, .sed-mark.active { background: var(--blue); border-color: var(--blue); }
+.sed-mark.passed { background: var(--blue); border-color: var(--blue); }
+.sed-mark::before { content: attr(data-label); position: absolute; right: 16px; top: 50%; transform: translateY(-50%) rotate(-45deg); font-size: 11px; letter-spacing: 0.1em; font-weight: 600; color: var(--text); white-space: nowrap; opacity: 0; transition: opacity 0.2s; font-family: inherit; }
+.sed-mark:hover::before, .sed-mark.active::before { opacity: 1; }
+@media (max-width: 767px) { .snav-ed { display: none; } }
 </style>
 </head>
 <body>
@@ -430,12 +469,12 @@ footer {
             <li><a href="#">신청내역</a></li>
           </ul>
         </li>
+        <li><a href="#">공지사항</a></li>
       </ul>
     </nav>
     <div class="util">
       <a href="#">로그인</a>
       <a href="#">회원가입</a>
-      <button class="btn-allmenu">전체메뉴</button>
     </div>
     <div class="hamburger">
       <span></span><span></span><span></span>
@@ -444,7 +483,17 @@ footer {
 </header>
 
 <!-- ?? ?덉뼱濡??? -->
-<section class="hero">
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#">빅바이어 마케팅</a></li>
+    <li><a href="#">수출바우처 컨설팅</a></li>
+    <li><a href="#">공지사항</a></li>
+    <li><a href="#">로그인</a></li>
+    <li><a href="#">회원가입</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="s-hero">
   <div class="wrap" style="position:relative;z-index:1;">
     <div class="hero-grid">
       <div class="hero-copy">
@@ -459,12 +508,7 @@ footer {
         </h1>
         <p>5억개 이상의 DB POOL을 활용하여 잠재된 바이어들에게 마케팅 서비스를 제공합니다.</p>
         <div class="hero-btns">
-          <a href="#" class="btn-grad">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M8 2L14 8L8 14M2 8h12"/>
-            </svg>
-            무료로 시작하기
-          </a>
+          <a href="#" class="btn-grad">무료로 시작하기</a>
           <a href="#" class="btn-outline">서비스 소개</a>
         </div>
       </div>
@@ -538,7 +582,7 @@ footer {
 </section>
 
 <!-- ?? 4媛??쒕퉬??移대뱶 ?? -->
-<div class="quick-svc">
+<div class="quick-svc" id="s-service">
   <div class="wrap">
     <div class="qs-grid">
       <div class="qs-card" style="border-top:3px solid var(--blue);">
@@ -594,7 +638,7 @@ footer {
 </div>
 
 <!-- ?? ?쒕퉬???뚭컻 6?④퀎 ?? -->
-<section class="proc-sec">
+<section class="proc-sec" id="s-process">
   <div class="wrap">
     <div class="section-head">
       <div class="badge">서비스 소개</div>
@@ -649,7 +693,7 @@ footer {
 </section>
 
 <!-- ?? 而⑥꽕???쒕퉬??(踰ㅽ넗 洹몃━?? ?? -->
-<section class="consult-sec">
+<section class="consult-sec" id="s-consult">
   <div class="wrap">
     <div class="section-head">
       <div class="badge">컨설팅 서비스</div>
@@ -753,7 +797,7 @@ footer {
 </section>
 
 <!-- ?? 湲곗뾽議고쉶 ?쒕퉬???? -->
-<section class="lookup-sec">
+<section class="lookup-sec" id="s-lookup">
   <div class="wrap">
     <div class="section-head">
       <div class="badge">기업조회 서비스</div>
@@ -848,5 +892,48 @@ footer {
   </div>
 </footer>
 
+<nav class="snav-ed" id="sectionNav">
+  <div class="sed-track">
+    <div class="sed-fill" id="sedFill"></div>
+  </div>
+  <a href="#s-hero"    class="sed-mark active" data-label="MAIN"       style="top:0%"></a>
+  <a href="#s-service" class="sed-mark"        data-label="SERVICE"    style="top:25%"></a>
+  <a href="#s-process" class="sed-mark"        data-label="PROCESS"    style="top:50%"></a>
+  <a href="#s-consult" class="sed-mark"        data-label="CONSULTING" style="top:75%"></a>
+  <a href="#s-lookup"  class="sed-mark"        data-label="LOOKUP"     style="top:100%"></a>
+</nav>
+
+<script>
+var hamburger = document.querySelector('.hamburger');
+var mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', function() {
+  hamburger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+});
+
+(function() {
+  var sectionIds = ['s-hero','s-service','s-process','s-consult','s-lookup'];
+  var marks = document.querySelectorAll('.sed-mark');
+  var fill  = document.getElementById('sedFill');
+  var total = sectionIds.length;
+
+  function update() {
+    var threshold = window.innerHeight * 0.4;
+    var idx = 0;
+    sectionIds.forEach(function(id, i) {
+      var el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= threshold) idx = i;
+    });
+    marks.forEach(function(m, i) {
+      m.classList.toggle('active', i === idx);
+      m.classList.toggle('passed', i < idx);
+    });
+    fill.style.height = (idx / (total - 1) * 100) + '%';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
 </body>
 </html>

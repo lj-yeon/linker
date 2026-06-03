@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LINKER 데이터 인텔리전스 대시보드</title>
+<title>mockup-02</title>
 <style>
 /* ?? 由ъ뀑 & 蹂???? */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +31,7 @@ html { scroll-behavior: smooth; }
 body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   background: #fff; color: var(--text); line-height: 1.6; }
 a { text-decoration: none; color: inherit; }
-img { display: block; }
+img { display: block; max-width: 100%; }
 .wrap { width: min(1080px, calc(100% - 32px)); margin: 0 auto; }
 .tag  { display: inline-block; padding: 4px 12px; border-radius: 20px;
   font-size: 11px; font-weight: 700; letter-spacing: .05em; margin-bottom: 12px; }
@@ -83,20 +83,20 @@ header {
 .util a { font-size: 13px; color: rgba(255,255,255,.6); font-weight: 500;
   padding: 7px 14px; border-radius: 6px; transition: all var(--trans); white-space: nowrap; }
 .util a:hover { background: rgba(255,255,255,.1); color: #fff; }
-.util .btn-allmenu {
-  background: none; border: 1px solid rgba(255,255,255,.2);
-  font-size: 13px; font-weight: 600; color: rgba(255,255,255,.7);
-  padding: 7px 14px; border-radius: 6px; cursor: pointer;
-  transition: all var(--trans); white-space: nowrap;
-}
-.util .btn-allmenu:hover { border-color: rgba(255,255,255,.5); color: #fff; }
 .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer;
-  margin-left: auto; padding: 8px; }
-.hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,.7);
+  margin-left: auto; padding: 9px 10px; background: rgba(255,255,255,.1); border-radius: 6px; border: 1px solid rgba(255,255,255,.15); }
+.hamburger span { display: block; height: 2px; background: rgba(255,255,255,.88);
   border-radius: 2px; }
+.hamburger span:nth-child(1) { width: 22px; }
+.hamburger span:nth-child(2) { width: 14px; }
+.hamburger span:nth-child(3) { width: 18px; }
 @media (min-width: 768px) {
   .gnb { display: flex; }
   .hamburger { display: none; }
+}
+@media (max-width: 767px) {
+  .header-logo { margin-right: 0; }
+  .util { display: none; }
 }
 
 /* ?? ?덉뼱濡?(?ㅽ겕 ?ㅼ씠鍮? ?? */
@@ -285,6 +285,10 @@ header {
 .pf-item:nth-child(6) .pf-num { background: #6BCFA0; }
 .pf-item h3 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
 .pf-item p  { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.6; }
+@media (max-width: 479px) {
+  .proc-flow { grid-template-columns: 1fr; }
+  .status-grid { grid-template-columns: 1fr; }
+}
 @media (min-width: 768px) {
   .proc-flow { grid-template-columns: repeat(3, 1fr); }
 }
@@ -441,6 +445,19 @@ footer {
 .site-address { font-size: 13px; line-height: 22px; color: rgba(255,255,255,.38); font-style: normal; }
 .footer__info-row select { border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.05); color: rgba(255,255,255,.55); padding: 0 16px; font-size: 13px; width: 210px; height: 42px; cursor: pointer; outline: none; flex-shrink: 0; border-radius: 6px; }
 .copyright { margin-top: 20px; font-size: 11px; color: rgba(255,255,255,.25); padding-top: 16px; border-top: 1px solid rgba(255,255,255,.06); }
+
+@media (max-width: 767px) {
+  .fnb { position: static; margin-bottom: 20px; }
+  .fnb__wrap { flex-wrap: wrap; }
+  .footer__info-row { flex-direction: column; align-items: flex-start; }
+  .footer__info-row select { width: 100%; }
+}
+
+.snav-side { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 500; display: flex; flex-direction: column; gap: 2px; }
+.ss-item { display: block; padding: 12px 16px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,.55); text-decoration: none; background: rgba(15,26,66,.75); backdrop-filter: blur(8px); border-radius: 0 8px 8px 0; border-left: 3px solid transparent; white-space: nowrap; transition: all 0.2s; transform: translateX(-4px); }
+.ss-item:hover { transform: translateX(0); color: rgba(255,255,255,.9); background: rgba(15,26,66,.9); }
+.ss-item.active { background: var(--navy); color: #fff; border-left-color: var(--orange); transform: translateX(0); }
+@media (max-width: 767px) { .snav-side { display: none; } }
 </style>
 </head>
 <body>
@@ -466,12 +483,12 @@ footer {
             <li><a href="#">신청내역</a></li>
           </ul>
         </li>
+        <li><a href="#">공지사항</a></li>
       </ul>
     </nav>
     <div class="util">
       <a href="#">로그인</a>
       <a href="#">회원가입</a>
-      <button class="btn-allmenu">전체메뉴</button>
     </div>
     <div class="hamburger">
       <span></span><span></span><span></span>
@@ -480,7 +497,7 @@ footer {
 </header>
 
 <!-- ?? ?덉뼱濡??? -->
-<section class="hero">
+<section class="hero" id="s-hero">
   <div class="hero-dots">
     <span class="d1"></span><span class="d2"></span><span class="d3"></span>
     <span class="d4"></span><span class="d5"></span><span class="d6"></span>
@@ -606,7 +623,7 @@ footer {
 </div>
 
 <!-- ?? 留덉????쒕퉬???? -->
-<section class="svc-sec" style="padding-top:clamp(32px,5vw,72px);">
+<section class="svc-sec" id="s-service" style="padding-top:clamp(32px,5vw,72px);">
   <div class="wrap">
     <div class="section-title">
       <div class="tag tag-blue">마케팅 서비스</div>
@@ -687,7 +704,7 @@ footer {
 </section>
 
 <!-- ?? ?쒕퉬???뚭컻 ?꾨줈?몄뒪 ?? -->
-<section class="proc-sec">
+<section class="proc-sec" id="s-process">
   <div class="wrap">
     <div class="section-title">
       <div class="tag tag-blue">서비스 소개</div>
@@ -744,7 +761,7 @@ footer {
 </section>
 
 <!-- ?? 而⑥꽕???쒕퉬???? -->
-<section class="consult-sec">
+<section class="consult-sec" id="s-consult">
   <div class="wrap">
     <!-- 吏援щ낯 + ?ㅻ챸 -->
     <div class="section-title">
@@ -885,7 +902,7 @@ footer {
 </section>
 
 <!-- ?? 湲곗뾽議고쉶 ?쒕퉬???? -->
-<section class="lookup-sec">
+<section class="lookup-sec" id="s-lookup">
   <div class="wrap">
     <div class="section-title">
       <div class="tag tag-blue">기업조회 서비스</div>
@@ -992,5 +1009,35 @@ footer {
   </div>
 </footer>
 
+<nav class="snav-side" id="sectionNav">
+  <a href="#s-hero" class="ss-item active">메인</a>
+  <a href="#s-service" class="ss-item">서비스</a>
+  <a href="#s-process" class="ss-item">프로세스</a>
+  <a href="#s-consult" class="ss-item">컨설팅</a>
+  <a href="#s-lookup" class="ss-item">기업조회</a>
+</nav>
+
+<script>
+(function () {
+  var items = document.querySelectorAll('#sectionNav .ss-item');
+  var sections = Array.from(items).map(function (a) {
+    return document.querySelector(a.getAttribute('href'));
+  });
+
+  function onScroll() {
+    var scrollY = window.scrollY || window.pageYOffset;
+    var active = 0;
+    sections.forEach(function (sec, i) {
+      if (sec && sec.getBoundingClientRect().top <= 120) active = i;
+    });
+    items.forEach(function (a, i) {
+      a.classList.toggle('active', i === active);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 </body>
 </html>
