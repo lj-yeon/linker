@@ -1,7 +1,7 @@
 # LINKER 웹 시안 (나이스디앤비 외주)
 
 (주)NICE디앤비 LINKER 서비스 랜딩 페이지 **HTML/CSS 정적 시안** 프로젝트입니다.  
-총 6가지 디자인 컨셉을 각각 독립 HTML 파일로 제공하며, GitHub Pages로 바로 미리볼 수 있습니다.
+총 3가지 디자인 컨셉을 각각 독립 HTML 파일로 제공하며, GitHub Pages로 바로 미리볼 수 있습니다.
 
 ---
 
@@ -12,7 +12,7 @@
 | **의뢰사** | (주)NICE디앤비 |
 | **프로젝트** | LINKER 수출지원·바이어 발굴 서비스 웹 시안 |
 | **형식** | HTML 단일 파일 (CSS 인라인) |
-| **시안 수** | 6종 + 목록 페이지 (`index.html`) |
+| **시안 수** | 3종 + 목록 페이지 (`index.html`) |
 
 ---
 
@@ -22,12 +22,9 @@
 |------|------|------|
 | [mockup-01.html](./mockup-01.html) | 공공·기관 클린 코퍼레이트 | 성장 막대그래프, 세계지도, stats 배너 |
 | [mockup-02.html](./mockup-02.html) | 네이비 대시보드 | 도넛 차트, 지역별 데이터 리스트, 다크 히어로 |
-| [mockup-03.html](./mockup-03.html) | 매거진·에디토리얼 | 태양계 오브 일러스트, 6단계 타임라인, 잡지형 카드 |
-| [mockup-04.html](./mockup-04.html) | 공공·기관 모던 | 퀵메뉴 아이콘 바, SVG 도넛+데이터 테이블, 수평 카테고리 카드 |
-| [mockup-05.html](./mockup-05.html) | 테크니컬 다크 | 네온 매트릭스 다이어그램, 지역 타일 그리드, 터미널 스캔 패널 |
-| [mockup-06.html](./mockup-06.html) | 트렌디 SaaS | 플로팅 서비스 카드, SVG 도넛 범례, 그라디언트 피처 카드 |
+| [mockup-03.html](./mockup-03.html) | 공공·기관 모던 | 퀵메뉴 아이콘 바, SVG 도넛+데이터 테이블, 수평 카테고리 카드 |
 
-메인 진입점: [index.html](./index.html) — 6개 시안 썸네일·설명·링크 목록
+메인 진입점: [index.html](./index.html) — 3개 시안 썸네일·설명·링크 목록 (새 창으로 열기)
 
 ---
 
@@ -50,10 +47,7 @@
 - **PC·태블릿** (768px+): 섹션 점프 네비게이션 (시안별 고유 디자인)
   - 01: 오른쪽 점 + 라벨
   - 02: 왼쪽 네이비 탭
-  - 03: 오른쪽 에디토리얼 진행선
-  - 04: 하단 아이콘 탭 바
-  - 05: 오른쪽 네온 캡슐
-  - 06: 하단 도트 pill
+  - 03: 하단 아이콘 탭 바
 
 ---
 
@@ -74,7 +68,7 @@ python -m http.server 8080
 1. GitHub 저장소 **Settings → Pages**
 2. **Source**: Deploy from a branch
 3. **Branch**: `main` / `/ (root)`
-4. 저장 후 `https://<username>.github.io/linker/` 에서 `index.html` 접속
+4. 저장 후 `https://lj-yeon.github.io/linker/` 에서 `index.html` 접속
 
 ---
 
@@ -95,9 +89,6 @@ linker/
 ├── mockup-01.html  # 시안 1
 ├── mockup-02.html  # 시안 2
 ├── mockup-03.html  # 시안 3
-├── mockup-04.html  # 시안 4
-├── mockup-05.html  # 시안 5
-├── mockup-06.html  # 시안 6
 └── README.md
 ```
 
