@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전시회 참가신청 - LINKER NICE D&B</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #1A6FD8; --blue-l: #E8F1FD; --blue-d: #0F4AA3;
+  --gray-1: #F8FAFB; --gray-2: #EFF2F5; --gray-3: #C9D2DC; --gray-4: #8997A8;
+  --dark: #1B2535; --text: #2C3A4A;
+  --r: 14px; --trans: .25s ease;
+  --primary:     #005B99;
+  --primary-d:   #003B71;
+  --primary-l:   #E6EFF7;
+  --border:      #D0D8E4;
+  --text-mid:    #555555;
+  --text-light:  #888888;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; min-width: 1280px; }
+a { text-decoration: none; color: inherit; }
+img { display: block; }
+ul { list-style: none; }
+.wrap { width: min(1280px, calc(100% - 40px)); margin: 0 auto; }
+
+/* ── 헤더 ── */
+header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid var(--gray-2); height: 66px; display: flex; align-items: center; }
+.header-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; gap: 0; }
+.header-logo { flex-shrink: 0; margin-right: 40px; }
+.header-logo img { height: 38px; object-fit: contain; display: block; }
+.gnb { display: none; gap: 0; align-items: center; list-style: none; font-size: 18px; font-weight: 700; }
+.gnb li { position: relative; }
+.gnb > li > a { display: block; color: var(--text); padding: 0 24px; line-height: 66px; transition: color var(--trans); white-space: nowrap; }
+.gnb > li:hover > a { color: var(--blue); }
+.gnb .sub { position: absolute; top: 66px; left: 0; background: #fff; border: 1px solid var(--gray-2); border-top: 2px solid var(--blue); border-radius: 0 0 var(--r) 0; box-shadow: 0 8px 24px rgba(0,0,0,.1); min-width: 170px; opacity: 0; visibility: hidden; transition: opacity var(--trans), visibility var(--trans); list-style: none; padding: 8px 0; }
+.gnb li:hover .sub { opacity: 1; visibility: visible; }
+.gnb .sub li a { display: block; padding: 10px 20px; font-size: 16px; font-weight: 500; color: var(--text); white-space: nowrap; }
+.gnb .sub li a:hover { background: var(--gray-1); color: var(--blue); }
+.util { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.util a { font-size: 16px; color: var(--gray-4); font-weight: 500; padding: 7px 14px; border-radius: 6px; transition: all var(--trans); white-space: nowrap; }
+.util a:hover { background: var(--gray-1); color: var(--blue); }
+.hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 9px 10px; background: var(--blue-l); border-radius: 8px; border: 1px solid rgba(26,111,216,.2); }
+.hamburger span { display: block; width: 20px; height: 2px; background: var(--blue); border-radius: 2px; }
+@media (min-width: 768px) { .gnb { display: flex; } .hamburger { display: none; } }
+@media (max-width: 767px) { .util { display: none; } }
+
+/* ── 페이지 배너 ── */
+.page-banner {
+  position: relative;
+  background:
+    radial-gradient(circle at 15% 40%, rgba(100,160,255,0.35) 0%, transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(80,40,200,0.25) 0%, transparent 35%),
+    linear-gradient(135deg, #0D1E3A 0%, #0F3575 50%, #1A5ABF 100%);
+  padding: 80px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+}
+.page-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.14) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  z-index: 1;
+  pointer-events: none;
+}
+.banner-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+}
+.banner-title {
+  font-size: 60px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  text-shadow: 0 0 40px rgba(80,160,255,0.55), 0 4px 12px rgba(0,0,0,0.7);
+  padding-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+}
+.banner-title::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 72px;
+  height: 3px;
+  background: linear-gradient(90deg, #4AADFF 0%, #00D4FF 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 14px rgba(0,212,255,0.9);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.5rem;
+}
+.banner-sub {
+  font-size: 20px;
+  color: rgba(180,220,255,0.85);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+/* ── 브레드크럼 ── */
+.loc-bar { width: 100%; background: transparent; padding: 32px 0 22px; }
+.loc-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; }
+.loc-path { display: flex; align-items: center; list-style: none; gap: 0; }
+.loc-path > li { position: relative; border: 1px solid #ccc; background-color: transparent; }
+.loc-path > li + li { border-left: 0; }
+.loc-home { display: flex; align-items: center; justify-content: center; width: 53px; height: 49px; color: #555; text-decoration: none; transition: background-color .2s; }
+.loc-home:hover { background-color: #f1ebff; }
+.loc-btn { display: flex; align-items: center; justify-content: space-between; width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 500; color: #222; text-decoration: none; transition: background-color .2s; white-space: nowrap; gap: 8px; }
+.loc-btn:hover { background-color: #f1ebff; color: #222; }
+.loc-none { display: flex; align-items: center; width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 700; color: #111; white-space: nowrap; }
+.loc-arrow { font-size: 15px; color: #888; flex-shrink: 0; }
+.loc-select { width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 700; color: #111; font-family: inherit; border: none; background: transparent; cursor: pointer; outline: none; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+
+/* ── 메인 콘텐츠 ── */
+.page-content { padding: 44px 0 80px; background: #fff; }
+.page-title-area { margin-bottom: 40px; display: flex; align-items: baseline; gap: 20px; }
+.page-title-area h2 { font-size: 32px; font-weight: 800; color: #1A2A40; flex-shrink: 0; }
+.page-title-area p { font-size: 16px; color: var(--text-mid); line-height: 1.75; }
+
+/* ── 신청 폼 ── */
+.apply-form-wrap {
+  /* 외곽 박스 없음 — 이미지 스타일대로 위아래 보더만 */
+}
+
+/* 폼 상단 타이틀 바 */
+.form-title-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #222;
+  margin-bottom: 0;
+}
+.form-title-bar .form-required-note {
+  font-size: 14px;
+  color: var(--text-mid);
+}
+.form-title-bar .form-required-note .req-star {
+  color: #c0392b;
+  font-weight: 700;
+  margin-right: 2px;
+}
+
+/* 폼 행 — 라벨 아래 보더 없음, 인풋 쪽만 보더 */
+.form-row {
+  display: flex;
+  align-items: center;
+  min-height: 84px;
+}
+.form-label {
+  width: 160px;
+  flex-shrink: 0;
+  padding: 30px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  /* 배경색 없음, 세로선 없음, 보더바텀 없음 */
+}
+.form-label .req {
+  color: #c0392b;
+  margin-left: 1px;
+}
+.form-field {
+  flex: 1;
+  padding: 26px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* 인풋 스타일 */
+.form-input {
+  height: 38px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 0 10px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+  max-width: 600px;
+}
+.form-input:focus { border-color: #888; }
+.form-input::placeholder { color: #bbb; }
+
+.form-select {
+  height: 38px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 0 10px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  min-width: 240px;
+  transition: border-color .2s;
+}
+.form-select:focus { border-color: #888; }
+
+.form-textarea {
+  width: 100%;
+  max-width: 600px;
+  height: 90px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 8px 10px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  resize: vertical;
+  transition: border-color .2s;
+}
+.form-textarea:focus { border-color: #888; }
+.form-textarea::placeholder { color: #bbb; }
+
+/* 입력 + 버튼 열 */
+.input-btn-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+.input-btn-row .form-input { flex: 1; max-width: none; }
+.btn-check {
+  height: 38px;
+  padding: 0 16px;
+  background: #fff;
+  border: 1px solid #888;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: background .2s;
+  flex-shrink: 0;
+}
+.btn-check:hover { background: #f5f5f5; }
+
+/* 체크박스 / 라디오 그룹 */
+.check-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  align-items: center;
+}
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+.check-item input[type="checkbox"],
+.check-item input[type="radio"] {
+  width: 15px;
+  height: 15px;
+  accent-color: #333;
+  cursor: pointer;
+}
+
+/* 텍스트 카운터 */
+.textarea-wrap { position: relative; width: 100%; max-width: 600px; }
+.char-counter {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 13px;
+  color: #aaa;
+  pointer-events: none;
+}
+
+/* ── 추가 사항 구분 ── */
+.form-section-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1A2A40;
+  margin-top: 80px;
+  margin-bottom: 0;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #222;
+}
+
+/* ── 제출 버튼 ── */
+.form-submit-area {
+  margin-top: 40px;
+  text-align: center;
+}
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 50px;
+  padding: 0 48px;
+  background: #333;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  transition: background .2s;
+}
+.btn-submit:hover { background: #111; }
+
+/* ── 푸터 ── */
+footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding: 40px 0 28px; }
+.footer__inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; position: relative; }
+.fnb { position: absolute; top: 0; right: 0; }
+.fnb__wrap { display: flex; list-style: none; align-items: center; padding: 0; margin: 0; flex-wrap: wrap; gap: 2px; }
+.fnb__wrap li + li::before { content: '|'; margin: 0 10px; color: var(--gray-3); font-weight: 400; }
+.fnb__link { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none; transition: color var(--trans); }
+.fnb__link:hover { color: var(--blue); }
+.footer__logo { display: block; min-height: 36px; }
+.footer__logo img { height: 30px; width: auto; object-fit: contain; }
+.footer__info-row { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 20px; }
+.site-address { font-size: 16px; line-height: 22px; color: var(--gray-4); font-style: normal; }
+.footer__info-row select { border: 1px solid var(--gray-2); background: #fff; color: var(--text); padding: 0 14px; font-size: 16px; width: 200px; height: 38px; border-radius: 8px; cursor: pointer; outline: none; flex-shrink: 0; transition: border-color var(--trans); }
+.footer__info-row select:hover { border-color: var(--blue); }
+.copyright { margin-top: 18px; font-size: 12px; color: var(--gray-4); opacity: .75; }
+
+/* ── 반응형 ── */
+@media (max-width: 768px) {
+  body { min-width: 360px; }
+  .page-banner { padding: 50px 0; }
+  .banner-title { font-size: 36px; }
+  .banner-sub { font-size: 16px; }
+  .form-label { width: 120px; font-size: 14px; padding: 12px 12px; }
+  .form-field { padding: 12px 12px; }
+  .fnb { position: static; margin-bottom: 16px; }
+  .fnb__wrap { flex-wrap: wrap; }
+  .footer__info-row { flex-direction: column; gap: 14px; margin-top: 16px; }
+  .footer__info-row select { width: 100%; max-width: 280px; }
+  .site-address { font-size: 12px; }
+  .page-title-area { flex-direction: column; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1 class="header-logo">
+      <a href="/"><img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스"></a>
+    </h1>
+    <nav>
+      <ul class="gnb">
+        <li><a href="#">빅바이어 마케팅</a></li>
+        <li><a href="#" style="color:#1A6FD8;">전시회 참가신청</a></li>
+      </ul>
+    </nav>
+    <div class="util">
+      <a href="#">로그인</a>
+      <a href="#">회원가입</a>
+    </div>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="page-banner" aria-label="페이지 배너">
+  <div class="wrap banner-inner">
+    <h1 class="banner-title">전시회 참가신청</h1>
+    <p class="banner-sub">국내외 전시회 참가를 통해 글로벌 시장 진출의 기회를 잡으세요</p>
+  </div>
+</section>
+
+<div class="loc-bar">
+  <div class="loc-inner">
+    <ul class="loc-path" aria-label="현재 위치">
+      <li>
+        <a href="#" class="loc-home" aria-label="홈">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.5z"/><polyline points="9 21 9 12 15 12 15 21"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="loc-btn">전시회 참가신청<span class="loc-arrow">▾</span></a>
+      </li>
+      <li>
+        <select class="loc-select" onchange="if(this.value) location.href=this.value;">
+          <option value="sub-apply.html">참가신청</option>
+          <option value="sub-apply-history.html">신청내역</option>
+        </select>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<main class="page-content" id="main-content">
+  <div class="wrap">
+
+    <div class="page-title-area">
+      <h2>전시회 참가 신청</h2>
+      <p>아래 양식을 작성하여 전시회 참가를 신청해 주세요. 담당자 확인 후 연락드립니다.</p>
+    </div>
+
+    <div class="apply-form-wrap">
+
+      <!-- 폼 상단 타이틀 -->
+      <div class="form-title-bar">
+        <span class="form-required-note"><span class="req-star">*</span> 표시는 필수 입력 항목입니다</span>
+      </div>
+
+      <!-- 전시회명 (체크박스) -->
+      <div class="form-row">
+        <div class="form-label">전시회명<span class="req">*</span></div>
+        <div class="form-field">
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="exhibitionName" value="sg"> 싱가포르 TECH WEEK (9/29~30)</label>
+            <label class="check-item"><input type="checkbox" name="exhibitionName" value="hk"> 홍콩 Beauty &amp; Wellness (8/13~17)</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 품목 -->
+      <div class="form-row">
+        <div class="form-label">품목</div>
+        <div class="form-field">
+          <input type="text" class="form-input" id="itemName" placeholder="품목을 입력하세요">
+        </div>
+      </div>
+
+      <!-- 추가사항 섹션 -->
+      <p class="form-section-title">추가사항<span style="font-size:14px;font-weight:500;color:#555;margin-left:10px;">(필수4, 선택1)</span></p>
+
+      <!-- 참가기업명 -->
+      <div class="form-row">
+        <div class="form-label">참가기업명<span class="req">*</span></div>
+        <div class="form-field">
+          <input type="text" class="form-input" id="companyName" placeholder="참가기업명을 입력하세요">
+        </div>
+      </div>
+
+      <!-- 담당자명/직함 -->
+      <div class="form-row">
+        <div class="form-label">담당자명/직함<span class="req">*</span></div>
+        <div class="form-field">
+          <input type="text" class="form-input" id="managerName" placeholder="담당자명 및 직함을 입력하세요">
+        </div>
+      </div>
+
+      <!-- 연락처 -->
+      <div class="form-row">
+        <div class="form-label">연락처<span class="req">*</span></div>
+        <div class="form-field">
+          <input type="text" class="form-input" id="contact" placeholder="연락처를 입력하세요">
+        </div>
+      </div>
+
+      <!-- 이메일 -->
+      <div class="form-row">
+        <div class="form-label">이메일<span class="req">*</span></div>
+        <div class="form-field">
+          <input type="text" class="form-input" id="email" placeholder="이메일 주소를 입력하세요">
+        </div>
+      </div>
+
+      <!-- 추가 문의 내용 (선택) -->
+      <div class="form-row" style="align-items:flex-start;">
+        <div class="form-label" style="padding-top:30px;">추가 문의 내용</div>
+        <div class="form-field" style="align-items:flex-start;border-bottom:none;">
+          <div class="textarea-wrap">
+            <textarea class="form-textarea" id="extraNote" placeholder="추가 문의 내용을 입력하세요" maxlength="1000" oninput="updateCounter(this,'noteCounter')"></textarea>
+            <span class="char-counter" id="noteCounter">0/1000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 제출 버튼 -->
+      <div class="form-submit-area">
+        <button type="button" class="btn-submit" onclick="handleSubmit()">전시회 참가 신청</button>
+      </div>
+
+    </div>
+    <!-- /.apply-form-wrap -->
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer__inner">
+    <div class="fnb">
+      <ul class="fnb__wrap">
+        <li><a href="#" class="fnb__link" style="color:red;">개인정보처리방침</a></li>
+        <li><a href="#" class="fnb__link">이용약관</a></li>
+        <li><a href="#" class="fnb__link">신용정보활용체제공시</a></li>
+        <li><a href="#" class="fnb__link">이메일무단수집거부</a></li>
+      </ul>
+    </div>
+    <div class="footer__logo">
+      <img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스">
+    </div>
+    <div class="footer__info-row">
+      <address class="site-address">
+        (04535) 서울특별시 중구 소공로 70, 포스트타워 16층 (주)NICE디앤비<br>
+        통신판매업신고: 제2024-서울중구-1736호 사업자등록번호: 107-86-24874 TEL: 02-2122-0233 FAX: 02-2122-2591
+      </address>
+      <select id="familySite" name="familySite">
+        <option value="" disabled selected>Family site</option>
+        <option value="https://www.nicednb.com">나이스디앤비 홈페이지</option>
+        <option value="https://global.nicednb.com">나이스디앤비 글로벌 홈페이지</option>
+      </select>
+    </div>
+    <p class="copyright">ⓒ 2023. NICE D&amp;B Co.,Ltd. ALL RIGHTS RESERVED.</p>
+  </div>
+</footer>
+
+<script>
+function updateCounter(el, counterId) {
+  var counter = document.getElementById(counterId);
+  if (counter) {
+    counter.textContent = el.value.length + '/' + el.getAttribute('maxlength');
+  }
+}
+
+function handleSubmit() {
+  var exhibitions = document.querySelectorAll('input[name="exhibitionName"]:checked');
+  var companyName = document.getElementById('companyName').value.trim();
+  var managerName = document.getElementById('managerName').value.trim();
+  var contact = document.getElementById('contact').value.trim();
+  var email = document.getElementById('email').value.trim();
+
+  if (exhibitions.length === 0) {
+    alert('참가 희망 전시회를 선택하세요.');
+    return;
+  }
+  if (!companyName) {
+    alert('참가기업명을 입력해 주세요.');
+    document.getElementById('companyName').focus();
+    return;
+  }
+  if (!managerName) {
+    alert('담당자명/직함을 입력해 주세요.');
+    document.getElementById('managerName').focus();
+    return;
+  }
+  if (!contact) {
+    alert('연락처를 입력해 주세요.');
+    document.getElementById('contact').focus();
+    return;
+  }
+  if (!email) {
+    alert('이메일을 입력해 주세요.');
+    document.getElementById('email').focus();
+    return;
+  }
+
+  alert('전시회 참가 신청이 완료되었습니다.\n담당자 확인 후 연락드리겠습니다.');
+}
+</script>
+
+</body>
+</html>

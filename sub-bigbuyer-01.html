@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>빅데이터 바이어 발굴 - LINKER NICE D&B</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ── 리셋 & 변수 ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #1A6FD8;
+  --blue-l: #E8F1FD;
+  --blue-d: #0F4AA3;
+  --orange: #F57C1E;
+  --orange-l: #FEF2E6;
+  --green: #2DAA6A;
+  --green-l: #E6F7EE;
+  --gray-1: #F8FAFB;
+  --gray-2: #EFF2F5;
+  --gray-3: #C9D2DC;
+  --gray-4: #8997A8;
+  --dark: #1B2535;
+  --text: #2C3A4A;
+  --r: 14px;
+  --rL: 20px;
+  --shadow: 0 4px 24px rgba(26,111,216,.10);
+  --trans: .25s ease;
+  /* 페이지 고유 변수 */
+  --primary:     #005B99;
+  --primary-d:   #003B71;
+  --primary-l:   #E6EFF7;
+  --border:      #D0D8E4;
+  --bg:          #F5F7FA;
+  --bg-gray:     #EEF1F6;
+  --text-mid:    #555555;
+  --text-light:  #888888;
+  --radius:      4px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 16px; background: #fff; color: var(--text); min-width: 1280px; line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+/* ── 공통 레이아웃 ── */
+.wrap { width: min(1280px, calc(100% - 40px)); margin: 0 auto; }
+
+/* ── 헤더 ── */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: #fff; border-bottom: 1px solid var(--gray-2);
+  height: 66px; display: flex; align-items: center;
+}
+.header-inner {
+  width: min(1280px, calc(100% - 40px)); margin: 0 auto;
+  display: flex; align-items: center; gap: 0;
+}
+.header-logo { flex-shrink: 0; margin-right: 40px; }
+.header-logo img { height: 38px; object-fit: contain; display: block; }
+.gnb {
+  display: none; gap: 0; align-items: center;
+  list-style: none; font-size: 18px; font-weight: 700;
+}
+.gnb li { position: relative; }
+.gnb > li > a {
+  display: block; color: var(--text); padding: 0 24px; line-height: 66px;
+  transition: color var(--trans); white-space: nowrap;
+}
+.gnb > li:hover > a { color: var(--blue); }
+.gnb .sub {
+  position: absolute; top: 66px; left: 0;
+  background: #fff; border: 1px solid var(--gray-2); border-top: 2px solid var(--blue);
+  border-radius: 0 0 var(--r) var(--r);
+  box-shadow: 0 8px 24px rgba(0,0,0,.1); min-width: 170px;
+  opacity: 0; visibility: hidden; transition: opacity var(--trans), visibility var(--trans);
+  list-style: none; padding: 8px 0;
+}
+.gnb li:hover .sub { opacity: 1; visibility: visible; }
+.gnb .sub li a { display: block; padding: 10px 20px; font-size: 16px; font-weight: 500;
+  color: var(--text); white-space: nowrap; }
+.gnb .sub li a:hover { background: var(--gray-1); color: var(--blue); }
+.util { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.util a { font-size: 16px; color: var(--gray-4); font-weight: 500;
+  padding: 7px 14px; border-radius: 6px; transition: all var(--trans); white-space: nowrap; }
+.util a:hover { background: var(--gray-1); color: var(--blue); }
+.hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer;
+  margin-left: auto; padding: 9px 10px; background: var(--blue-l); border-radius: 8px; border: 1px solid rgba(26,111,216,.2); }
+.hamburger span { display: block; width: 20px; height: 2px; background: var(--blue); border-radius: 2px; }
+@media (min-width: 768px) { .gnb { display: flex; } .hamburger { display: none; } }
+@media (max-width: 767px) { .util { display: none; } }
+
+/* ── 페이지 배너 ── */
+.page-banner {
+  position: relative;
+  background:
+    radial-gradient(circle at 15% 40%, rgba(100,160,255,0.35) 0%, transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(80,40,200,0.25) 0%, transparent 35%),
+    linear-gradient(135deg, #0D1E3A 0%, #0F3575 50%, #1A5ABF 100%);
+  padding: 80px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+}
+.page-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.14) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  z-index: 1;
+  pointer-events: none;
+}
+.banner-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+}
+
+.banner-title {
+  font-size: 60px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  text-shadow: 0 0 40px rgba(80,160,255,0.55), 0 4px 12px rgba(0,0,0,0.7);
+  padding-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+}
+.banner-title::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 72px;
+  height: 3px;
+  background: linear-gradient(90deg, #4AADFF 0%, #00D4FF 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 14px rgba(0,212,255,0.9);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.5rem;
+  border-bottom: none;
+}
+.banner-sub {
+  font-size: 20px;
+  color: rgba(180,220,255,0.85);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+/* ── 브레드크럼 ── */
+.loc-bar {
+  width: 100%;
+  background: transparent;
+  padding: 32px 0 22px;
+}
+.loc-inner {
+  width: min(1280px, calc(100% - 40px));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.loc-path {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 0;
+}
+.loc-path > li {
+  position: relative;
+  border: 1px solid #ccc;
+  background-color: transparent;
+}
+.loc-path > li + li {
+  border-left: 0;
+}
+.loc-home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 53px;
+  height: 49px;
+  color: #555;
+  text-decoration: none;
+  transition: background-color .2s;
+}
+.loc-home:hover { background-color: #f1ebff; }
+.loc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 198px;
+  height: 49px;
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #222;
+  text-decoration: none;
+  transition: background-color .2s;
+  white-space: nowrap;
+  gap: 8px;
+}
+.loc-btn:hover { background-color: #f1ebff; color: #222; }
+.loc-none {
+  display: flex;
+  align-items: center;
+  width: 198px;
+  height: 49px;
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  white-space: nowrap;
+}
+.loc-arrow { font-size: 15px; color: #888; flex-shrink: 0; }
+
+/* ── 메인 콘텐츠 ── */
+.page-content {
+  padding: 44px 0 80px;
+  background: #fff;
+}
+
+/* 페이지 제목 영역 */
+.page-title-area {
+  margin-bottom: 48px;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+.page-title-area h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1A2A40;
+  flex-shrink: 0;
+}
+.page-title-area p {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+/* ── 통합 검색 패널 ── */
+.search-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+/* ── 통합 검색 조건 ── */
+.unified-criteria {
+  border-top: 2px solid var(--blue-l);
+  background: #F7F9FC;
+  padding: 16px 24px;
+}
+.unified-criteria-hd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.unified-badge {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--blue-l);
+  border: 1px solid #B8D4F7;
+  border-radius: 20px;
+  padding: 3px 12px;
+}
+.unified-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 44px;
+  align-items: center;
+}
+.unified-empty {
+  font-size: 16px;
+  color: var(--gray-3);
+}
+.criteria-kw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.criteria-kw-chip button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,.8);
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+}
+.criteria-kw-chip button:hover { color: #fff; }
+.criteria-cat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1B8A6B;
+  color: #fff;
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.criteria-cat-chip button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,.8);
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+}
+.criteria-cat-chip button:hover { color: #fff; }
+
+.search-section-header {
+  background: #003F7A;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search-section-header .sec-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
+.search-section-header .sec-desc {
+  font-size: 16px;
+  color: rgba(255,255,255,0.65);
+}
+.search-keyword-area {
+  background: #FAFBFD;
+  padding: 20px 24px;
+}
+/* 키워드 칩 스타일 */
+.keyword-chips-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 36px;
+  padding: 8px 12px;
+  background: #F8FAFB;
+  border: 1px solid var(--gray-2);
+  border-radius: 8px;
+  margin-top: 8px;
+}
+.keyword-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blue-l);
+  border: 1px solid #B8D4F7;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 16px;
+  color: var(--blue);
+  font-weight: 500;
+}
+.keyword-chip-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--blue);
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+  opacity: .7;
+}
+.keyword-chip-remove:hover { opacity: 1; }
+.keyword-chips-empty {
+  font-size: 16px;
+  color: var(--gray-3);
+  align-self: center;
+}
+.keyword-counter {
+  font-size: 16px;
+  color: var(--gray-4);
+  font-weight: 500;
+}
+.keyword-counter.at-max { color: var(--blue); font-weight: 600; }
+.search-input-row {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+.search-input-row input[type="text"] {
+  flex: 1;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 16px;
+  font-size: 16px;
+  color: var(--text);
+  font-family: inherit;
+  background: white;
+  outline: none;
+  transition: border-color var(--trans);
+}
+.search-input-row input[type="text"]:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0,91,153,0.08);
+}
+.search-input-row input[type="text"]::placeholder {
+  color: #B0BAC6;
+  font-size: 16px;
+}
+.btn-search-main {
+  height: 46px;
+  padding: 0 24px;
+  background: var(--primary);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background var(--trans);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-search-main:hover { background: var(--primary-d); }
+.btn-search-main svg { width: 16px; height: 16px; flex-shrink: 0; }
+.search-divider-row {
+  background: #EAEFF5;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 12px;
+}
+.search-divider-label {
+  font-size: 16px;
+  color: #8898AA;
+  white-space: nowrap;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.search-divider-label::before,
+.search-divider-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #C8D3DF;
+}
+.search-category-header {
+  padding: 16px 24px 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-bottom: 1px solid #F0F3F7;
+}
+.search-category-header .cat-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+}
+.search-category-header .cat-desc {
+  font-size: 16px;
+  color: var(--text-light);
+}
+.category-selector {
+  margin: 0 24px 20px;
+  border: 1px solid #D0D8E4;
+  border-radius: 3px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.cat-col { border-right: 1px solid #D0D8E4; }
+.cat-col:last-child { border-right: none; }
+.cat-col-header {
+  background: #4A6BA0;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 9px 14px;
+  letter-spacing: 0.02em;
+}
+.cat-col-list {
+  height: 210px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #C8D3DF transparent;
+}
+.cat-col-list::-webkit-scrollbar { width: 4px; }
+.cat-col-list::-webkit-scrollbar-track { background: transparent; }
+.cat-col-list::-webkit-scrollbar-thumb { background: #C8D3DF; border-radius: 2px; }
+.cat-item {
+  padding: 7px 14px;
+  font-size: 16px;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: background var(--trans), color var(--trans);
+  border-bottom: 1px solid #F3F5F8;
+  line-height: 1.5;
+}
+.cat-item:last-child { border-bottom: none; }
+.cat-item:hover { background: #EBF3FB; color: var(--primary); }
+.cat-item.active { font-weight: 700; color: var(--primary); background: #D9EAF7; }
+.selected-category-area {
+  padding: 12px 24px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.selected-label { font-size: 16px; font-weight: 600; color: #555; white-space: nowrap; }
+.selected-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-l);
+  border: 1px solid #B8D0E8;
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.selected-tag-remove {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 2px;
+  line-height: 1;
+  transition: color var(--trans);
+  font-family: inherit;
+}
+.selected-tag-remove:hover { color: #C62828; }
+.search-country-area {
+  border-top: 1px solid #EAEFF5;
+  background: #FAFBFD;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.country-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+/* ── 커스텀 국가 멀티셀렉트 ── */
+.country-ms { flex: 1; position: relative; }
+.cms-trigger {
+  min-height: 46px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px 34px 6px 10px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  position: relative;
+  transition: border-color .2s;
+  user-select: none;
+}
+.cms-trigger:hover { border-color: var(--primary); }
+.cms-trigger.open {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0,91,153,0.08);
+}
+.cms-caret {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-4);
+  font-size: 12px;
+  pointer-events: none;
+  transition: transform .2s;
+}
+.cms-trigger.open .cms-caret { transform: translateY(-50%) rotate(180deg); }
+.cms-placeholder { color: #B0BAC6; font-size: 16px; }
+.cms-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--blue-l);
+  border: 1px solid #B8D4F7;
+  color: var(--blue);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 2px 8px 2px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.cms-chip-rm {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--blue);
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 0 0 2px;
+  opacity: .65;
+}
+.cms-chip-rm:hover { opacity: 1; }
+.cms-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.13);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+}
+.cms-panel[hidden] { display: none !important; }
+.cms-search-row {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--gray-2);
+  flex-shrink: 0;
+}
+.cms-search-input {
+  width: 100%;
+  height: 34px;
+  border: 1px solid var(--gray-2);
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  color: var(--text);
+}
+.cms-search-input:focus { border-color: var(--primary); }
+.cms-options {
+  overflow-y: auto;
+  flex: 1;
+  list-style: none;
+  padding: 4px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #C9D2DC transparent;
+}
+.cms-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text);
+  transition: background .12s;
+}
+.cms-opt:hover { background: var(--gray-1); }
+.cms-opt.sel { background: var(--blue-l); color: var(--blue); font-weight: 600; }
+.cms-opt.hide { display: none; }
+.cms-chk {
+  width: 16px; height: 16px;
+  border: 1.5px solid var(--gray-3);
+  border-radius: 3px;
+  flex-shrink: 0;
+  position: relative;
+  transition: all .15s;
+}
+.cms-opt.sel .cms-chk {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.cms-opt.sel .cms-chk::after {
+  content: '';
+  position: absolute;
+  left: 3px; top: 1px;
+  width: 8px; height: 5px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+}
+.search-submit-area {
+  border-top: 1px solid #EAEFF5;
+  background: #F0F4F9;
+  padding: 24px 24px 32px;
+  text-align: center;
+}
+.search-submit-note { font-size: 16px; color: #666; margin-bottom: 14px; line-height: 1.5; }
+.btn-ai-search {
+  width: 100%;
+  height: 70px;
+  font-size: 24px;
+  font-weight: 800;
+  background: #1A6FD8;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all .25s ease;
+  letter-spacing: 0.03em;
+  font-family: inherit;
+}
+.btn-ai-search:hover {
+  background: #1560C0;
+  transform: translateY(-2px);
+}
+.btn-ai-search svg { width: 28px; height: 28px; flex-shrink: 0; }
+
+/* ── 푸터 ── */
+footer {
+  background: var(--gray-1);
+  border-top: 1px solid var(--gray-2);
+  padding: 40px 0 28px;
+}
+.footer__inner {
+  width: min(1280px, calc(100% - 40px));
+  margin: 0 auto; position: relative;
+}
+.fnb { position: absolute; top: 0; right: 0; }
+.fnb__wrap { display: flex; list-style: none; align-items: center; padding: 0; margin: 0; flex-wrap: wrap; gap: 2px; }
+.fnb__wrap li + li::before { content: '|'; margin: 0 10px; color: var(--gray-3); font-weight: 400; }
+.fnb__link { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none; transition: color var(--trans); }
+.fnb__link:hover { color: var(--blue); }
+.footer__logo { display: block; min-height: 36px; }
+.footer__logo img { height: 30px; width: auto; object-fit: contain; }
+.footer__info-row { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 20px; }
+.site-address { font-size: 16px; line-height: 22px; color: var(--gray-4); font-style: normal; }
+.footer__info-row select {
+  border: 1px solid var(--gray-2); background: #fff; color: var(--text);
+  padding: 0 14px; font-size: 16px; width: 200px; height: 38px;
+  border-radius: 8px; cursor: pointer; outline: none; flex-shrink: 0;
+  transition: border-color var(--trans);
+}
+.footer__info-row select:hover { border-color: var(--blue); }
+.copyright { margin-top: 18px; font-size: 12px; color: var(--gray-4); opacity: .75; }
+
+/* ── 반응형 ── */
+@media (max-width: 900px) {
+  .category-selector { grid-template-columns: 1fr; }
+  .cat-col { border-right: none; border-bottom: 1px solid #D0D8E4; }
+  .cat-col:last-child { border-bottom: none; }
+  .cat-col-list { height: 140px; }
+}
+@media (max-width: 768px) {
+  .page-banner { padding: 50px 0; }
+  .banner-title { font-size: 36px; }
+  .search-country-area { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .country-ms { width: 100%; }
+  .search-category-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+@media (max-width: 768px) {
+  .fnb { position: static; margin-bottom: 16px; }
+  .fnb__wrap { flex-wrap: wrap; }
+  .footer__info-row { flex-direction: column; gap: 14px; margin-top: 16px; }
+  .footer__info-row select { width: 100%; max-width: 280px; }
+  .site-address { font-size: 12px; }
+}
+@media (max-width: 480px) {
+  .page-content { padding: 28px 0 60px; }
+  .selected-category-area { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── AI 검색 결과 패널 ── */
+.search-result-panel {
+  margin-top: 28px;
+  border: 1px solid #C8D4E3;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+.result-panel-hd {
+  background: #002D5F;
+  color: white;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.result-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid #E8EFF7;
+}
+.result-stat {
+  padding: 28px 20px;
+  border-right: 1px solid #E8EFF7;
+  text-align: center;
+}
+.result-stat:last-child { border-right: none; }
+.result-stat-label {
+  font-size: 16px;
+  color: #7A8AA0;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.result-stat-value {
+  font-size: 40px;
+  font-weight: 900;
+  color: #002D5F;
+  line-height: 1;
+}
+.result-stat-unit {
+  font-size: 16px;
+  font-weight: 500;
+  color: #7A8AA0;
+  margin-left: 4px;
+}
+.result-cta {
+  padding: 24px 24px 28px;
+  background: #EAF1F8;
+  border-top: 3px solid var(--primary);
+}
+.result-cta-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.result-cta-desc {
+  font-size: 16px;
+  color: #3A4A5A;
+  line-height: 1.6;
+}
+.result-cta-select-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.result-cta-select-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+}
+.result-send-select {
+  height: 44px;
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  padding: 0 12px;
+  font-size: 16px;
+  font-family: inherit;
+  background: white;
+  cursor: pointer;
+  min-width: 150px;
+  outline: none;
+  color: #1A2A40;
+  font-weight: 600;
+}
+.result-send-select:focus { border-color: var(--primary-d); box-shadow: 0 0 0 3px rgba(0,91,153,.12); }
+.btn-marketing-write {
+  width: 100%;
+  height: 64px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  letter-spacing: 0.02em;
+}
+.btn-marketing-write svg { width: 22px; height: 22px; flex-shrink: 0; }
+.btn-marketing-write:hover { background: var(--primary-d); box-shadow: 0 6px 20px rgba(0,59,113,.30); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1 class="header-logo">
+      <a href="/"><img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스"></a>
+    </h1>
+    <nav>
+      <ul class="gnb">
+        <li><a href="#">빅바이어 마케팅</a></li>
+        <li><a href="#">전시회 참가신청</a></li>
+      </ul>
+    </nav>
+    <div class="util">
+      <a href="#">로그인</a>
+      <a href="#">회원가입</a>
+    </div>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ======================================================
+     3. 페이지 배너
+====================================================== -->
+<section class="page-banner" aria-label="페이지 배너">
+  <div class="wrap banner-inner">
+    <h1 class="banner-title">빅바이어 마케팅</h1>
+    <p class="banner-sub">전 세계 억 명의 바이어 정보를 AI와 POOL로 연결해드립니다</p>
+  </div>
+</section>
+
+<div class="loc-bar">
+  <div class="loc-inner">
+    <ul class="loc-path" aria-label="현재 위치">
+      <li>
+        <a href="#" class="loc-home" aria-label="홈">
+          <i class="fa-solid fa-house" style="font-size:16px;"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="loc-btn">빅바이어 마케팅<span class="loc-arrow">▾</span></a>
+      </li>
+      <li>
+        <span class="loc-none">빅데이터바이어발굴</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================================================
+     5. 메인 콘텐츠
+====================================================== -->
+<main class="page-content" id="main-content">
+  <div class="wrap">
+
+    <!-- 페이지 제목 영역 -->
+    <div class="page-title-area">
+      <h2>빅데이터 바이어 발굴</h2>
+      <p>전 세계 억 명의 바이어 데이터베이스를 기반으로 최적의 바이어를 발굴해 드립니다</p>
+    </div>
+
+    <!-- 통합 검색 패널 -->
+    <div class="search-panel" role="search" aria-label="바이어 발굴 검색">
+
+      <!-- ── SECTION 1: 검색어 직접 입력 ── -->
+      <div class="search-section-header">
+        <span class="sec-title">검색어 입력 <span class="keyword-counter" id="kwCounter">0 / 5</span></span>
+      </div>
+      <div class="search-keyword-area">
+        <div class="search-input-row">
+          <input
+            type="text"
+            id="keywordInput"
+            placeholder="검색어 입력 후 Enter (최대 5개)"
+            aria-label="바이어 검색 키워드"
+          >
+        </div>
+      </div>
+
+      <!-- ── 구분자 ── -->
+      <div class="search-divider-row">
+        <span class="search-divider-label">카테고리 추가 선택 <small style="font-weight:400;font-size:11px;">(최대 3개, 키워드와 함께 검색됩니다)</small></span>
+      </div>
+
+      <!-- ── SECTION 2: 카테고리 검색 ── -->
+      <div class="search-category-header">
+        <span class="cat-title">카테고리 검색</span>
+        <span class="cat-desc">검색어가 떠오르지 않을 때는 카테고리 검색을 활용해 보세요</span>
+      </div>
+
+      <!-- 3단 카테고리 선택기 -->
+      <div class="category-selector" role="group" aria-label="카테고리 선택">
+
+        <!-- 1차 카테고리 -->
+        <div class="cat-col">
+          <div class="cat-col-header">1차 카테고리</div>
+          <ul class="cat-col-list" id="cat1List" role="listbox" aria-label="1차 카테고리">
+            <li class="cat-item" role="option" data-cat="1" tabindex="0">Beauty &amp; Personal Care</li>
+            <li class="cat-item" role="option" data-cat="2" tabindex="0">Food &amp; Beverage</li>
+            <li class="cat-item active" role="option" aria-selected="true" data-cat="3" tabindex="0">Home &amp; Kitchen</li>
+            <li class="cat-item" role="option" data-cat="4" tabindex="0">Fashion</li>
+            <li class="cat-item" role="option" data-cat="5" tabindex="0">Stationery &amp; Printing</li>
+            <li class="cat-item" role="option" data-cat="6" tabindex="0">Health &amp; Medical</li>
+            <li class="cat-item" role="option" data-cat="7" tabindex="0">Sport Gifts &amp; Toys</li>
+            <li class="cat-item" role="option" data-cat="8" tabindex="0">Vehicles &amp; Accessories</li>
+            <li class="cat-item" role="option" data-cat="9" tabindex="0">Electronic Products</li>
+            <li class="cat-item" role="option" data-cat="10" tabindex="0">Equipment &amp; Packaging</li>
+            <li class="cat-item" role="option" data-cat="11" tabindex="0">Electrical Components &amp; Telecoms</li>
+            <li class="cat-item" role="option" data-cat="12" tabindex="0">Industrial Supplies</li>
+            <li class="cat-item" role="option" data-cat="13" tabindex="0">Machinery &amp; Parts</li>
+            <li class="cat-item" role="option" data-cat="14" tabindex="0">Construction &amp; Safety</li>
+          </ul>
+        </div>
+
+        <!-- 2차 카테고리 -->
+        <div class="cat-col">
+          <div class="cat-col-header">2차 카테고리</div>
+          <ul class="cat-col-list" id="cat2List" role="listbox" aria-label="2차 카테고리">
+            <li class="cat-item active" role="option" aria-selected="true" data-cat2="home" tabindex="0">Home</li>
+            <li class="cat-item" role="option" data-cat2="kitchen" tabindex="0">Kitchen</li>
+          </ul>
+        </div>
+
+        <!-- 3차 카테고리 -->
+        <div class="cat-col">
+          <div class="cat-col-header">3차 카테고리</div>
+          <ul class="cat-col-list" id="cat3List" role="listbox" aria-label="3차 카테고리">
+            <li class="cat-item" role="option" data-cat3="baby" tabindex="0">Baby Supplies &amp; Products</li>
+            <li class="cat-item active" role="option" aria-selected="true" data-cat3="bathroom" tabindex="0">Bathroom</li>
+            <li class="cat-item" role="option" data-cat3="bedding" tabindex="0">Bedding</li>
+            <li class="cat-item" role="option" data-cat3="cleaning" tabindex="0">Cleaning Supplies</li>
+            <li class="cat-item" role="option" data-cat3="doors" tabindex="0">Doors &amp; Windows</li>
+            <li class="cat-item" role="option" data-cat3="furniture" tabindex="0">Furniture</li>
+            <li class="cat-item" role="option" data-cat3="garden" tabindex="0">Garden</li>
+            <li class="cat-item" role="option" data-cat3="decor" tabindex="0">Home Decor</li>
+            <li class="cat-item" role="option" data-cat3="storage" tabindex="0">Home Storage &amp; Organization</li>
+            <li class="cat-item" role="option" data-cat3="accessories" tabindex="0">Household Accessories</li>
+            <li class="cat-item" role="option" data-cat3="lighting" tabindex="0">Home Lighting</li>
+            <li class="cat-item" role="option" data-cat3="laundry" tabindex="0">Laundry</li>
+            <li class="cat-item" role="option" data-cat3="pet" tabindex="0">Pet Products</li>
+            <li class="cat-item" role="option" data-cat3="watering" tabindex="0">Watering &amp; Irrigation Supplies</li>
+            <li class="cat-item" role="option" data-cat3="other" tabindex="0">Other Home Products</li>
+          </ul>
+        </div>
+
+      </div><!-- /.category-selector -->
+
+
+      <!-- ── 통합 검색 조건 ── -->
+      <div class="unified-criteria">
+        <div class="unified-criteria-hd">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          선택된 검색 조건
+          <span class="unified-badge" id="criteriaBadge">키워드 0 · 카테고리 0</span>
+        </div>
+        <div class="unified-chips" id="criteriaChips">
+          <span class="unified-empty">검색어를 입력하거나 카테고리를 선택하면 여기에 모입니다</span>
+        </div>
+      </div>
+
+      <!-- ── SECTION 3: 국가 선택 ── -->
+      <div class="search-country-area">
+        <label class="country-label">국가를 선택하세요</label>
+        <div class="country-ms" id="countryMs">
+          <div class="cms-trigger" id="cmsTrigger" tabindex="0" role="combobox" aria-expanded="false">
+            <div class="cms-chips" id="cmsChips">
+              <span class="cms-placeholder">국가 선택 (복수 선택 가능)</span>
+            </div>
+            <span class="cms-caret">▾</span>
+          </div>
+          <div class="cms-panel" id="cmsPanel" hidden>
+            <div class="cms-search-row">
+              <input type="text" class="cms-search-input" id="cmsSearchInput" placeholder="국가 검색..." autocomplete="off">
+            </div>
+            <ul class="cms-options" id="cmsOptions" role="listbox" aria-multiselectable="true">
+              <li class="cms-opt" data-value="KR" data-label="대한민국 (KR)" role="option"><span class="cms-chk"></span>대한민국 (KR)</li>
+              <li class="cms-opt" data-value="US" data-label="미국 (US)" role="option"><span class="cms-chk"></span>미국 (US)</li>
+              <li class="cms-opt" data-value="CN" data-label="중국 (CN)" role="option"><span class="cms-chk"></span>중국 (CN)</li>
+              <li class="cms-opt" data-value="JP" data-label="일본 (JP)" role="option"><span class="cms-chk"></span>일본 (JP)</li>
+              <li class="cms-opt" data-value="DE" data-label="독일 (DE)" role="option"><span class="cms-chk"></span>독일 (DE)</li>
+              <li class="cms-opt" data-value="VN" data-label="베트남 (VN)" role="option"><span class="cms-chk"></span>베트남 (VN)</li>
+              <li class="cms-opt" data-value="IN" data-label="인도 (IN)" role="option"><span class="cms-chk"></span>인도 (IN)</li>
+              <li class="cms-opt" data-value="GB" data-label="영국 (GB)" role="option"><span class="cms-chk"></span>영국 (GB)</li>
+              <li class="cms-opt" data-value="AU" data-label="호주 (AU)" role="option"><span class="cms-chk"></span>호주 (AU)</li>
+              <li class="cms-opt" data-value="FR" data-label="프랑스 (FR)" role="option"><span class="cms-chk"></span>프랑스 (FR)</li>
+              <li class="cms-opt" data-value="CA" data-label="캐나다 (CA)" role="option"><span class="cms-chk"></span>캐나다 (CA)</li>
+              <li class="cms-opt" data-value="IT" data-label="이탈리아 (IT)" role="option"><span class="cms-chk"></span>이탈리아 (IT)</li>
+              <li class="cms-opt" data-value="ES" data-label="스페인 (ES)" role="option"><span class="cms-chk"></span>스페인 (ES)</li>
+              <li class="cms-opt" data-value="NL" data-label="네덜란드 (NL)" role="option"><span class="cms-chk"></span>네덜란드 (NL)</li>
+              <li class="cms-opt" data-value="SG" data-label="싱가포르 (SG)" role="option"><span class="cms-chk"></span>싱가포르 (SG)</li>
+              <li class="cms-opt" data-value="TH" data-label="태국 (TH)" role="option"><span class="cms-chk"></span>태국 (TH)</li>
+              <li class="cms-opt" data-value="MY" data-label="말레이시아 (MY)" role="option"><span class="cms-chk"></span>말레이시아 (MY)</li>
+              <li class="cms-opt" data-value="ID" data-label="인도네시아 (ID)" role="option"><span class="cms-chk"></span>인도네시아 (ID)</li>
+              <li class="cms-opt" data-value="PH" data-label="필리핀 (PH)" role="option"><span class="cms-chk"></span>필리핀 (PH)</li>
+              <li class="cms-opt" data-value="TW" data-label="대만 (TW)" role="option"><span class="cms-chk"></span>대만 (TW)</li>
+              <li class="cms-opt" data-value="HK" data-label="홍콩 (HK)" role="option"><span class="cms-chk"></span>홍콩 (HK)</li>
+              <li class="cms-opt" data-value="AE" data-label="아랍에미리트 (AE)" role="option"><span class="cms-chk"></span>아랍에미리트 (AE)</li>
+              <li class="cms-opt" data-value="SA" data-label="사우디아라비아 (SA)" role="option"><span class="cms-chk"></span>사우디아라비아 (SA)</li>
+              <li class="cms-opt" data-value="TR" data-label="터키 (TR)" role="option"><span class="cms-chk"></span>터키 (TR)</li>
+              <li class="cms-opt" data-value="BR" data-label="브라질 (BR)" role="option"><span class="cms-chk"></span>브라질 (BR)</li>
+              <li class="cms-opt" data-value="MX" data-label="멕시코 (MX)" role="option"><span class="cms-chk"></span>멕시코 (MX)</li>
+              <li class="cms-opt" data-value="RU" data-label="러시아 (RU)" role="option"><span class="cms-chk"></span>러시아 (RU)</li>
+              <li class="cms-opt" data-value="PL" data-label="폴란드 (PL)" role="option"><span class="cms-chk"></span>폴란드 (PL)</li>
+              <li class="cms-opt" data-value="SE" data-label="스웨덴 (SE)" role="option"><span class="cms-chk"></span>스웨덴 (SE)</li>
+              <li class="cms-opt" data-value="CH" data-label="스위스 (CH)" role="option"><span class="cms-chk"></span>스위스 (CH)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 제출 영역 ── -->
+      <div class="search-submit-area">
+        <p class="search-submit-note">입력한 검색어와 선택한 카테고리를 합산하여 AI가 최적의 바이어를 발굴합니다</p>
+        <button class="btn-ai-search" type="button" aria-label="AI 바이어 발굴 시작">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="3"/>
+            <path d="M11 2a9 9 0 100 18A9 9 0 0011 2z" opacity="0.3"/>
+            <path d="M20 20l-2.5-2.5"/>
+            <path d="M14 8l2-2 2 2-2 2-2-2z" stroke-width="1.5"/>
+          </svg>
+          AI 바이어 발굴
+        </button>
+      </div>
+
+    </div><!-- /.search-panel -->
+
+    <!-- ── AI 검색 결과 패널 ── -->
+    <div class="search-result-panel" id="searchResultPanel" hidden>
+      <div class="result-panel-hd">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        AI 바이어 발굴 결과
+      </div>
+      <div class="result-stats-row">
+        <div class="result-stat">
+          <div class="result-stat-label">검색결과<br>(기업기준)</div>
+          <div><span class="result-stat-value" id="resultCompany">0</span><span class="result-stat-unit">건</span></div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-label">발송가능 건수<br>(이메일기준)</div>
+          <div><span class="result-stat-value" id="resultEmail">0</span><span class="result-stat-unit">건</span></div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-label">(예상)차감</div>
+          <div><span class="result-stat-value" id="resultCash">0</span><span class="result-stat-unit">캐시</span></div>
+        </div>
+      </div>
+      <div class="result-cta">
+        <div class="result-cta-top">
+          <p class="result-cta-desc">발굴된 바이어에게 마케팅 메시지를 직접 발송하세요.</p>
+          <div class="result-cta-select-row">
+            <span class="result-cta-select-label">발송 건수</span>
+            <select class="result-send-select" id="sendCount">
+              <option value="">건수 선택</option>
+              <option value="10">10건</option>
+              <option value="30">30건</option>
+              <option value="50">50건</option>
+              <option value="100">100건</option>
+              <option value="150">150건</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-marketing-write" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          마케팅 메시지 작성
+        </button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer__inner">
+    <div class="fnb">
+      <ul class="fnb__wrap">
+        <li><a href="#" class="fnb__link" style="color:red;">개인정보처리방침</a></li>
+        <li><a href="#" class="fnb__link">이용약관</a></li>
+        <li><a href="#" class="fnb__link">신용정보활용체제공시</a></li>
+        <li><a href="#" class="fnb__link">이메일무단수집거부</a></li>
+      </ul>
+    </div>
+    <div class="footer__logo">
+      <img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스">
+    </div>
+    <div class="footer__info-row">
+      <address class="site-address">
+        (04535) 서울특별시 중구 소공로 70, 포스트타워 16층 (주)NICE디앤비<br>
+        통신판매업신고: 제2024-서울중구-1736호 사업자등록번호: 107-86-24874 TEL: 02-2122-0233 FAX: 02-2122-2591
+      </address>
+      <select id="familySite" name="familySite">
+        <option value="" disabled selected>Family site</option>
+        <option value="https://www.nicednb.com">나이스디앤비 홈페이지</option>
+        <option value="https://global.nicednb.com">나이스디앤비 글로벌 홈페이지</option>
+      </select>
+    </div>
+    <p class="copyright">ⓒ 2023. NICE D&amp;B Co.,Ltd. ALL RIGHTS RESERVED.</p>
+  </div>
+</footer>
+
+<!-- ======================================================
+     JavaScript
+====================================================== -->
+<script>
+(function () {
+  'use strict';
+
+  var MAX_KW = 5;
+  var MAX_COMBO = 3;
+  var keywords = [];
+  var catCombos = [];
+  var kwInput = document.getElementById('keywordInput');
+  var kwCounter = document.getElementById('kwCounter');
+
+  function renderCriteria() {
+    var chipsEl = document.getElementById('criteriaChips');
+    var badgeEl = document.getElementById('criteriaBadge');
+    if (!chipsEl) return;
+
+    var catCount = catCombos.length;
+    var kwCount = keywords.length;
+    chipsEl.innerHTML = '';
+
+    if (kwCount === 0 && catCount === 0) {
+      var emptySpan = document.createElement('span');
+      emptySpan.className = 'unified-empty';
+      emptySpan.textContent = '검색어를 입력하거나 카테고리를 선택하면 여기에 모입니다';
+      chipsEl.appendChild(emptySpan);
+      if (badgeEl) badgeEl.textContent = '키워드 0 · 카테고리 0';
+      return;
+    }
+
+    keywords.forEach(function(kw, idx) {
+      var chip = document.createElement('span');
+      chip.className = 'criteria-kw-chip';
+      chip.textContent = kw;
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.textContent = '×';
+      btn.setAttribute('aria-label', '키워드 삭제');
+      (function(i){ btn.addEventListener('click', function() {
+        keywords.splice(i, 1);
+        updateKwInput();
+        renderCriteria();
+      }); })(idx);
+      chip.appendChild(btn);
+      chipsEl.appendChild(chip);
+    });
+
+    catCombos.forEach(function(combo, idx) {
+      var catChip = document.createElement('span');
+      catChip.className = 'criteria-cat-chip';
+      catChip.textContent = combo;
+      var catBtn = document.createElement('button');
+      catBtn.type = 'button'; catBtn.textContent = '×';
+      catBtn.setAttribute('aria-label', '카테고리 삭제');
+      (function(i){ catBtn.addEventListener('click', function() {
+        catCombos.splice(i, 1);
+        renderCriteria();
+      }); })(idx);
+      catChip.appendChild(catBtn);
+      chipsEl.appendChild(catChip);
+    });
+
+    if (badgeEl) badgeEl.textContent = '키워드 ' + kwCount + ' · 카테고리 ' + catCount;
+  }
+
+  function updateKwInput() {
+    if (!kwInput) return;
+    if (kwCounter) {
+      kwCounter.textContent = keywords.length + ' / ' + MAX_KW;
+      kwCounter.className = 'keyword-counter' + (keywords.length >= MAX_KW ? ' at-max' : '');
+    }
+    kwInput.disabled = keywords.length >= MAX_KW;
+    kwInput.placeholder = keywords.length >= MAX_KW ? '최대 5개 입력 완료' : '검색어 입력 후 Enter (최대 5개)';
+  }
+
+  if (kwInput) {
+    kwInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        var val = kwInput.value.trim();
+        if (val && keywords.length < MAX_KW) {
+          keywords.push(val);
+          kwInput.value = '';
+          updateKwInput();
+          renderCriteria();
+        }
+      }
+    });
+    updateKwInput();
+    renderCriteria();
+  }
+
+  /* ── 카테고리 인터랙션: 컬럼별 단일 선택 + 추가 버튼 ── */
+  var cat1Items = document.querySelectorAll('#cat1List .cat-item');
+  var cat2Items = document.querySelectorAll('#cat2List .cat-item');
+  var cat3Items = document.querySelectorAll('#cat3List .cat-item');
+
+  function selectSingle(group, clicked) {
+    group.forEach(function(i) { i.classList.remove('active'); i.removeAttribute('aria-selected'); });
+    if (!clicked.classList.contains('active')) {
+      clicked.classList.add('active');
+      clicked.setAttribute('aria-selected', 'true');
+    }
+  }
+
+  function addCombo() {
+    if (catCombos.length >= MAX_COMBO) return;
+    var c1 = document.querySelector('#cat1List .cat-item.active');
+    var c2 = document.querySelector('#cat2List .cat-item.active');
+    var c3 = document.querySelector('#cat3List .cat-item.active');
+    if (!c1) return;
+    var label = c1.textContent.trim();
+    if (c2) label += ' > ' + c2.textContent.trim();
+    if (c3) label += ' > ' + c3.textContent.trim();
+    catCombos.push(label);
+    [].concat(Array.from(cat1Items), Array.from(cat2Items), Array.from(cat3Items)).forEach(function(i) {
+      i.classList.remove('active'); i.removeAttribute('aria-selected');
+    });
+    renderCriteria();
+  }
+
+  cat1Items.forEach(function(item) {
+    item.addEventListener('click', function() { selectSingle(Array.from(cat1Items), item); });
+    item.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); } });
+  });
+  cat2Items.forEach(function(item) {
+    item.addEventListener('click', function() { selectSingle(Array.from(cat2Items), item); });
+    item.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); } });
+  });
+  cat3Items.forEach(function(item) {
+    item.addEventListener('click', function() { selectSingle(Array.from(cat3Items), item); addCombo(); });
+    item.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); } });
+  });
+
+  // 초기 상태: .active 로 하드코딩된 항목들을 첫 콤보로 자동 추가
+  (function() {
+    var c1 = document.querySelector('#cat1List .cat-item.active');
+    var c2 = document.querySelector('#cat2List .cat-item.active');
+    var c3 = document.querySelector('#cat3List .cat-item.active');
+    if (c1) {
+      var label = c1.textContent.trim();
+      if (c2) label += ' > ' + c2.textContent.trim();
+      if (c3) label += ' > ' + c3.textContent.trim();
+      catCombos.push(label);
+      [].concat(Array.from(cat1Items), Array.from(cat2Items), Array.from(cat3Items)).forEach(function(i) {
+        i.classList.remove('active'); i.removeAttribute('aria-selected');
+      });
+    }
+  })();
+
+  renderCriteria();
+
+  /* ── AI 결과 패널 표시 ── */
+  var aiBtn = document.querySelector('.btn-ai-search');
+  var resultPanel = document.getElementById('searchResultPanel');
+  if (aiBtn && resultPanel) {
+    aiBtn.addEventListener('click', function () {
+      resultPanel.hidden = false;
+      setTimeout(function () {
+        resultPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    });
+  }
+
+}());
+
+/* ── 국가 커스텀 멀티셀렉트 ── */
+(function () {
+  var selected = {};
+  var trigger  = document.getElementById('cmsTrigger');
+  var panel    = document.getElementById('cmsPanel');
+  var chipsEl  = document.getElementById('cmsChips');
+  var searchEl = document.getElementById('cmsSearchInput');
+  var opts     = document.querySelectorAll('.cms-opt');
+  if (!trigger) return;
+
+  function renderChips() {
+    chipsEl.innerHTML = '';
+    var keys = Object.keys(selected);
+    if (!keys.length) {
+      var ph = document.createElement('span');
+      ph.className = 'cms-placeholder';
+      ph.textContent = '국가 선택 (복수 선택 가능)';
+      chipsEl.appendChild(ph);
+    } else {
+      keys.forEach(function (v) {
+        var chip = document.createElement('span');
+        chip.className = 'cms-chip';
+        chip.textContent = selected[v];
+        var rm = document.createElement('button');
+        rm.type = 'button'; rm.className = 'cms-chip-rm'; rm.textContent = '×';
+        (function (val) {
+          rm.addEventListener('click', function (e) {
+            e.stopPropagation();
+            delete selected[val];
+            opts.forEach(function (o) { if (o.dataset.value === val) o.classList.remove('sel'); });
+            renderChips();
+          });
+        })(v);
+        chip.appendChild(rm);
+        chipsEl.appendChild(chip);
+      });
+    }
+  }
+
+  trigger.addEventListener('click', function () {
+    var opening = panel.hidden;
+    panel.hidden = !opening;
+    trigger.classList.toggle('open', opening);
+    if (opening) {
+      var rect = trigger.getBoundingClientRect();
+      panel.style.position = 'fixed';
+      panel.style.top = (rect.bottom + 4) + 'px';
+      panel.style.left = rect.left + 'px';
+      panel.style.right = 'auto';
+      panel.style.width = rect.width + 'px';
+      searchEl.value = '';
+      opts.forEach(function (o) { o.classList.remove('hide'); });
+      searchEl.focus();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!document.getElementById('countryMs').contains(e.target)) {
+      panel.hidden = true; trigger.classList.remove('open');
+    }
+  });
+
+  opts.forEach(function (opt) {
+    opt.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var v = opt.dataset.value, l = opt.dataset.label;
+      if (opt.classList.contains('sel')) { opt.classList.remove('sel'); delete selected[v]; }
+      else { opt.classList.add('sel'); selected[v] = l; }
+      renderChips();
+    });
+  });
+
+  searchEl.addEventListener('input', function () {
+    var q = searchEl.value.toLowerCase();
+    opts.forEach(function (o) { o.classList.toggle('hide', o.dataset.label.toLowerCase().indexOf(q) < 0); });
+  });
+
+  window.getSelectedCountries = function () { return Object.values(selected); };
+  renderChips();
+}());
+</script>
+
+</body>
+</html>

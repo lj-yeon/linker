@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신청내역 - LINKER NICE D&B</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #1A6FD8; --blue-l: #E8F1FD; --blue-d: #0F4AA3;
+  --gray-1: #F8FAFB; --gray-2: #EFF2F5; --gray-3: #C9D2DC; --gray-4: #8997A8;
+  --dark: #1B2535; --text: #2C3A4A;
+  --r: 14px; --trans: .25s ease;
+  --primary:     #005B99;
+  --primary-d:   #003B71;
+  --border:      #D0D8E4;
+  --text-mid:    #555555;
+  --text-light:  #888888;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; min-width: 1280px; }
+a { text-decoration: none; color: inherit; }
+img { display: block; }
+ul { list-style: none; }
+.wrap { width: min(1280px, calc(100% - 40px)); margin: 0 auto; }
+
+/* ── 헤더 ── */
+header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid var(--gray-2); height: 66px; display: flex; align-items: center; }
+.header-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; }
+.header-logo { flex-shrink: 0; margin-right: 40px; }
+.header-logo img { height: 38px; object-fit: contain; display: block; }
+.gnb { display: none; gap: 0; align-items: center; list-style: none; font-size: 18px; font-weight: 700; }
+.gnb li { position: relative; }
+.gnb > li > a { display: block; color: var(--text); padding: 0 24px; line-height: 66px; transition: color var(--trans); white-space: nowrap; }
+.gnb > li:hover > a { color: var(--blue); }
+.gnb .sub { position: absolute; top: 66px; left: 0; background: #fff; border: 1px solid var(--gray-2); border-top: 2px solid var(--blue); border-radius: 0 0 var(--r) 0; box-shadow: 0 8px 24px rgba(0,0,0,.1); min-width: 170px; opacity: 0; visibility: hidden; transition: opacity var(--trans), visibility var(--trans); list-style: none; padding: 8px 0; }
+.gnb li:hover .sub { opacity: 1; visibility: visible; }
+.gnb .sub li a { display: block; padding: 10px 20px; font-size: 16px; font-weight: 500; color: var(--text); white-space: nowrap; }
+.gnb .sub li a:hover { background: var(--gray-1); color: var(--blue); }
+.util { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.util a { font-size: 16px; color: var(--gray-4); font-weight: 500; padding: 7px 14px; border-radius: 6px; transition: all var(--trans); white-space: nowrap; }
+.util a:hover { background: var(--gray-1); color: var(--blue); }
+.hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 9px 10px; background: var(--blue-l); border-radius: 8px; border: 1px solid rgba(26,111,216,.2); }
+.hamburger span { display: block; width: 20px; height: 2px; background: var(--blue); border-radius: 2px; }
+@media (min-width: 768px) { .gnb { display: flex; } .hamburger { display: none; } }
+@media (max-width: 767px) { .util { display: none; } }
+
+/* ── 페이지 배너 ── */
+.page-banner {
+  position: relative;
+  background:
+    radial-gradient(circle at 15% 40%, rgba(100,160,255,0.35) 0%, transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(80,40,200,0.25) 0%, transparent 35%),
+    linear-gradient(135deg, #0D1E3A 0%, #0F3575 50%, #1A5ABF 100%);
+  padding: 80px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+}
+.page-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.14) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  z-index: 1;
+  pointer-events: none;
+}
+.banner-inner { position: relative; z-index: 2; width: 100%; text-align: center; }
+.banner-title {
+  font-size: 60px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  text-shadow: 0 0 40px rgba(80,160,255,0.55), 0 4px 12px rgba(0,0,0,0.7);
+  padding-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+}
+.banner-title::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 72px;
+  height: 3px;
+  background: linear-gradient(90deg, #4AADFF 0%, #00D4FF 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 14px rgba(0,212,255,0.9);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.5rem;
+}
+.banner-sub { font-size: 20px; color: rgba(180,220,255,0.85); font-weight: 400; letter-spacing: 0.04em; }
+
+/* ── 브레드크럼 ── */
+.loc-bar { width: 100%; background: transparent; padding: 32px 0 22px; }
+.loc-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; }
+.loc-path { display: flex; align-items: center; list-style: none; }
+.loc-path > li { position: relative; border: 1px solid #ccc; background-color: transparent; }
+.loc-path > li + li { border-left: 0; }
+.loc-home { display: flex; align-items: center; justify-content: center; width: 53px; height: 49px; color: #555; text-decoration: none; transition: background-color .2s; }
+.loc-home:hover { background-color: #f1ebff; }
+.loc-btn { display: flex; align-items: center; justify-content: space-between; width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 500; color: #222; text-decoration: none; transition: background-color .2s; white-space: nowrap; gap: 8px; }
+.loc-btn:hover { background-color: #f1ebff; }
+.loc-none { display: flex; align-items: center; width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 700; color: #111; white-space: nowrap; }
+.loc-arrow { font-size: 15px; color: #888; flex-shrink: 0; }
+.loc-select { width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 700; color: #111; font-family: inherit; border: none; background: transparent; cursor: pointer; outline: none; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+
+/* ── 메인 콘텐츠 ── */
+.page-content { padding: 44px 0 80px; background: #fff; }
+.page-title-area { margin-bottom: 32px; display: flex; align-items: baseline; gap: 20px; }
+.page-title-area h2 { font-size: 32px; font-weight: 800; color: #1A2A40; flex-shrink: 0; }
+.page-title-area p { font-size: 16px; color: var(--text-mid); line-height: 1.75; }
+
+/* ── 검색 패널 ── */
+.search-panel {
+  padding: 28px 0;
+  margin-bottom: 40px;
+}
+.search-row:first-child {
+  border-top: 2px solid #222;
+}
+.search-grid {
+  display: flex;
+  flex-direction: column;
+}
+.search-row {
+  display: flex;
+  align-items: center;
+}
+.search-label {
+  width: 130px;
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  padding: 22px 20px;
+}
+.search-field {
+  flex: 1;
+  padding: 22px 20px 22px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.search-row:last-child .search-field {
+  border-bottom: none;
+}
+.search-input {
+  height: 38px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 0 10px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+}
+.search-input:focus { border-color: #888; }
+.search-input::placeholder { color: #bbb; }
+.date-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.date-range .search-input { width: 160px; flex-shrink: 0; }
+.date-sep { font-size: 16px; color: #888; flex-shrink: 0; }
+.search-btn-area {
+  margin-top: 24px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 36px;
+  background: #1A2A40;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .2s;
+}
+.btn-search:hover { background: #0D1E3A; }
+.btn-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 28px;
+  background: #fff;
+  color: #555;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .2s;
+}
+.btn-reset:hover { background: #f5f5f5; }
+
+/* ── 결과 영역 ── */
+.result-area { margin-top: 8px; }
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.result-count {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+.result-count strong { color: var(--blue); font-weight: 800; }
+
+/* ── 결과 테이블 ── */
+.result-table-wrap { overflow-x: auto; }
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+.result-table thead tr {
+  background: none;
+  color: #1A2A40;
+}
+.result-table thead {
+  border-top: 2px solid #222;
+  border-bottom: 1px solid #aaa;
+}
+.result-table th {
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+.result-table tbody tr {
+  border-bottom: 1px solid #e8e8e8;
+  transition: background .15s;
+}
+.result-table tbody tr:hover { background: #f5f8fc; }
+.result-table td {
+  padding: 16px 16px;
+  text-align: center;
+  color: #333;
+  white-space: nowrap;
+}
+.result-table td.left { text-align: left; }
+
+/* 빈 결과 */
+.empty-result {
+  padding: 80px 0;
+  text-align: center;
+  color: #aaa;
+}
+.empty-result i { font-size: 48px; margin-bottom: 16px; display: block; }
+.empty-result p { font-size: 16px; }
+
+/* ── 페이지네이션 ── */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 32px;
+}
+.page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background: #fff;
+  color: #555;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .15s;
+  font-weight: 500;
+}
+.page-btn:hover { border-color: #1A2A40; color: #1A2A40; }
+.page-btn.active { background: #1A2A40; border-color: #1A2A40; color: #fff; font-weight: 700; }
+.page-btn.arrow { color: #888; }
+
+/* ── 푸터 ── */
+footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding: 40px 0 28px; }
+.footer__inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; position: relative; }
+.fnb { position: absolute; top: 0; right: 0; }
+.fnb__wrap { display: flex; list-style: none; align-items: center; padding: 0; margin: 0; flex-wrap: wrap; gap: 2px; }
+.fnb__wrap li + li::before { content: '|'; margin: 0 10px; color: var(--gray-3); font-weight: 400; }
+.fnb__link { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none; transition: color var(--trans); }
+.fnb__link:hover { color: var(--blue); }
+.footer__logo { display: block; min-height: 36px; }
+.footer__logo img { height: 30px; width: auto; object-fit: contain; }
+.footer__info-row { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 20px; }
+.site-address { font-size: 16px; line-height: 22px; color: var(--gray-4); font-style: normal; }
+.footer__info-row select { border: 1px solid var(--gray-2); background: #fff; color: var(--text); padding: 0 14px; font-size: 16px; width: 200px; height: 38px; border-radius: 8px; cursor: pointer; outline: none; flex-shrink: 0; transition: border-color var(--trans); }
+.footer__info-row select:hover { border-color: var(--blue); }
+.copyright { margin-top: 18px; font-size: 12px; color: var(--gray-4); opacity: .75; }
+@media (max-width: 768px) {
+  .fnb { position: static; margin-bottom: 16px; }
+  .fnb__wrap { flex-wrap: wrap; }
+  .footer__info-row { flex-direction: column; gap: 14px; margin-top: 16px; }
+  .footer__info-row select { width: 100%; max-width: 280px; }
+  .site-address { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1 class="header-logo">
+      <a href="/"><img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스"></a>
+    </h1>
+    <nav>
+      <ul class="gnb">
+        <li><a href="#">빅바이어 마케팅</a></li>
+        <li><a href="#" style="color:#1A6FD8;">전시회 참가신청</a></li>
+      </ul>
+    </nav>
+    <div class="util">
+      <a href="#">로그인</a>
+      <a href="#">회원가입</a>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="page-banner" aria-label="페이지 배너">
+  <div class="wrap banner-inner">
+    <h1 class="banner-title">전시회 참가신청</h1>
+    <p class="banner-sub">국내외 전시회 참가를 통해 글로벌 시장 진출의 기회를 잡으세요</p>
+  </div>
+</section>
+
+<div class="loc-bar">
+  <div class="loc-inner">
+    <ul class="loc-path" aria-label="현재 위치">
+      <li><a href="#" class="loc-home" aria-label="홈"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.5z"/><polyline points="9 21 9 12 15 12 15 21"/></svg></a></li>
+      <li><a href="#" class="loc-btn">전시회 참가신청<span class="loc-arrow">▾</span></a></li>
+      <li>
+        <select class="loc-select" onchange="if(this.value) location.href=this.value;">
+          <option value="sub-apply.html">참가신청</option>
+          <option value="sub-apply-history.html" selected>신청내역</option>
+        </select>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<main class="page-content">
+  <div class="wrap">
+
+    <div class="page-title-area">
+      <h2>신청내역</h2>
+      <p>전시회 참가 신청 내역을 조회합니다.</p>
+    </div>
+
+    <!-- ── 검색 패널 ── -->
+    <div class="search-panel">
+      <div class="search-grid">
+
+        <!-- 신청기간 -->
+        <div class="search-row">
+          <div class="search-label">신청기간</div>
+          <div class="search-field">
+            <div class="date-range">
+              <input type="date" class="search-input" id="dateFrom">
+              <span class="date-sep">~</span>
+              <input type="date" class="search-input" id="dateTo">
+            </div>
+          </div>
+        </div>
+
+        <!-- 품목 -->
+        <div class="search-row">
+          <div class="search-label">품목</div>
+          <div class="search-field">
+            <input type="text" class="search-input" id="searchItem" placeholder="품목 입력">
+          </div>
+        </div>
+
+        <!-- 기업명 -->
+        <div class="search-row">
+          <div class="search-label">기업명</div>
+          <div class="search-field">
+            <input type="text" class="search-input" id="searchCompany" placeholder="기업명 입력">
+          </div>
+        </div>
+
+        <!-- 담당자명 -->
+        <div class="search-row">
+          <div class="search-label">담당자명</div>
+          <div class="search-field">
+            <input type="text" class="search-input" id="searchManager" placeholder="담당자명 입력">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="search-btn-area">
+        <button type="button" class="btn-reset" onclick="resetSearch()">
+          <i class="fa-solid fa-rotate-left"></i> 초기화
+        </button>
+        <button type="button" class="btn-search" onclick="doSearch()">
+          <i class="fa-solid fa-magnifying-glass"></i> 검색
+        </button>
+      </div>
+    </div>
+
+    <!-- ── 검색 결과 ── -->
+    <div class="result-area" id="resultArea">
+      <div class="result-header">
+        <p class="result-count">총 <strong id="totalCount">5</strong>건</p>
+      </div>
+
+      <div class="result-table-wrap">
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th style="width:60px;">No</th>
+              <th style="width:110px;">신청일</th>
+              <th>전시회명</th>
+              <th style="width:140px;">품목명</th>
+              <th style="width:160px;">참가기업명</th>
+              <th style="width:120px;">담당자명</th>
+              <th style="width:100px;">접수상태</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody">
+            <tr>
+              <td>6</td>
+              <td>2025.06.21</td>
+              <td class="left">싱가포르 TECH WEEK (9/29~30)<br>홍콩 Beauty &amp; Wellness (8/13~17)</td>
+              <td>뷰티 디바이스</td>
+              <td>㈜코스모텍</td>
+              <td>한소희</td>
+              <td>접수완료</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>2025.06.20</td>
+              <td class="left">싱가포르 TECH WEEK (9/29~30)</td>
+              <td>스마트 센서</td>
+              <td>㈜테크이노베이션</td>
+              <td>김지훈</td>
+              <td>접수완료</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>2025.06.18</td>
+              <td class="left">홍콩 Beauty &amp; Wellness (8/13~17)</td>
+              <td>기능성 화장품</td>
+              <td>㈜뷰티랩코리아</td>
+              <td>이수진</td>
+              <td>검토중</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>2025.06.15</td>
+              <td class="left">싱가포르 TECH WEEK (9/29~30)</td>
+              <td>IoT 디바이스</td>
+              <td>㈜글로벌커넥트</td>
+              <td>박민서</td>
+              <td>승인</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>2025.06.10</td>
+              <td class="left">홍콩 Beauty &amp; Wellness (8/13~17)</td>
+              <td>헤어케어 제품</td>
+              <td>㈜헤어플러스</td>
+              <td>최유나</td>
+              <td>승인</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2025.06.05</td>
+              <td class="left">싱가포르 TECH WEEK (9/29~30)</td>
+              <td>반도체 부품</td>
+              <td>㈜세미텍</td>
+              <td>정현우</td>
+              <td>반려</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 페이지네이션 -->
+      <div class="pagination">
+        <button class="page-btn arrow">&#8249;</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn arrow">&#8250;</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer__inner">
+    <div class="fnb">
+      <ul class="fnb__wrap">
+        <li><a href="#" class="fnb__link" style="color:red;">개인정보처리방침</a></li>
+        <li><a href="#" class="fnb__link">이용약관</a></li>
+        <li><a href="#" class="fnb__link">신용정보활용체제공시</a></li>
+        <li><a href="#" class="fnb__link">이메일무단수집거부</a></li>
+      </ul>
+    </div>
+    <div class="footer__logo">
+      <img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스">
+    </div>
+    <div class="footer__info-row">
+      <address class="site-address">
+        (04535) 서울특별시 중구 소공로 70, 포스트타워 16층 (주)NICE디앤비<br>
+        통신판매업신고: 제2024-서울중구-1736호 사업자등록번호: 107-86-24874 TEL: 02-2122-0233 FAX: 02-2122-2591
+      </address>
+      <select id="familySite" name="familySite">
+        <option value="" disabled selected>Family site</option>
+        <option value="https://www.nicednb.com">나이스디앤비 홈페이지</option>
+        <option value="https://global.nicednb.com">나이스디앤비 글로벌 홈페이지</option>
+      </select>
+    </div>
+    <p class="copyright">ⓒ 2023. NICE D&amp;B Co.,Ltd. ALL RIGHTS RESERVED.</p>
+  </div>
+</footer>
+
+<script>
+var allData = [
+  { no:6, date:'2025.06.21', exhibition:['싱가포르 TECH WEEK (9/29~30)', '홍콩 Beauty & Wellness (8/13~17)'], item:'뷰티 디바이스',  company:'㈜코스모텍',     manager:'한소희', statusLabel:'접수완료' },
+  { no:5, date:'2025.06.20', exhibition:['싱가포르 TECH WEEK (9/29~30)'],                                     item:'스마트 센서',    company:'㈜테크이노베이션', manager:'김지훈', statusLabel:'접수완료' },
+  { no:4, date:'2025.06.18', exhibition:['홍콩 Beauty & Wellness (8/13~17)'],                                  item:'기능성 화장품',  company:'㈜뷰티랩코리아', manager:'이수진', statusLabel:'검토중'   },
+  { no:3, date:'2025.06.15', exhibition:['싱가포르 TECH WEEK (9/29~30)'],                                     item:'IoT 디바이스',   company:'㈜글로벌커넥트', manager:'박민서', statusLabel:'승인'     },
+  { no:2, date:'2025.06.10', exhibition:['홍콩 Beauty & Wellness (8/13~17)'],                                  item:'헤어케어 제품',  company:'㈜헤어플러스',   manager:'최유나', statusLabel:'승인'     },
+  { no:1, date:'2025.06.05', exhibition:['싱가포르 TECH WEEK (9/29~30)'],                                     item:'반도체 부품',    company:'㈜세미텍',       manager:'정현우', statusLabel:'반려'     }
+];
+
+function doSearch() {
+  var item    = document.getElementById('searchItem').value.trim().toLowerCase();
+  var company = document.getElementById('searchCompany').value.trim().toLowerCase();
+  var manager = document.getElementById('searchManager').value.trim().toLowerCase();
+  var from    = document.getElementById('dateFrom').value;
+  var to      = document.getElementById('dateTo').value;
+
+  var filtered = allData.filter(function(d) {
+    if (item    && d.item.toLowerCase().indexOf(item) < 0)       return false;
+    if (company && d.company.toLowerCase().indexOf(company) < 0) return false;
+    if (manager && d.manager.toLowerCase().indexOf(manager) < 0) return false;
+    if (from || to) {
+      var dDate = d.date.replace(/\./g, '-');
+      if (from && dDate < from) return false;
+      if (to   && dDate > to)   return false;
+    }
+    return true;
+  });
+
+
+  renderTable(filtered);
+}
+
+function resetSearch() {
+  document.getElementById('searchItem').value    = '';
+  document.getElementById('searchCompany').value = '';
+  document.getElementById('searchManager').value = '';
+  document.getElementById('dateFrom').value      = '';
+  document.getElementById('dateTo').value        = '';
+  renderTable(allData);
+}
+
+function renderTable(data) {
+  document.getElementById('totalCount').textContent = data.length;
+  var tbody = document.getElementById('resultBody');
+
+  if (data.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" style="padding:60px 0;color:#aaa;font-size:16px;">검색 결과가 없습니다.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = data.map(function(d) {
+    return '<tr>' +
+      '<td>' + d.no + '</td>' +
+      '<td>' + d.date + '</td>' +
+      '<td class="left">' + d.exhibition.join('<br>') + '</td>' +
+      '<td>' + d.item + '</td>' +
+      '<td>' + d.company + '</td>' +
+      '<td>' + d.manager + '</td>' +
+      '<td>' + d.statusLabel + '</td>' +
+    '</tr>';
+  }).join('');
+}
+</script>
+
+</body>
+</html>
