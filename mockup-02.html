@@ -711,8 +711,8 @@
       .footer-bottom p { font-size: 13px !important; }
       .footer-bottom-links a { font-size: 12px !important; }
 
-      /* Layout container padding */
-      .inner { padding: 0 16px; }
+      /* Layout container padding — also constrain width & remove centering offset */
+      .inner { padding: 0 16px; width: 100%; margin: 0; }
 
       /* Body font size */
       body { font-size: 16px; }
@@ -752,7 +752,7 @@
       .footer-body p { font-size: 12px !important; }
 
       /* Layout container padding */
-      .inner { padding: 0 12px; }
+      .inner { padding: 0 12px; width: 100%; margin: 0; }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -1076,10 +1076,11 @@
       .hero__inner {
         flex-direction: column !important;
         justify-content: flex-start !important;
-        align-items: flex-start !important;
+        align-items: stretch !important;
         padding: 40px 20px !important;
         gap: 28px !important;
         height: auto !important;
+        width: 100% !important;
       }
       section[aria-label="메인 비주얼"] {
         height: auto !important;
@@ -1091,7 +1092,9 @@
       }
       .hero__inner > div:last-child {
         width: 100% !important;
+        max-width: 100% !important;
         flex-shrink: unset !important;
+        box-sizing: border-box !important;
       }
 
       /* 마케팅 서비스 rows */
