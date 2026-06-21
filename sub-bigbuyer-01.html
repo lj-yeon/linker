@@ -40,7 +40,7 @@
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  font-size: 16px; background: #fff; color: var(--text); min-width: 1280px; line-height: 1.6; }
+  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 img { display: block; max-width: 100%; }
@@ -770,20 +770,30 @@ footer {
   .cat-col-list { height: 140px; }
 }
 @media (max-width: 768px) {
-  .page-banner { padding: 50px 0; }
+  /* 배너 */
+  .page-banner { padding: 48px 0; }
   .banner-title { font-size: 36px; }
+  .banner-sub { font-size: 17px; }
+  /* 페이지 타이틀 세로 배치 */
+  .page-title-area { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 32px; }
+  /* 검색 패널 패딩 축소 */
+  .search-section-header { padding: 10px 16px; }
+  .search-keyword-area { padding: 16px 16px; }
+  .search-divider-row { padding: 0 16px; }
+  .search-category-header { padding: 12px 16px 10px; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .category-selector { margin: 0 16px 16px; }
+  .unified-criteria { padding: 12px 16px; }
+  .search-country-area { flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px 16px; }
+  .country-ms { width: 100%; }
+  .search-submit-area { padding: 18px 16px 24px; }
   /* 브레드크럼 모바일 */
-  .loc-bar { padding: 0; position: sticky; top: 66px; z-index: 90; background: #fff; border-bottom: 1px solid #e0e0e0; box-shadow: none; }
+  .loc-bar { padding: 0; position: sticky; top: 66px; z-index: 90; background: #fff; border-bottom: 1px solid #e0e0e0; }
   .loc-inner { width: 100%; margin: 0; padding: 0; }
   .loc-path { width: 100%; }
   .loc-path > li:first-child { display: none; }
   .loc-path > li { flex: 1; border: none; }
   .loc-select { width: 100%; height: 44px; font-size: 14px; padding: 0 12px; }
-  .search-country-area { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .country-ms { width: 100%; }
-  .search-category-header { flex-direction: column; align-items: flex-start; gap: 4px; }
-}
-@media (max-width: 768px) {
+  /* 푸터 */
   .fnb { position: static; margin-bottom: 16px; }
   .fnb__wrap { flex-wrap: wrap; }
   .footer__info-row { flex-direction: column; gap: 14px; margin-top: 16px; }
@@ -791,8 +801,25 @@ footer {
   .site-address { font-size: 12px; }
 }
 @media (max-width: 480px) {
-  .page-content { padding: 28px 0 60px; }
+  /* 배너 */
+  .page-banner { padding: 36px 0; }
+  .banner-title { font-size: 26px; padding-bottom: 2.5rem; }
+  .banner-sub { font-size: 14px; }
+  /* 콘텐츠 */
+  .page-content { padding: 24px 0 48px; }
   .selected-category-area { flex-direction: column; align-items: flex-start; }
+  /* 결과 통계 1열 배치 */
+  .result-stats-row { grid-template-columns: 1fr; }
+  .result-stat { border-right: none; border-bottom: 1px solid #E8EFF7; padding: 20px 16px; }
+  .result-stat:last-child { border-bottom: none; }
+  .result-stat-value { font-size: 32px; }
+  /* CTA 세로 배치 */
+  .result-cta { padding: 18px 16px 22px; }
+  .result-cta-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .result-cta-select-row { width: 100%; }
+  .result-send-select { width: 100%; min-width: unset; }
+  .btn-marketing-write { font-size: 17px; height: 54px; }
+  .btn-ai-search { height: 58px; font-size: 18px; }
 }
 
 /* ── AI 검색 결과 패널 ── */
@@ -988,6 +1015,9 @@ footer {
             aria-label="바이어 검색 키워드"
           >
         </div>
+        <div class="keyword-chips-area" id="keywordChipsArea">
+          <span class="keyword-chips-empty">검색어를 입력하세요</span>
+        </div>
       </div>
 
       <!-- ── 구분자 ── -->
@@ -1058,9 +1088,10 @@ footer {
 
       </div><!-- /.category-selector -->
 
+      <div class="selected-category-area" id="selectedCategoryArea" style="display:none;"></div>
 
       <!-- ── 통합 검색 조건 ── -->
-      <div class="unified-criteria">
+      <div class="unified-criteria" id="unifiedCriteria" hidden>
         <div class="unified-criteria-hd">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           선택된 검색 조건
@@ -1224,6 +1255,65 @@ footer {
   var kwInput = document.getElementById('keywordInput');
   var kwCounter = document.getElementById('kwCounter');
 
+  function renderKeywordChips() {
+    var area = document.getElementById('keywordChipsArea');
+    if (!area) return;
+    area.innerHTML = '';
+    if (keywords.length === 0) {
+      var e = document.createElement('span');
+      e.className = 'keyword-chips-empty';
+      e.textContent = '검색어를 입력하세요';
+      area.appendChild(e);
+      return;
+    }
+    keywords.forEach(function(kw, idx) {
+      var chip = document.createElement('span');
+      chip.className = 'keyword-chip';
+      chip.textContent = kw;
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'keyword-chip-remove'; btn.textContent = '×';
+      btn.setAttribute('aria-label', '키워드 삭제');
+      (function(i) {
+        btn.addEventListener('click', function() {
+          keywords.splice(i, 1);
+          updateKwInput();
+          renderCriteria();
+        });
+      })(idx);
+      chip.appendChild(btn);
+      area.appendChild(chip);
+    });
+  }
+
+  function renderCategoryTags() {
+    var area = document.getElementById('selectedCategoryArea');
+    if (!area) return;
+    if (catCombos.length === 0) { area.style.display = 'none'; return; }
+    area.style.display = '';
+    area.innerHTML = '';
+    var label = document.createElement('span');
+    label.className = 'selected-label';
+    label.textContent = '선택된 카테고리';
+    area.appendChild(label);
+    catCombos.forEach(function(combo, idx) {
+      var tag = document.createElement('span');
+      tag.className = 'selected-tag';
+      tag.textContent = combo;
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'selected-tag-remove'; btn.textContent = '×';
+      btn.setAttribute('aria-label', '카테고리 삭제');
+      (function(i) {
+        btn.addEventListener('click', function() {
+          catCombos.splice(i, 1);
+          renderCategoryTags();
+          renderCriteria();
+        });
+      })(idx);
+      tag.appendChild(btn);
+      area.appendChild(tag);
+    });
+  }
+
   function renderCriteria() {
     var chipsEl = document.getElementById('criteriaChips');
     var badgeEl = document.getElementById('criteriaBadge');
@@ -1284,6 +1374,7 @@ footer {
     }
     kwInput.disabled = keywords.length >= MAX_KW;
     kwInput.placeholder = keywords.length >= MAX_KW ? '최대 5개 입력 완료' : '검색어 입력 후 Enter (최대 5개)';
+    renderKeywordChips();
   }
 
   if (kwInput) {
@@ -1329,6 +1420,7 @@ footer {
     [].concat(Array.from(cat1Items), Array.from(cat2Items), Array.from(cat3Items)).forEach(function(i) {
       i.classList.remove('active'); i.removeAttribute('aria-selected');
     });
+    renderCategoryTags();
     renderCriteria();
   }
 
@@ -1361,13 +1453,17 @@ footer {
     }
   })();
 
+  renderKeywordChips();
+  renderCategoryTags();
   renderCriteria();
 
-  /* ── AI 결과 패널 표시 ── */
+  /* ── AI 결과 패널 + 검색 조건 박스 표시 ── */
   var aiBtn = document.querySelector('.btn-ai-search');
   var resultPanel = document.getElementById('searchResultPanel');
+  var unifiedCriteria = document.getElementById('unifiedCriteria');
   if (aiBtn && resultPanel) {
     aiBtn.addEventListener('click', function () {
+      if (unifiedCriteria) unifiedCriteria.hidden = false;
       resultPanel.hidden = false;
       setTimeout(function () {
         resultPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });

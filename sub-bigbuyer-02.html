@@ -37,7 +37,7 @@
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; min-width: 1280px; }
+  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; }
 a { text-decoration: none; color: inherit; }
 img { display: block; }
 ul { list-style: none; }
@@ -268,9 +268,9 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 .step-row:first-child .step-connector-line {
   top: 58px;
 }
-.step-row:last-child .step-connector-line {
+#step3 .step-connector-line {
   bottom: auto;
-  height: 58px;
+  height: 54px;
 }
 .step-header {
   display: flex;
@@ -553,6 +553,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   gap: 28px;
   align-items: start;
 }
+.search-layout.no-sidebar { grid-template-columns: 1fr; }
 .search-sidebar {
   position: sticky;
   top: 82px;
@@ -753,12 +754,17 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   .cat-list { height: 140px; }
 }
 @media (max-width: 768px) {
-  .page-banner { padding: 50px 0; }
+  /* 배너 */
+  .page-banner { padding: 48px 0; }
   .page-banner h1 { font-size: 36px; }
+  .page-banner-sub { font-size: 17px; }
+  /* 페이지 타이틀 세로 배치 */
+  .content-header { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 32px; }
+  /* 스텝 레이아웃 */
   .step-body { padding-left: 54px; }
   .step-connector-line { left: 27px; }
   /* 브레드크럼 모바일 */
-  .loc-bar { padding: 0; position: sticky; top: 66px; z-index: 90; background: #fff; border-bottom: 1px solid #e0e0e0; box-shadow: none; }
+  .loc-bar { padding: 0; position: sticky; top: 66px; z-index: 90; background: #fff; border-bottom: 1px solid #e0e0e0; }
   .loc-inner { width: 100%; margin: 0; padding: 0; }
   .loc-path { width: 100%; }
   .loc-path > li:first-child { display: none; }
@@ -766,10 +772,28 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   .loc-select { width: 100%; height: 44px; font-size: 14px; padding: 0 12px; }
 }
 @media (max-width: 480px) {
+  /* 배너 */
+  .page-banner { padding: 36px 0; }
+  .page-banner h1 { font-size: 26px; padding-bottom: 2.5rem; }
+  .page-banner-sub { font-size: 14px; }
+  /* 스텝 연결선 모바일 제거 */
+  .step-connector-line { display: none; }
+  /* 스텝 본문 */
   .step-body { padding-left: 14px; padding-right: 14px; }
-  .step-header { padding: 14px 14px; }
+  .step-header { padding: 14px; }
   .submit-section { padding: 18px 14px; }
   .btn-ai-search { height: 58px; font-size: 18px; }
+  /* 결과 통계 1열 배치 */
+  .result-stats-row { grid-template-columns: 1fr; }
+  .result-stat { border-right: none; border-bottom: 1px solid #E8EFF7; padding: 20px 16px; }
+  .result-stat:last-child { border-bottom: none; }
+  .result-stat-value { font-size: 32px; }
+  /* CTA 세로 배치 */
+  .result-cta { padding: 18px 16px 22px; }
+  .result-cta-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .result-cta-select-row { width: 100%; }
+  .result-send-select { width: 100%; min-width: unset; }
+  .btn-marketing-write { font-size: 17px; height: 54px; }
 }
 </style>
 </head>
@@ -888,10 +912,10 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
           <div class="step-num" aria-label="STEP 2">02</div>
           <span class="step-title">카테고리 선택</span>
           <span class="step-opt-badge">선택 사항</span>
+          <span class="keyword-counter" id="catCounter">0 / 3</span>
         </div>
 
         <div class="step-body">
-          <p class="step-sub-desc">최대 3개, 키워드와 함께 검색됩니다</p>
 
           <!-- 3단 카테고리 그리드 -->
           <div class="category-grid" role="group" aria-label="카테고리 선택">
@@ -1269,6 +1293,13 @@ function renderCriteria() {
   if (!chipsEl && !badgeEl && !sidebarKwChips && !sidebarCatChips) return;
 
   var catCount = catCombos.length;
+
+  /* 카테고리 카운터 업데이트 */
+  var catCounter = document.getElementById('catCounter');
+  if (catCounter) {
+    catCounter.textContent = catCount + ' / 3';
+    catCounter.className = 'keyword-counter' + (catCount >= MAX_COMBO ? ' at-max' : '');
+  }
   var kwArr = typeof keywords !== 'undefined' ? keywords : [];
 
   /* ── 메인 unified-criteria 칩 영역 ── */
