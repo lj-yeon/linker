@@ -1,532 +1,1382 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mockup-03</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --primary: #0b50bc; --sub: #e6f0ff; --text: #2d3748; --gray: #718096; --orange: #F97316; --orange-sub: #fff7ed; --green: #16A34A; --green-sub: #f0fdf4; }
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard', sans-serif; }
-        body { color: var(--text); background: #f8fafc; padding-top: 66px; overflow-x: hidden; }
-        .container { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 20px; }
-        
-        /* Header */
-        header { height: 66px; background: #fff; border-bottom: 1px solid #e2e8f0; position: fixed; top:0; left:0; width:100%; z-index:1000; }
-        .header-in { display:flex; align-items:center; height:100%; gap:0; position:relative; }
-        .logo-img { height: 45px; display: block; object-fit: contain; }
-        .gnb { display:flex; gap:40px; list-style:none; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); }
-        .gnb a { font-weight:600; color:#4a5568; text-decoration:none; font-size:16px; white-space:nowrap; }
-        .gnb a:hover { color:var(--primary); }
-        .util { display:flex; gap:15px; color:#a0aec0; font-size:14px; align-items:center; margin-left:auto; }
-        .util a { color:#718096; text-decoration:none; white-space:nowrap; }
-        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:9px 10px; background:var(--sub); border-radius:8px; border:none; margin-left:16px; }
-        .hamburger span { display:block; width:20px; height:2px; background:var(--primary); border-radius:2px; transition:0.3s; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINKER - 글로벌 바이어 발굴 플랫폼 | NICE D&B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ctp-blue:      #003B9C;
+    --ctp-yellow:    #F2A800;
+    --ctp-olive:     #8BA82E;
+    --ctp-gray:      #63666A;
+    --ctp-dark-blue: #004F6B;
+    --ctp-orange:    #E86500;
+    --ctp-green:     #4A9425;
+    --ctp-sky:       #0085BA;
+    --ctp-gold:      #FFBB00;
+    --ctp-lime:      #9DC632;
+  }
 
-        /* 가로형 아이콘 메뉴 바 */
-        .quick-menu { background: #fff; padding: 25px 0; border-top: 1px solid #edf2f7; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .quick-grid { display: flex; justify-content: space-between; flex-wrap: wrap; row-gap: 16px; }
-        .quick-item { width: 11%; text-align: center; cursor: pointer; }
-        .quick-item .icon-circle { width: 55px; height: 55px; background: #f7fafc; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto; color: var(--primary); font-size: 22px; transition: 0.2s; border: 1px solid #e2e8f0; }
-        .quick-item:hover .icon-circle { background: var(--primary); color: #fff; transform: translateY(-3px); }
-        .quick-item span { font-size: 13px; font-weight: 600; color: #4a5568; }
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-        /* 메인 히어로 영역 */
-        .hero { padding: 60px 0; background: #fff; }
-        .hero-grid { display: flex; justify-content: space-between; align-items: center; }
-        .hero-left { width: 50%; }
-        .hero-left h1 { font-size: 42px; font-weight: 800; color: #1a202c; line-height: 1.3; margin-bottom: 20px; }
-        .hero-left p { font-size: 18px; color: var(--gray); margin-bottom: 35px; line-height: 1.6; }
-        .btn-group .btn { padding: 14px 30px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; margin-right: 12px; }
-        .btn-blue { background: var(--primary); color: #fff; box-shadow: 0 4px 14px rgba(11,80,188,0.3); }
-        .btn-white { background: #fff; color: var(--primary); border: 1px solid #cbd5e0; }
-        
-        /* 우측 서비스 카테고리 그래픽 박스 */
-        .hero-right { width: 45%; background: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%); padding: 35px; border-radius: 24px; border: 1px solid #e2e8f0; }
-        .graphic-title { font-size:16px; font-weight:700; color:var(--primary); margin-bottom:20px; display:flex; align-items:center; gap:8px;}
-        .graphic-row { background:#fff; padding:18px; border-radius:12px; margin-bottom:12px; border-left:5px solid var(--primary); display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 6px rgba(0,0,0,0.02);}
-        .graphic-row strong { font-size:15px; color:#1a202c; display:flex; align-items:center; gap:10px; }
-        .graphic-row strong i { color: var(--primary); }
-        .graphic-row span { font-size:13px; color:var(--gray); font-weight:600; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    color: #333;
+    line-height: 1.7;
+    background: #fff;
+    min-width: 1280px;
+  }
 
-        /* 프로세스 섹션 */
-        .sec-wrap { padding: 80px 0; }
-        .sec-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:35px; border-bottom:2px solid #e2e8f0; padding-bottom:15px;}
-        .sec-title { font-size: 26px; font-weight: 800; color: #1a202c; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        
-        .status-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 30px; position: relative; transition: 0.3s; }
-        .status-card:hover { transform:translateY(-5px); box-shadow:0 12px 20px rgba(0,0,0,0.05); }
-        .card-icon { width: 45px; height: 45px; background: var(--sub); color: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 15px; }
-        .badge { position: absolute; top: 25px; right: 30px; background: #e2e8f0; color: #4a5568; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
-        .badge.active { background: var(--primary); color: #fff; }
-        .status-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 12px; color: #1a202c; }
-        .status-card p { font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 20px; }
-        .status-card .foot-val { font-size: 14px; font-weight: 700; color: var(--primary); border-top: 1px dashed #edf2f7; padding-top: 15px; display:flex; justify-content:space-between;}
+  a { text-decoration: none; color: inherit; }
+  ul, ol { list-style: none; }
+  img { display: block; max-width: 100%; }
 
-        /* 하단 2분할 레이아웃 */
-        .bottom-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 0; }
-        .split-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 35px; }
-        .split-box h2 { font-size: 22px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        .split-box h2 i { color: var(--primary); }
-        
-        .data-list { display: flex; flex-direction: column; gap: 12px; }
-        .data-item { display: flex; justify-content: space-between; padding: 14px; background: #f7fafc; border-radius: 8px; font-size: 14px; align-items: center; }
-        .data-item .region { font-weight: 600; display: flex; align-items: center; gap: 8px; }
-        .data-item .count { color: var(--primary); font-weight: 700; }
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
-        /* ── 주황·초록 포인트 믹스 ── */
-        /* 퀵메뉴 아이콘 색상 교체 */
-        .quick-item:nth-child(2) .icon-circle { color: var(--orange); border-color: #fed7aa; }
-        .quick-item:nth-child(4) .icon-circle { color: var(--green); border-color: #bbf7d0; }
-        .quick-item:nth-child(6) .icon-circle { color: var(--orange); border-color: #fed7aa; }
-        /* 히어로 그래픽 카드 accent */
-        .graphic-row:nth-child(3) { border-left-color: var(--orange); }
-        .graphic-row:nth-child(3) strong i { color: var(--orange); }
-        .graphic-row:nth-child(4) { border-left-color: var(--green); }
-        .graphic-row:nth-child(4) strong i { color: var(--green); }
-        /* 스텝 카드 아이콘·뱃지 교체 */
-        .status-card:nth-child(2) .card-icon { background: var(--orange-sub); color: var(--orange); }
-        .status-card:nth-child(2) .badge.active { background: var(--orange); }
-        .status-card:nth-child(3) .card-icon { background: var(--green-sub); color: var(--green); }
-        .status-card:nth-child(4) .card-icon { background: var(--orange-sub); color: var(--orange); }
-        .status-card:nth-child(5) .card-icon { background: var(--green-sub); color: var(--green); }
-        .status-card:nth-child(6) .card-icon { background: var(--orange-sub); color: var(--orange); }
-        .status-card:nth-child(2) .foot-val { color: var(--orange); }
-        .status-card:nth-child(3) .foot-val { color: var(--green); }
-        .status-card:nth-child(5) .foot-val { color: var(--green); }
-        /* 하단 데이터 분할 박스 헤더 */
-        .split-box:first-child h2 i { color: var(--orange); }
-        .split-box:last-child h2 i { color: var(--green); }
-        .data-item:nth-child(2) .count { color: var(--orange); }
-        .data-item:nth-child(3) .count { color: var(--green); }
-        /* sec-head 액센트 */
-        .sec-head { border-bottom-color: var(--orange); }
+  /* ===== UTILITY BAR ===== */
+  .utility-bar {
+    height: 36px;
+    background: #EBF4EC;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #C8E0CC;
+  }
 
-        /* ── 반응형 ── */
-        @media (max-width: 960px) {
-          .quick-item { width: calc(100% / 4); }
-        }
-        @media (max-width: 768px) {
-          body { padding-top: 66px; }
-          header { height: 66px; }
-          .logo-img { height: 34px; }
-          .quick-menu { display: none; }
-          .gnb {
-            display: none; position: fixed; top: 60px; left: 0; width: 100%;
-            background: #fff; flex-direction: column; gap: 0;
-            border-top: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(0,0,0,.1);
-            z-index: 999; padding: 8px 0;
-            transform: none;
-          }
-          .gnb li a { display:block; padding:13px 20px; font-size:15px; border-bottom:1px solid #f1f5f9; }
-          header.open .gnb { display: flex; }
-          .util { display: none; }
-          .hamburger { display: flex; margin-left: auto; }
+  .utility-bar .container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
-          .quick-menu { padding: 18px 0; }
-          .quick-item { width: calc(100% / 4); }
-          .quick-item .icon-circle { width: 44px; height: 44px; font-size: 18px; border-radius: 12px; }
-          .quick-item span { font-size: 11px; }
+  .utility-bar ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
 
-          .hero { padding: 36px 0; }
-          .hero-grid { flex-direction: column; gap: 28px; }
-          .hero-left { width: 100%; }
-          .hero-left h1 { font-size: clamp(26px, 6vw, 36px); }
-          .hero-left p { font-size: 15px; margin-bottom: 24px; }
-          .hero-right { width: 100%; padding: 24px; }
-          .btn-group { display:flex; flex-wrap:wrap; gap:10px; }
-          .btn-group .btn { margin-right:0; white-space:nowrap; }
+  .utility-bar ul li a {
+    color: #2D5A1B;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0 12px;
+    border-right: 1px solid #B8D4BC;
+    line-height: 1;
+    display: inline-block;
+  }
+  .utility-bar ul li:last-child a { border-right: none; padding-right: 0; }
+  .utility-bar ul li a:hover { color: var(--ctp-green); }
 
-          .sec-wrap { padding: 48px 0; }
-          .grid-3 { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-          .status-card { padding: 22px 18px; }
+  /* ===== HEADER ===== */
+  .site-header {
+    height: 80px;
+    background: #fff;
+    border-bottom: 3px solid var(--ctp-green);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
 
-          .bottom-split { grid-template-columns: 1fr; gap: 20px; padding: 36px 0; }
-        }
-        @media (max-width: 480px) {
-          .quick-item { width: calc(100% / 4); }
-          .quick-item span { font-size: 10px; }
-          .grid-3 { grid-template-columns: 1fr; }
-          .sec-head { flex-direction: column; align-items: flex-start; gap: 8px; }
-          .sec-title { font-size: 20px; }
-          .split-box { padding: 22px 16px; }
-          .split-box h2 { font-size: 18px; }
-          .data-item { flex-wrap: wrap; gap: 4px; }
-          .data-item .count { font-size: 12px; }
-          .hero-left p { font-size: 14px; }
-          .btn-group .btn { padding: 12px 20px; font-size: 14px; }
-        }
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
 
-        /* ── 푸터 (공공·기관 스타일) ── */
-        footer { background: #f8fafc; padding: 40px 20px; color: #4a5568; border-top: 2px solid #e2e8f0; }
-        .footer__inner { max-width: 1200px; margin: 0 auto; position: relative; }
-        .fnb { position: absolute; top: 0; right: 0; }
-        .fnb__wrap { display: flex; list-style: none; align-items: center; padding: 0; margin: 0; }
-        .fnb__wrap li + li::before { content: '|'; margin: 0 12px; color: #cbd5e0; font-weight: 400; }
-        .fnb__link { font-size: 14px; font-weight: 700; color: #4a5568; text-decoration: none; }
-        .fnb__link:hover { color: var(--primary); }
-        .footer__logo { display: block; min-height: 40px; }
-        .footer__logo img { height: 34px; width: auto; object-fit: contain; }
-        .footer__info-row { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 28px; }
-        .site-address { font-size: 14px; line-height: 22px; color: #718096; font-style: normal; }
-        .footer__info-row select { border: 1px solid #e2e8f0; background: #fff; color: #4a5568; padding: 0 16px; font-size: 14px; width: 210px; height: 40px; border-radius: 6px; cursor: pointer; outline: none; flex-shrink: 0; }
-        .copyright { margin-top: 20px; font-size: 12px; color: #a0aec0; }
-        @media (max-width: 768px) {
-          .fnb { position: static; margin-bottom: 20px; }
-          .fnb__wrap { flex-wrap: wrap; gap: 6px; }
-          .fnb__wrap li + li::before { margin: 0 6px; }
-          .fnb__link { font-size: 13px; }
-          .footer__logo { min-height: auto; margin-bottom: 16px; }
-          .footer__info-row { flex-direction: column; gap: 14px; margin-top: 20px; }
-          .footer__info-row select { width: 100%; max-width: 320px; }
-          .site-address { font-size: 14px; line-height: 22px; }
-        }
-        /* ── 컨설팅 서비스 섹션 ── */
-        .consult-section { background: #fff; padding: 80px 0; }
-        .consult-section-head { text-align: center; margin-bottom: 50px; }
-        .consult-section-head .sec-badge { display: inline-block; background: var(--sub); color: var(--primary); font-size: 13px; font-weight: 700; padding: 5px 16px; border-radius: 20px; margin-bottom: 14px; }
-        .consult-section-head h2 { font-size: 32px; font-weight: 800; color: #1a202c; margin-bottom: 10px; }
-        .consult-section-head p { font-size: 15px; color: var(--gray); }
-        .consult-layout { display: grid; grid-template-columns: 360px 1fr; gap: 60px; align-items: center; }
-        .donut-chart-wrap { display: flex; flex-direction: column; align-items: center; }
-        .donut-svg { width: 320px; height: 320px; }
-        .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        .data-table thead tr { background: var(--primary); color: #fff; }
-        .data-table thead th { padding: 14px 18px; font-weight: 700; font-size: 13px; text-align: left; letter-spacing: 0.03em; }
-        .data-table thead th:nth-child(2), .data-table thead th:nth-child(3) { text-align: right; }
-        .data-table tbody tr:nth-child(even) { background: #f7fafc; }
-        .data-table tbody tr:nth-child(odd) { background: #fff; }
-        .data-table tbody td { padding: 13px 18px; color: var(--text); border-bottom: 1px solid #edf2f7; }
-        .data-table tbody td:nth-child(2) { text-align: right; font-weight: 600; color: var(--primary); }
-        .data-table tbody td:nth-child(3) { text-align: right; font-weight: 600; color: var(--gray); }
-        .data-table .total-row td { background: var(--primary) !important; color: #fff !important; font-weight: 800; font-size: 15px; }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
 
-        /* ── 기업조회 서비스 섹션 ── */
-        .lookup-section { background: #f8fafc; padding: 80px 0; }
-        .lookup-section-head { text-align: center; margin-bottom: 50px; }
-        .lookup-section-head .sec-badge { display: inline-block; background: var(--primary); color: #fff; font-size: 13px; font-weight: 700; padding: 5px 16px; border-radius: 20px; margin-bottom: 14px; }
-        .lookup-section-head h2 { font-size: 32px; font-weight: 800; color: #1a202c; margin-bottom: 10px; }
-        .lookup-section-head p { font-size: 15px; color: var(--gray); }
-        .hcat-list { display: flex; flex-direction: column; gap: 12px; }
-        .hcat-card { background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; border-left-width: 4px; display: flex; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden; }
-        .hcat-card.hcat-red { border-left-color: #ef4444; }
-        .hcat-card.hcat-green { border-left-color: var(--green); }
-        .hcat-card.hcat-blue { border-left-color: var(--primary); }
-        .hcat-left { display: flex; align-items: center; gap: 16px; padding: 24px 28px; flex-shrink: 0; min-width: 200px; }
-        .hcat-icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-        .hcat-red .hcat-icon { background: #fee2e2; color: #ef4444; }
-        .hcat-green .hcat-icon { background: var(--green-sub); color: var(--green); }
-        .hcat-blue .hcat-icon { background: var(--sub); color: var(--primary); }
-        .hcat-name { font-size: 18px; font-weight: 800; white-space: nowrap; }
-        .hcat-red .hcat-name { color: #ef4444; }
-        .hcat-green .hcat-name { color: var(--green); }
-        .hcat-blue .hcat-name { color: var(--primary); }
-        .hcat-divider { width: 1px; height: 56px; background: #e2e8f0; flex-shrink: 0; }
-        .hcat-tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 24px 28px; }
-        .hcat-tag { padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
-        .hcat-red .hcat-tag { background: #fee2e2; color: #dc2626; }
-        .hcat-green .hcat-tag { background: var(--green-sub); color: var(--green); }
-        .hcat-blue .hcat-tag { background: var(--sub); color: var(--primary); }
+  .logo-icon {
+    width: 24px;
+    height: 24px;
+    background: var(--ctp-green);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-        @media (max-width: 960px) {
-          .consult-layout { grid-template-columns: 1fr; }
-          .donut-chart-wrap { align-items: center; }
-          .donut-svg { width: 260px; height: 260px; }
-        }
-        @media (max-width: 768px) {
-          .consult-section { padding: 50px 0; }
-          .lookup-section { padding: 50px 0; }
-          .consult-section-head h2, .lookup-section-head h2 { font-size: 24px; }
-          .hcat-card { flex-direction: column; align-items: flex-start; }
-          .hcat-left { padding-bottom: 0; min-width: unset; }
-          .hcat-divider { display: none; }
-          .hcat-tags { padding-top: 12px; }
-          .data-table thead th, .data-table tbody td { padding: 10px 12px; }
-        }
-        .snav-tab { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 500; display: flex; align-items: center; gap: 4px; background: #fff; border: 1px solid #e2e8f0; border-radius: 50px; padding: 6px 8px; box-shadow: 0 8px 32px rgba(11,80,188,.15); }
-        .stab-item { display: flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 40px; text-decoration: none; font-size: 13px; font-weight: 600; color: #718096; transition: all 0.2s; white-space: nowrap; }
-        .stab-item i { font-size: 14px; }
-        .stab-item:hover { background: var(--sub); color: var(--primary); }
-        .stab-item.active { background: var(--primary); color: #fff; }
-        @media (max-width: 767px) { .snav-tab { display: none; } }
-    </style>
+  .logo-icon span {
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+  }
+
+  .logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ctp-blue);
+    letter-spacing: -0.5px;
+  }
+
+  .logo-sep {
+    width: 1px;
+    height: 20px;
+    background: #ccc;
+    margin: 0 10px;
+  }
+
+  .logo-sub {
+    font-size: 16px;
+    color: var(--ctp-gray);
+  }
+
+  .gnb-wrap {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .gnb {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    height: 80px;
+  }
+
+  .gnb > li { position: relative; }
+
+  .gnb > li > a {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    padding: 0 18px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #444;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .gnb > li > a:hover,
+  .gnb > li:hover > a {
+    color: var(--ctp-green);
+    border-bottom-color: var(--ctp-green);
+  }
+
+  .gnb > li > .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-top: 2px solid var(--ctp-green);
+    min-width: 150px;
+    list-style: none;
+    display: none;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .gnb > li:hover > .dropdown { display: block; }
+
+  .dropdown li a {
+    display: block;
+    padding: 9px 18px;
+    font-size: 17px;
+    color: #444;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .dropdown li:last-child a { border-bottom: none; }
+  .dropdown li a:hover { background: #F5FAF5; color: var(--ctp-green); }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--ctp-green);
+    padding: 6px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+  }
+  .search-btn:hover { opacity: 0.75; }
+
+  .hamburger-wrap { display: none; }
+  #mobile-menu-toggle { display: none; }
+
+  .hamburger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px;
+  }
+  .hamburger-btn span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .mobile-nav {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 2px solid var(--ctp-green);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    z-index: 998;
+  }
+
+  #mobile-menu-toggle:checked ~ .mobile-nav { display: block; }
+
+  .mobile-nav ul { list-style: none; padding: 8px 0; }
+  .mobile-nav ul li a {
+    display: block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .mobile-nav ul li a:hover { color: var(--ctp-green); background: #F5FAF5; }
+
+  /* ===== HERO — Center-aligned, green overlay, yellow CTA ===== */
+  .main-visual {
+    position: relative;
+    min-height: 580px;
+    background: url('https://picsum.photos/seed/m13hero/1400/520') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 40, 10, 0.60);
+  }
+
+  .main-visual-content {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 72px 20px 92px;
+    text-align: center;
+  }
+
+  .hero-region-badge {
+    display: inline-block;
+    background: rgba(74,148,37,0.75);
+    border: 1px solid rgba(157,198,50,0.5);
+    color: var(--ctp-lime);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 5px 18px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-main-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    letter-spacing: -0.8px;
+  }
+
+  .hero-sub-desc {
+    font-size: 20px;
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .hero-data-line {
+    font-size: 17px;
+    color: rgba(255,255,255,0.68);
+    margin-bottom: 36px;
+  }
+
+  .hero-cta-yellow {
+    display: inline-block;
+    background: var(--ctp-yellow);
+    color: #1A2E00;
+    font-size: 19px;
+    font-weight: 700;
+    padding: 14px 40px;
+    border-radius: 3px;
+    transition: background 0.2s;
+    margin-bottom: 32px;
+  }
+  .hero-cta-yellow:hover { background: #e09900; }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .hero-tag {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.28);
+    color: rgba(255,255,255,0.9);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 20px;
+  }
+
+  /* ===== 바로가기 — Light green tinted strip ===== */
+
+  /* ===== SECTION COMMONS ===== */
+  .section-header {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  .section-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ctp-green);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ctp-blue);
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .section-divider {
+    width: 40px;
+    height: 3px;
+    background: var(--ctp-green);
+    margin: 0 auto 16px;
+  }
+
+  .section-desc {
+    font-size: 19px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  /* ===== SECTION 01 마케팅 서비스 — Horizontal program listing rows ===== */
+  .business-section {
+    background: #fff;
+    padding: 72px 0;
+  }
+
+  .program-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid #D8EBD8;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .program-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border-bottom: 1px solid #D8EBD8;
+    transition: background 0.2s;
+  }
+  .program-row:last-child { border-bottom: none; }
+  .program-row:nth-child(odd) { background: #F0F8F1; }
+  .program-row:nth-child(even) { background: #fff; }
+  .program-row:hover { background: #E6F4E8; }
+
+  .program-num {
+    width: 60px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ctp-green);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .program-num-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .program-thumb {
+    width: 260px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .program-thumb img,
+  .program-thumb svg {
+    width: 100%;
+    height: 100%;
+    min-height: 140px;
+    display: block;
+  }
+
+  .program-body {
+    flex: 1;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .program-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #1A3A10;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .program-desc {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.75;
+  }
+
+  .program-action {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+  }
+
+  .program-btn {
+    display: inline-block;
+    background: var(--ctp-green);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 3px;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .program-btn:hover { background: #3A7A1E; }
+
+  /* ===== SECTION 02 서비스 소개 — Two-Phase layout ===== */
+  .service-intro-section {
+    padding: 0;
+  }
+
+  .phase-block {
+    padding: 72px 0;
+  }
+  .phase-block.phase-1 { background: #F5FAF5; }
+  .phase-block.phase-2 { background: #fff; }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .phase-badge {
+    flex-shrink: 0;
+    background: var(--ctp-green);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .phase-2 .phase-badge { background: var(--ctp-blue); }
+
+  .phase-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A3A10;
+    white-space: nowrap;
+  }
+  .phase-2 .phase-title { color: var(--ctp-blue); }
+
+  .phase-line {
+    flex: 1;
+    height: 1px;
+    background: #C8E0CC;
+  }
+  .phase-2 .phase-line { background: #C8D8EC; }
+
+  .phase-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .phase-step-card {
+    background: #fff;
+    border: 1px solid #D8EBD8;
+    border-top: 3px solid var(--ctp-green);
+    padding: 24px 22px;
+    border-radius: 3px;
+    transition: box-shadow 0.2s;
+  }
+  .phase-step-card:hover { box-shadow: 0 4px 14px rgba(74,148,37,0.12); }
+
+  .phase-2 .phase-step-card {
+    border: 1px solid #C8D8EC;
+    border-top: 3px solid var(--ctp-blue);
+  }
+  .phase-2 .phase-step-card:hover { box-shadow: 0 4px 14px rgba(0,59,156,0.1); }
+
+  .psc-number {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ctp-green);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .phase-2 .psc-number { color: var(--ctp-blue); }
+
+  .psc-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A3A10;
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+  .phase-2 .psc-title { color: #001830; }
+
+  .psc-desc {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .psc-metric {
+    border-top: 1px solid #D8EBD8;
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .phase-2 .psc-metric { border-top-color: #C8D8EC; }
+
+  .psc-metric-val {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ctp-green);
+  }
+  .phase-2 .psc-metric-val { color: var(--ctp-blue); }
+
+  .psc-metric-lab {
+    font-size: 15px;
+    color: #888;
+  }
+
+  /* ===== SECTION 03 컨설팅 — Green bars ===== */
+  .consulting-section {
+    background: #F0F8F1;
+    padding: 80px 0;
+  }
+
+  .consulting-inner {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .chart-head {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1A3A10;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ctp-green);
+  }
+
+  .chart-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .chart-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .chart-label {
+    font-size: 17px;
+    color: #333;
+    font-weight: 500;
+    min-width: 130px;
+    flex-shrink: 0;
+  }
+
+  .chart-bar-outer {
+    flex: 1;
+    background: #C8E0CC;
+    height: 26px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .chart-bar-inner {
+    height: 100%;
+    background: var(--ctp-green);
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+
+  .chart-value {
+    font-size: 16px;
+    color: #333;
+    font-weight: 700;
+    min-width: 100px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .chart-caption {
+    font-size: 17px;
+    color: #555;
+    margin-top: 24px;
+    line-height: 1.75;
+    padding-top: 16px;
+    border-top: 1px solid #C8E0CC;
+  }
+
+  /* Right dark green total panel */
+  .consulting-total {
+    background: #2A5A14;
+    color: #fff;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top: 4px solid var(--ctp-lime);
+    border-radius: 3px;
+  }
+
+  .total-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ctp-lime);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .total-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ctp-yellow);
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+
+  .total-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .total-regions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 16px;
+    margin-top: 4px;
+  }
+
+  .total-region-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+  }
+
+  .total-region-name { color: rgba(255,255,255,0.65); }
+  .total-region-count { color: rgba(255,255,255,0.9); font-weight: 500; }
+
+  /* ===== SECTION 04 기업조회 — Green accent cards ===== */
+  .company-check-section {
+    background: #fff;
+    padding: 80px 0;
+  }
+
+  .check-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .check-card-green {
+    background: #fff;
+    border: 1px solid #D8EBD8;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .check-card-green:hover { box-shadow: 0 6px 18px rgba(74,148,37,0.13); }
+
+  .check-card-img {
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+  }
+  .check-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .check-card-green:hover .check-card-img img { transform: scale(1.04); }
+
+  .check-card-body {
+    border-left: 4px solid var(--ctp-green);
+    padding: 18px 20px 22px;
+  }
+
+  .check-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ctp-green);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid #EDF5EE;
+    font-size: 17px;
+    color: #444;
+  }
+  .check-item:last-child { border-bottom: none; }
+
+  .check-checkmark {
+    color: var(--ctp-green);
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .company-info-text {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.75;
+    margin-top: 12px;
+    max-width: 720px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ===== FOOTER ===== */
+  .site-footer {
+    background: #1B3D1E;
+    border-top: 4px solid var(--ctp-yellow);
+  }
+
+  .footer-policy-bar {
+    background: #0D1E0F;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-policy-bar .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .footer-policy-bar a {
+    font-size: 16px;
+    color: #B8D4BC;
+    padding: 0 14px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    transition: color 0.2s;
+    line-height: 1;
+  }
+  .footer-policy-bar a:first-child { padding-left: 0; }
+  .footer-policy-bar a:last-child { border-right: none; }
+  .footer-policy-bar a:hover { color: #fff; }
+  .footer-policy-bar a.privacy { color: #ff6b6b; }
+
+  .footer-main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 20px 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+  }
+
+  .footer-col-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ctp-lime);
+    margin-bottom: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  .footer-logo-img {
+    max-height: 40px;
+    margin-bottom: 16px;
+  }
+
+  .footer-address {
+    font-size: 16px;
+    color: #B8D4BC;
+    line-height: 1.9;
+  }
+
+  .footer-address p { margin: 0; }
+
+  .footer-family { margin-top: 20px; }
+
+  .footer-family-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .footer-family a {
+    display: block;
+    font-size: 16px;
+    color: #B8D4BC;
+    padding: 3px 0;
+    transition: color 0.2s;
+  }
+  .footer-family a:hover { color: #fff; }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .footer-links li a {
+    display: block;
+    font-size: 17px;
+    color: #B8D4BC;
+    padding: 5px 0;
+    transition: color 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-links li:last-child a { border-bottom: none; }
+  .footer-links li a:hover { color: #fff; }
+
+  .footer-bottom {
+    background: #0D1E0F;
+    padding: 16px 20px;
+  }
+
+  .footer-bottom-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-copyright {
+    font-size: 16px;
+    color: #fff;
+    opacity: 0.65;
+    text-align: center;
+  }
+
+  /* ===== MOBILE RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .utility-bar { display: none; }
+    .site-header { position: sticky; }
+    .header-inner { position: relative; }
+    .gnb-wrap { display: none; }
+    .search-btn { display: none; }
+    .hamburger-wrap { display: flex; align-items: center; margin-left: auto; }
+
+    .hero-main-title { font-size: 26px; }
+    .main-visual { min-height: 380px; }
+
+
+    .program-row { flex-wrap: wrap; }
+    .program-thumb { width: 100%; height: 140px; }
+    .program-action { padding: 0 16px 20px; }
+    .program-num { width: 48px; }
+
+    .phase-steps-grid { grid-template-columns: 1fr; }
+
+    .consulting-inner { grid-template-columns: 1fr; }
+    .check-cards { grid-template-columns: 1fr; }
+
+    .section-title { font-size: 22px; }
+
+    .footer-main { grid-template-columns: 1fr; gap: 28px; padding: 36px 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .program-row { flex-direction: column; }
+    .program-num { width: 100%; height: 40px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+  }
+</style>
 </head>
 <body>
 
-    <!-- Header (지정 로고 이미지 반영) -->
-    <header>
-        <div class="container header-in">
-            <a href="#"><img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="충남테크노파크" class="logo-img"></a>
-            <ul class="gnb">
-                <li><a href="#">빅바이어 마케팅</a></li>
-                <li><a href="#">수출바우처 컨설팅</a></li>
-                <li><a href="#">고객센터</a></li>
-            </ul>
-            <div class="util"><a href="#">로그인</a><span>|</span><a href="#">회원가입</a></div>
-            <button class="hamburger" aria-label="메뉴열기">
-                <span></span><span></span><span></span>
-            </button>
+<!-- ===== UTILITY BAR ===== -->
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="logo-area">
+      <img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스" style="height:38px;object-fit:contain;display:block;">
+    </a>
+
+    <nav class="gnb-wrap">
+      <ul class="gnb">
+        <li><a href="#">빅바이어 마케팅</a></li>
+        <li><a href="#">공지사항</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-right">
+      <a href="#" style="font-size:15px;color:#333;text-decoration:none;margin-right:14px;">로그인</a>
+      <a href="#" style="font-size:15px;color:#333;text-decoration:none;">회원가입</a>
+    </div>
+
+    <div class="hamburger-wrap">
+      <input type="checkbox" id="mobile-menu-toggle" aria-hidden="true">
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <nav class="mobile-nav">
+        <ul>
+          <li><a href="#">빅바이어 마케팅</a></li>
+          <li><a href="#">공지사항</a></li>
+          <li><a href="#">로그인</a></li>
+          <li><a href="#">회원가입</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="main-visual">
+  <div class="main-visual-content">
+    <span class="hero-region-badge">NICE D&amp;B · 글로벌 바이어 발굴 플랫폼</span>
+    <h1 class="hero-main-title">지역기업의 글로벌 수출을<br>함께 만들어갑니다</h1>
+    <p class="hero-sub-desc">수출바우처 바이어 발굴 전문 지원기관</p>
+    <p class="hero-data-line">5억 건+ 나이스디앤비가 보유한 글로벌 기업 빅데이터</p>
+    <a href="#" class="hero-cta-yellow">서비스 시작하기</a>
+    <div class="hero-tags">
+      <span class="hero-tag">최적화된 RPA 자동화</span>
+      <span class="hero-tag">정교한 AI 솔루션</span>
+      <span class="hero-tag">553M+ 검증 데이터</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 01 마케팅 서비스 — Horizontal program rows ===== -->
+<section class="business-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Marketing Service</span>
+      <h2 class="section-title">마케팅 서비스</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">5억개 이상의 DB POOL을 활용하여 잠재된 바이어들에게 마케팅 서비스를 제공합니다.</p>
+    </div>
+    <div class="program-list">
+      <!-- Row 1 -->
+      <div class="program-row">
+        <div class="program-num"><div class="program-num-circle">01</div></div>
+        <div class="program-thumb">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=280&fit=crop&auto=format" alt="빅바이어 마케팅">
         </div>
-    </header>
-
-    <section class="hero" id="s-hero">
-        <div class="container hero-grid">
-            <div class="hero-left">
-                <h1>마케팅 서비스</h1>
-                <p>NICE D&B가 축적한 5억 개 이상의 방대한 글로벌 DB POOL을 완벽하게 핸들링하여 국내 기업의 잠재 바이어 매칭 및 수출 판로 개척을 원스톱으로 지원합니다.</p>
-                <div class="btn-group">
-                    <a href="#" class="btn btn-blue">마케팅 시작하기</a>
-                    <a href="#" class="btn btn-white">서비스 매뉴얼 다운로드</a>
-                </div>
-            </div>
-            
-            <div class="hero-right">
-                <div class="graphic-title"><i class="fa-solid fa-circle-check"></i> LINKER 핵심 서비스 카테고리</div>
-                <div class="graphic-row"><strong><i class="fa-solid fa-chart-bar"></i> 빅바이어 마케팅 솔루션</strong><span>/bm-service</span></div>
-                <div class="graphic-row"><strong><i class="fa-solid fa-handshake"></i> 수출바우처 맞춤형 컨설팅</strong><span>/consulting</span></div>
-                <div class="graphic-row"><strong><i class="fa-solid fa-file-contract"></i> 글로벌 신용 보고서 발급</strong><span>D&B Network</span></div>
-                <div class="graphic-row"><strong><i class="fa-solid fa-shield-halved"></i> 사기 바이어 사전 검증 시스템</strong><span>/risk-check</span></div>
-            </div>
+        <div class="program-body">
+          <h3 class="program-title">빅바이어 마케팅</h3>
+          <p class="program-desc">NICE D&amp;B가 보유한 5억 개 이상의 해외기업 DB POOL을 활용하여, 잠재된 바이어들에게 마케팅 서비스를 제공합니다. 최적화된 RPA 로직과 정교한 AI 솔루션을 결합하여 기업의 니즈에 맞는 바이어 정보를 빠르고 정확하게 제공합니다.</p>
         </div>
-    </section>
-
-    <section class="quick-menu" id="s-quickmenu">
-        <div class="container quick-grid">
-            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-magnifying-glass"></i></div><span>빅바이어 발굴</span></div>
-            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-paper-plane"></i></div><span>메시지 발송</span></div>
-            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-folder-open"></i></div><span>임시저장함</span></div>
-            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-paste"></i></div><span>컨설팅 신청</span></div>
-            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-file-shield"></i></div><span>사기바이어 확인</span></div>
-            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-chart-line"></i></div><span>결제 우량정보</span></div>
-            <div class="quick-item"><div class="icon-circle"><i class="fa-solid fa-headset"></i></div><span>고객센터 FAQ</span></div>
+        <div class="program-action">
+          <a href="#" class="program-btn">자세히보기</a>
         </div>
-    </section>
-
-    <section class="sec-wrap" id="s-service" style="background:#f7fafc;">
-        <div class="container">
-            <div class="sec-head">
-                <div class="sec-title">서비스 소개 (6단계 프로세스)</div>
-            </div>
-            <div class="grid-3">
-                <div class="status-card">
-                    <div class="badge active">STEP 01</div>
-                    <div class="card-icon"><i class="fa-solid fa-database"></i></div>
-                    <h3>빅데이터 발굴</h3>
-                    <p>세계 최대 규모(5억 건 이상)의 글로벌 기업 빅데이터를 실시간 웹데이터와 정밀 결합시켜 최적의 맞춤 바이어를 추출합니다.</p>
-                    <div class="foot-val"><span>정확도 지표</span><span>98.2% 수렴</span></div>
-                </div>
-                <div class="status-card">
-                    <div class="badge active">STEP 02</div>
-                    <div class="card-icon"><i class="fa-solid fa-bezier-curve"></i></div>
-                    <h3>AI 추천 로직</h3>
-                    <p>실제 무역 거래 데이터를 학습한 AI가 독자 알고리즘을 가동하여, 유효 거래 성사 확률이 극대화된 진성 바이어를 선별합니다.</p>
-                    <div class="foot-val"><span>매칭 알고리즘</span><span>실시간 분석중</span></div>
-                </div>
-                <div class="status-card">
-                    <div class="badge">STEP 03</div>
-                    <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
-                    <h3>마케팅 메시지 작성</h3>
-                    <p>발굴된 타겟 바이어군에 전송할 eDM을 간편하게 빌딩합니다. 자주 쓰이는 프리셋 포맷은 템플릿에 저장하여 즉시 사용 가능합니다.</p>
-                    <div class="foot-val"><span>스마트 메시지</span><span>템플릿 제공</span></div>
-                </div>
-                <div class="status-card">
-                    <div class="badge">STEP 04</div>
-                    <div class="card-icon"><i class="fa-solid fa-paper-plane"></i></div>
-                    <h3>마케팅 메시지 발송</h3>
-                    <p>작성이 완료된 타겟형 eDM을 전 세계 바이어 메일망으로 안전하게 다이렉트 발송합니다. A/B 테스트를 통한 회신율 모니터링을 제공합니다.</p>
-                    <div class="foot-val"><span>서버 발송 상태</span><span>안정성 100%</span></div>
-                </div>
-                <div class="status-card">
-                    <div class="badge">STEP 05</div>
-                    <div class="card-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
-                    <h3>바이어 확인 및 열람</h3>
-                    <p>수출 기업의 핵심 Selling Point가 정밀하게 조율되어 담긴 eDM을 수신한 글로벌 바이어가 실시간으로 내용을 오픈하고 검토합니다.</p>
-                    <div class="foot-val"><span>추적 코드 연동</span><span>실시간 추적</span></div>
-                </div>
-                <div class="status-card">
-                    <div class="badge">STEP 06</div>
-                    <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
-                    <h3>바이어 답변 메시지 확인</h3>
-                    <p>일반적인 무차별 대량 메일 발송 케이스 대비 타겟팅을 통해 최대 5배 이상 도출되는 압도적인 글로벌 바이어의 피드백 답변을 확인합니다.</p>
-                    <div class="foot-val"><span>평균 피드백률</span><span>5배 상승 도달</span></div>
-                </div>
-            </div>
+      </div>
+      <!-- Row 2 -->
+      <div class="program-row">
+        <div class="program-num"><div class="program-num-circle">02</div></div>
+        <div class="program-thumb">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=280&fit=crop&auto=format" alt="수출바우처 컨설팅">
         </div>
-    </section>
-
-    <section class="consult-section" id="s-consult">
-        <div class="container">
-            <div class="consult-section-head">
-                <span class="sec-badge">컨설팅 서비스</span>
-                <h2>해외기업 신용조사</h2>
-                <p>글로벌 데이터 현황 총 6개 지역 553,609,651건</p>
-            </div>
-            <div class="consult-layout">
-                <div class="donut-chart-wrap">
-                    <svg class="donut-svg" viewBox="0 0 200 200">
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#0b50bc" stroke-width="28" stroke-dasharray="143.38 296.44" stroke-dashoffset="439.82" transform="rotate(-90 100 100)"/>
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#3b82f6" stroke-width="28" stroke-dasharray="124.02 315.80" stroke-dashoffset="296.44" transform="rotate(-90 100 100)"/>
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#F97316" stroke-width="28" stroke-dasharray="93.68 346.14" stroke-dashoffset="172.42" transform="rotate(-90 100 100)"/>
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#16A34A" stroke-width="28" stroke-dasharray="66.85 372.97" stroke-dashoffset="78.74" transform="rotate(-90 100 100)"/>
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#f59e0b" stroke-width="28" stroke-dasharray="9.24 430.58" stroke-dashoffset="11.89" transform="rotate(-90 100 100)"/>
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#ec4899" stroke-width="28" stroke-dasharray="3.08 436.74" stroke-dashoffset="2.65" transform="rotate(-90 100 100)"/>
-                        <circle cx="100" cy="100" r="56" fill="#fff"/>
-                        <text x="100" y="96" text-anchor="middle" font-size="18" font-weight="900" fill="#1a202c" font-family="Pretendard, sans-serif">5.5억+</text>
-                        <text x="100" y="114" text-anchor="middle" font-size="10" fill="#718096" font-family="Pretendard, sans-serif">총 기업 데이터</text>
-                    </svg>
-                </div>
-                <div>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>지역</th>
-                                <th>데이터 건수</th>
-                                <th>비율</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Asia Pacific</td><td>180,161,374건</td><td>32.6%</td></tr>
-                            <tr><td>Europe</td><td>156,229,203건</td><td>28.2%</td></tr>
-                            <tr><td>North America</td><td>117,948,961건</td><td>21.3%</td></tr>
-                            <tr><td>Latin America</td><td>83,850,324건</td><td>15.2%</td></tr>
-                            <tr><td>Africa</td><td>11,564,797건</td><td>2.1%</td></tr>
-                            <tr><td>Middle East</td><td>3,854,992건</td><td>0.7%</td></tr>
-                            <tr class="total-row"><td><i class="fa-solid fa-globe"></i> Global Total</td><td>553,609,651건</td><td>100%</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="program-body">
+          <h3 class="program-title">수출바우처 컨설팅</h3>
+          <p class="program-desc">전문 MD가 귀사를 위한 맞춤 컨설팅을 무료로 제공해 드립니다. 수출바우처 사업을 활용하여 글로벌 시장 진출을 가속화하고, 해외 바이어 발굴부터 계약 체결까지 전 과정을 지원합니다.</p>
         </div>
-    </section>
-
-    <section class="lookup-section" id="s-lookup">
-        <div class="container">
-            <div class="lookup-section-head">
-                <span class="sec-badge">기업조회 서비스</span>
-                <h2>거래기업 등록상태 확인</h2>
-                <p>공공/민간 각 부문이 보유한 해외기업의 중요 거래정보를 실시간 공유합니다.</p>
-            </div>
-            <div class="hcat-list">
-                <div class="hcat-card hcat-red">
-                    <div class="hcat-left">
-                        <div class="hcat-icon"><i class="fa-solid fa-landmark"></i></div>
-                        <span class="hcat-name">금융기관</span>
-                    </div>
-                    <div class="hcat-divider"></div>
-                    <div class="hcat-tags">
-                        <span class="hcat-tag">무역사기</span>
-                        <span class="hcat-tag">대금지급 지연</span>
-                        <span class="hcat-tag">부정당 체제</span>
-                        <span class="hcat-tag">탈세</span>
-                        <span class="hcat-tag">자금세탁</span>
-                    </div>
-                </div>
-                <div class="hcat-card hcat-green">
-                    <div class="hcat-left">
-                        <div class="hcat-icon"><i class="fa-solid fa-chart-line"></i></div>
-                        <span class="hcat-name">우량정보</span>
-                    </div>
-                    <div class="hcat-divider"></div>
-                    <div class="hcat-tags">
-                        <span class="hcat-tag">적기 결제</span>
-                        <span class="hcat-tag">무역활동 지수</span>
-                    </div>
-                </div>
-                <div class="hcat-card hcat-blue">
-                    <div class="hcat-left">
-                        <div class="hcat-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                        <span class="hcat-name">등급정보</span>
-                    </div>
-                    <div class="hcat-divider"></div>
-                    <div class="hcat-tags">
-                        <span class="hcat-tag">D&amp;B Rating</span>
-                        <span class="hcat-tag">PAYDEX</span>
-                        <span class="hcat-tag">수출거래 위험지표</span>
-                    </div>
-                </div>
-            </div>
+        <div class="program-action">
+          <a href="#" class="program-btn">신청하기</a>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer__inner">
-            <div class="fnb">
-                <ul class="fnb__wrap">
-                    <li><a href="#" class="fnb__link" style="color:red;">개인정보처리방침</a></li>
-                    <li><a href="/policy-details" class="fnb__link">이용약관</a></li>
-                    <li><a href="/credit-usage-notice" class="fnb__link">신용정보활용체제공시</a></li>
-                    <li><a href="/email-no-collection" class="fnb__link">이메일무단수집거부</a></li>
-                </ul>
-            </div>
-            <div class="footer__logo">
-                <img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스">
-            </div>
-            <div class="footer__info-row">
-                <address class="site-address">
-                    (04535) 서울특별시 중구 소공로 70, 포스트타워 16층 (주)NICE디앤비<br>
-                    통신판매업신고: 제2024-서울중구-1736호 사업자등록번호: 107-86-24874 TEL: 02-2122-0233 FAX: 02-2122-2591
-                </address>
-                <select id="familySite" name="familySite">
-                    <option value="" disabled selected>Family site</option>
-                    <option value="https://www.nicednb.com">나이스디앤비 홈페이지</option>
-                    <option value="https://global.nicednb.com"> 나이스디앤비 글로벌 홈페이지 </option>
-                </select>
-            </div>
-            <p class="copyright">ⓒ 2023. NICE D&amp;B Co.,Ltd. ALL RIGHTS RESERVED.</p>
+      </div>
+      <!-- Row 3 -->
+      <div class="program-row">
+        <div class="program-num"><div class="program-num-circle">03</div></div>
+        <div class="program-thumb">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=280&fit=crop&auto=format" alt="해외기업 보고서">
         </div>
-    </footer>
+        <div class="program-body">
+          <h3 class="program-title">해외기업 보고서</h3>
+          <p class="program-desc">D&amp;B의 글로벌 네트워크를 통해 모든 국가 내 대상 기업을 조회하고 보고서를 발급받으세요. 기업 신용정보, 재무현황, 임원 구성 등 상세 정보를 포함한 종합 리포트를 제공합니다.</p>
+        </div>
+        <div class="program-action">
+          <a href="#" class="program-btn">자세히보기</a>
+        </div>
+      </div>
+      <!-- Row 4 -->
+      <div class="program-row">
+        <div class="program-num"><div class="program-num-circle">04</div></div>
+        <div class="program-thumb">
+          <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=280&fit=crop&auto=format" alt="바이어 확인">
+        </div>
+        <div class="program-body">
+          <h3 class="program-title">바이어 확인</h3>
+          <p class="program-desc">사기바이어를 실시간으로 확인할 수 있습니다. 무역사기, 대금지급 지연, 부정당 체제, 탈세, 자금세탁 이력이 있는 기업을 사전에 걸러내어 안전한 무역 거래를 지원합니다.</p>
+        </div>
+        <div class="program-action">
+          <a href="#" class="program-btn">바로확인</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ===== SECTION 02 서비스 소개 — Two-Phase layout ===== -->
+<section class="service-intro-section">
+  <!-- Phase 1 -->
+  <div class="phase-block phase-1">
+    <div class="container">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 1</span>
+        <h3 class="phase-title">바이어 발굴 단계</h3>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-steps-grid">
+        <!-- Step 01 -->
+        <div class="phase-step-card">
+          <span class="psc-number">STEP 01</span>
+          <h4 class="psc-title">빅데이터 발굴</h4>
+          <p class="psc-desc">세계 최대 규모(5억 건 이상)의 글로벌 기업 빅데이터를 실시간 웹데이터와 정밀 결합시켜 최적의 맞춤 바이어를 추출합니다.</p>
+          <div class="psc-metric">
+            <span class="psc-metric-val">98.2%</span>
+            <span class="psc-metric-lab">정확도</span>
+          </div>
+        </div>
+        <!-- Step 02 -->
+        <div class="phase-step-card">
+          <span class="psc-number">STEP 02</span>
+          <h4 class="psc-title">AI 추천 로직</h4>
+          <p class="psc-desc">실제 무역 거래 데이터를 학습한 AI가 독자 알고리즘을 가동하여 거래 성사 확률이 높은 진성 바이어를 선별합니다.</p>
+          <div class="psc-metric">
+            <span class="psc-metric-val">실시간</span>
+            <span class="psc-metric-lab">매칭 분석</span>
+          </div>
+        </div>
+        <!-- Step 03 -->
+        <div class="phase-step-card">
+          <span class="psc-number">STEP 03</span>
+          <h4 class="psc-title">마케팅 메시지 작성</h4>
+          <p class="psc-desc">발굴된 타겟 바이어군에 전송할 eDM을 간편하게 작성합니다. 자주 쓰이는 프리셋 포맷은 템플릿에 저장 가능합니다.</p>
+          <div class="psc-metric">
+            <span class="psc-metric-val">템플릿</span>
+            <span class="psc-metric-lab">제공</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Phase 2 -->
+  <div class="phase-block phase-2">
+    <div class="container">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 2</span>
+        <h3 class="phase-title">마케팅 실행 단계</h3>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-steps-grid">
+        <!-- Step 04 -->
+        <div class="phase-step-card">
+          <span class="psc-number">STEP 04</span>
+          <h4 class="psc-title">마케팅 메시지 발송</h4>
+          <p class="psc-desc">작성이 완료된 타겟형 eDM을 전 세계 바이어 메일망으로 안전하게 발송합니다. A/B 테스트를 통한 회신율 모니터링을 제공합니다.</p>
+          <div class="psc-metric">
+            <span class="psc-metric-val">100%</span>
+            <span class="psc-metric-lab">발송 안정성</span>
+          </div>
+        </div>
+        <!-- Step 05 -->
+        <div class="phase-step-card">
+          <span class="psc-number">STEP 05</span>
+          <h4 class="psc-title">바이어 확인 및 열람</h4>
+          <p class="psc-desc">핵심 Selling Point가 담긴 eDM을 수신한 글로벌 바이어가 실시간으로 내용을 열람하고 검토합니다.</p>
+          <div class="psc-metric">
+            <span class="psc-metric-val">실시간</span>
+            <span class="psc-metric-lab">추적</span>
+          </div>
+        </div>
+        <!-- Step 06 -->
+        <div class="phase-step-card">
+          <span class="psc-number">STEP 06</span>
+          <h4 class="psc-title">바이어 답변 확인</h4>
+          <p class="psc-desc">일반 발굴·발송 대비 타겟팅을 통해 최대 5배 이상 도출되는 글로벌 바이어의 피드백 답변을 확인하세요.</p>
+          <div class="psc-metric">
+            <span class="psc-metric-val">5배</span>
+            <span class="psc-metric-lab">답변율 향상</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<nav class="snav-tab" id="sectionNav">
-  <a href="#s-hero" class="stab-item active">
-    <i class="fa-solid fa-house"></i>
-    <span>메인</span>
-  </a>
-  <a href="#s-quickmenu" class="stab-item">
-    <i class="fa-solid fa-grip"></i>
-    <span>서비스</span>
-  </a>
-  <a href="#s-service" class="stab-item">
-    <i class="fa-solid fa-list-check"></i>
-    <span>서비스 소개</span>
-  </a>
-  <a href="#s-consult" class="stab-item">
-    <i class="fa-solid fa-earth-americas"></i>
-    <span>컨설팅</span>
-  </a>
-  <a href="#s-lookup" class="stab-item">
-    <i class="fa-solid fa-building-shield"></i>
-    <span>기업조회</span>
-  </a>
-</nav>
+<!-- ===== SECTION 03 컨설팅 서비스 ===== -->
+<section class="consulting-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Consulting Service</span>
+      <h2 class="section-title">컨설팅 서비스</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">해외기업 신용조사 — 글로벌 5억 5천만 기업 데이터</p>
+    </div>
 
-<script>
-  document.querySelector('.hamburger').addEventListener('click', function() {
-    this.closest('header').classList.toggle('open');
-  });
+    <!-- TOTAL CALLOUT BOX -->
+    <div style="background:#2A5A14; display:flex; justify-content:space-between; align-items:center; padding:28px 36px;">
+      <div>
+        <div style="color:rgba(255,255,255,0.7); font-size:16px;">글로벌 기업 데이터 총 보유 현황</div>
+        <div style="color:#fff; font-weight:700; font-size:36px; margin:6px 0;">553,609,651건</div>
+        <div style="color:#F2A800; font-size:16px;">6개 지역 · 실시간 업데이트</div>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <div style="border:1px solid rgba(255,255,255,0.3); padding:8px 16px; color:#fff; font-size:17px; border-radius:2px;">수출바우처 지원기관</div>
+        <div style="border:1px solid rgba(255,255,255,0.3); padding:8px 16px; color:#fff; font-size:17px; border-radius:2px;">AI 매칭 서비스</div>
+        <div style="border:1px solid rgba(255,255,255,0.3); padding:8px 16px; color:#fff; font-size:17px; border-radius:2px;">글로벌 DB</div>
+      </div>
+    </div>
 
-  (function() {
-    var sections = ['s-hero', 's-quickmenu', 's-service', 's-consult', 's-lookup'];
-    var tabs = document.querySelectorAll('#sectionNav .stab-item');
+    <!-- REGION TILES 3×2 GRID -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin:2px 0;">
+      <div style="background:#fff; padding:20px 24px; border:1px solid #E0EED8; border-top:3px solid #4A9425;">
+        <div style="color:#4A9425; font-size:17px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">Asia Pacific</div>
+        <div style="color:#1a1a1a; font-size:22px; font-weight:700; margin:8px 0 4px; font-variant-numeric:tabular-nums;">180,161,374건</div>
+        <div style="color:#888; font-size:17px;">32.5%</div>
+      </div>
+      <div style="background:#fff; padding:20px 24px; border:1px solid #E0EED8; border-top:3px solid #F2A800;">
+        <div style="color:#4A9425; font-size:17px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">Europe</div>
+        <div style="color:#1a1a1a; font-size:22px; font-weight:700; margin:8px 0 4px; font-variant-numeric:tabular-nums;">156,229,203건</div>
+        <div style="color:#888; font-size:17px;">28.2%</div>
+      </div>
+      <div style="background:#fff; padding:20px 24px; border:1px solid #E0EED8; border-top:3px solid #003B9C;">
+        <div style="color:#4A9425; font-size:17px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">North America</div>
+        <div style="color:#1a1a1a; font-size:22px; font-weight:700; margin:8px 0 4px; font-variant-numeric:tabular-nums;">117,948,961건</div>
+        <div style="color:#888; font-size:17px;">21.3%</div>
+      </div>
+      <div style="background:#fff; padding:20px 24px; border:1px solid #E0EED8; border-top:3px solid #4A9425;">
+        <div style="color:#4A9425; font-size:17px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">Latin America</div>
+        <div style="color:#1a1a1a; font-size:22px; font-weight:700; margin:8px 0 4px; font-variant-numeric:tabular-nums;">83,850,324건</div>
+        <div style="color:#888; font-size:17px;">15.1%</div>
+      </div>
+      <div style="background:#fff; padding:20px 24px; border:1px solid #E0EED8; border-top:3px solid #F2A800;">
+        <div style="color:#4A9425; font-size:17px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">Africa</div>
+        <div style="color:#1a1a1a; font-size:22px; font-weight:700; margin:8px 0 4px; font-variant-numeric:tabular-nums;">11,564,797건</div>
+        <div style="color:#888; font-size:17px;">2.1%</div>
+      </div>
+      <div style="background:#fff; padding:20px 24px; border:1px solid #E0EED8; border-top:3px solid #003B9C;">
+        <div style="color:#4A9425; font-size:17px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">Middle East</div>
+        <div style="color:#1a1a1a; font-size:22px; font-weight:700; margin:8px 0 4px; font-variant-numeric:tabular-nums;">3,854,992건</div>
+        <div style="color:#888; font-size:17px;">0.8%</div>
+      </div>
+    </div>
 
-    function onScroll() {
-      var scrollY = window.pageYOffset + window.innerHeight / 3;
-      var current = sections[0];
-      sections.forEach(function(id) {
-        var el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollY) current = id;
-      });
-      tabs.forEach(function(tab) {
-        tab.classList.toggle('active', tab.getAttribute('href') === '#' + current);
-      });
-    }
+    <!-- CONSULTING TEXT -->
+    <div style="margin-top:16px; border-left:3px solid #4A9425; padding:20px 24px; background:#F5FAF5;">
+      <p style="color:#333; font-size:17px; line-height:1.8; margin:0;">전문 MD가 귀사를 위한 맞춤 컨설팅을 무료로 제공해 드립니다. 수출바우처를 활용하여 글로벌 시장 진출을 가속화하세요.</p>
+    </div>
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
-</script>
+  </div>
+</section>
+
+<!-- ===== SECTION 04 기업조회 — Green accent cards ===== -->
+<section class="company-check-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Company Verification</span>
+      <h2 class="section-title">기업조회 서비스</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">거래기업의 등록상태를 확인할 수 있습니다.</p>
+    </div>
+    <div class="check-cards">
+      <!-- Card 1 금융기관 -->
+      <div class="check-card-green">
+        <div class="check-card-img">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=160&fit=crop&auto=format" alt="금융기관">
+        </div>
+        <div class="check-card-body">
+          <h3 class="check-card-title">금융기관</h3>
+          <div class="check-item"><span class="check-checkmark">✓</span>무역사기</div>
+          <div class="check-item"><span class="check-checkmark">✓</span>대금지급 지연</div>
+          <div class="check-item"><span class="check-checkmark">✓</span>부정당 체제</div>
+          <div class="check-item"><span class="check-checkmark">✓</span>탈세</div>
+          <div class="check-item"><span class="check-checkmark">✓</span>자금세탁</div>
+        </div>
+      </div>
+      <!-- Card 2 우량정보 -->
+      <div class="check-card-green">
+        <div class="check-card-img">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=160&fit=crop&auto=format" alt="우량정보">
+        </div>
+        <div class="check-card-body">
+          <h3 class="check-card-title">우량정보</h3>
+          <div class="check-item"><span class="check-checkmark">✓</span>적기 결제</div>
+          <div class="check-item"><span class="check-checkmark">✓</span>무역활동 지수</div>
+        </div>
+      </div>
+      <!-- Card 3 등급정보 -->
+      <div class="check-card-green">
+        <div class="check-card-img">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=160&fit=crop&auto=format" alt="등급정보">
+        </div>
+        <div class="check-card-body">
+          <h3 class="check-card-title">등급정보</h3>
+          <div class="check-item"><span class="check-checkmark">✓</span>D&amp;B Rating</div>
+          <div class="check-item"><span class="check-checkmark">✓</span>PAYDEX</div>
+          <div class="check-item"><span class="check-checkmark">✓</span>수출거래 위험지표</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-policy-bar">
+    <div class="container">
+      <a href="#" class="privacy">개인정보처리방침</a>
+      <a href="#">이용약관</a>
+      <a href="#">신용정보활용체제공시</a>
+      <a href="#">이메일무단수집거부</a>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div>
+      <img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="NICE D&B" class="footer-logo-img">
+      <div class="footer-address">
+        <p>(04535) 서울특별시 중구 소공로 70, 포스트타워 16층 (주)NICE디앤비</p>
+        <p>통신판매업신고: 제2024-서울중구-1736호&nbsp;&nbsp;사업자등록번호: 107-86-24874</p>
+        <p>TEL: 02-2122-0233&nbsp;&nbsp;FAX: 02-2122-2591</p>
+      </div>
+      <div class="footer-family">
+        <div class="footer-family-title">Family Site</div>
+        <a href="#">나이스디앤비 홈페이지</a>
+        <a href="#">나이스디앤비 글로벌 홈페이지</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">주요 서비스</div>
+      <ul class="footer-links">
+        <li><a href="#">빅바이어 마케팅</a></li>
+        <li><a href="#">수출바우처 컨설팅</a></li>
+        <li><a href="#">해외기업 보고서</a></li>
+        <li><a href="#">기업조회 서비스</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">고객지원</div>
+      <ul class="footer-links">
+        <li><a href="#">자주묻는질문</a></li>
+        <li><a href="#">이용안내</a></li>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">사이트맵</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p class="footer-copyright">ⓒ 2023. NICE D&amp;B Co.,Ltd. ALL RIGHTS RESERVED.</p>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
