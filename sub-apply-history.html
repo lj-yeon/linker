@@ -22,7 +22,7 @@
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; min-width: 1280px; }
+  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; min-width: 360px; }
 a { text-decoration: none; color: inherit; }
 img { display: block; }
 ul { list-style: none; }
@@ -320,12 +320,102 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 .footer__info-row select { border: 1px solid var(--gray-2); background: #fff; color: var(--text); padding: 0 14px; font-size: 16px; width: 200px; height: 38px; border-radius: 8px; cursor: pointer; outline: none; flex-shrink: 0; transition: border-color var(--trans); }
 .footer__info-row select:hover { border-color: var(--blue); }
 .copyright { margin-top: 18px; font-size: 12px; color: var(--gray-4); opacity: .75; }
+/* ── 햄버거 애니메이션 ── */
+.hamburger span { transition: transform .25s ease, opacity .25s ease; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── 모바일 내비게이션 패널 ── */
+.mobile-nav {
+  position: fixed; top: 66px; left: 0; right: 0; z-index: 99;
+  background: #fff; border-bottom: 1px solid var(--gray-2);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  transform: translateY(-110%);
+  transition: transform .3s ease;
+  pointer-events: none;
+}
+.mobile-nav.open { transform: translateY(0); pointer-events: auto; }
+.mobile-nav > ul { list-style: none; }
+.mobile-nav > ul li a {
+  display: block; padding: 15px 20px;
+  font-size: 16px; font-weight: 700; color: var(--text);
+  border-bottom: 1px solid var(--gray-2);
+}
+.mobile-nav > ul li a:active { background: var(--gray-1); }
+.mobile-nav .m-util { display: flex; gap: 8px; padding: 12px 20px 16px; }
+.mobile-nav .m-util a {
+  flex: 1; text-align: center; font-size: 15px; font-weight: 600;
+  color: var(--gray-4); padding: 9px; border: 1px solid var(--gray-2);
+  border-radius: 6px; transition: all var(--trans);
+}
+.mobile-nav .m-util .m-login { color: var(--blue); border-color: rgba(26,111,216,.3); }
+@media (min-width: 768px) { .mobile-nav { display: none !important; } }
+
 @media (max-width: 768px) {
+  body { min-width: 360px; }
+
+  /* 배너 */
+  .page-banner { padding: 40px 0; }
+  .banner-title { font-size: 32px; padding-bottom: 2.5rem; }
+  .banner-sub { font-size: 15px; max-width: 260px; margin: 0 auto; line-height: 1.7; }
+
+  /* 브레드크럼 */
+  .loc-bar { padding: 0; position: sticky; top: 66px; z-index: 90; background: #fff; border-bottom: 1px solid #e0e0e0; box-shadow: none; }
+  .loc-inner { width: 100%; margin: 0; padding: 0; }
+  .loc-path > li:first-child { display: none; }
+  .loc-path { width: 100%; }
+  .loc-path > li { flex: 1; border: none; }
+  .loc-path > li + li { border-left: 1px solid #ccc; }
+  .loc-btn { width: 100%; height: 44px; font-size: 14px; padding: 0 12px; justify-content: space-between; }
+  .loc-select { width: 100%; height: 44px; font-size: 14px; padding: 0 12px; }
+
+  /* 페이지 타이틀 */
+  .page-title-area { flex-direction: column; gap: 6px; }
+  .page-title-area h2 { font-size: 24px; }
+
+  /* 검색 패널: 세로 스택 */
+  .search-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-label {
+    width: 100%;
+    padding: 16px 0 8px 0;
+    font-size: 15px;
+  }
+  .search-field {
+    width: 100%;
+    padding: 0 0 16px 0;
+  }
+  .search-row:first-child { border-top: 2px solid #222; }
+  .search-row:first-child .search-label { padding-top: 16px; }
+
+  /* 날짜 범위 */
+  .date-range { flex-wrap: wrap; width: 100%; }
+  .date-range .search-input { width: 100%; flex-shrink: 1; }
+
+  /* 검색 버튼 */
+  .search-btn-area { flex-direction: column; }
+  .btn-search, .btn-reset { width: 100%; justify-content: center; }
+
+  /* 결과 테이블 */
+  .result-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .result-table { min-width: 600px; font-size: 14px; }
+  .result-table th, .result-table td { padding: 10px 10px; }
+
+  /* 푸터 */
   .fnb { position: static; margin-bottom: 16px; }
   .fnb__wrap { flex-wrap: wrap; }
   .footer__info-row { flex-direction: column; gap: 14px; margin-top: 16px; }
   .footer__info-row select { width: 100%; max-width: 280px; }
   .site-address { font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+  .banner-title { font-size: 26px; }
+  .page-content { padding: 24px 0 48px; }
+  .search-panel { padding: 0; }
 }
 </style>
 </head>
@@ -346,9 +436,20 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
       <a href="#">로그인</a>
       <a href="#">회원가입</a>
     </div>
-    <div class="hamburger"><span></span><span></span><span></span></div>
+    <div class="hamburger" id="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></div>
   </div>
 </header>
+
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#">빅바이어 마케팅</a></li>
+    <li><a href="#" style="color:#1A6FD8;">전시회 참가신청</a></li>
+  </ul>
+  <div class="m-util">
+    <a href="#" class="m-login">로그인</a>
+    <a href="#">회원가입</a>
+  </div>
+</div>
 
 <section class="page-banner" aria-label="페이지 배너">
   <div class="wrap banner-inner">
@@ -360,8 +461,14 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 <div class="loc-bar">
   <div class="loc-inner">
     <ul class="loc-path" aria-label="현재 위치">
-      <li><a href="#" class="loc-home" aria-label="홈"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.5z"/><polyline points="9 21 9 12 15 12 15 21"/></svg></a></li>
-      <li><a href="#" class="loc-btn">전시회 참가신청<span class="loc-arrow">▾</span></a></li>
+      <li><a href="#" class="loc-home" aria-label="홈"><i class="fa-solid fa-house" style="font-size:16px;"></i></a></li>
+      <li>
+        <select class="loc-select" onchange="if(this.value) location.href=this.value;">
+          <option value="sub-bigbuyer-01.html">빅바이어마케팅 V1</option>
+          <option value="sub-bigbuyer-02.html">빅바이어마케팅 V2</option>
+          <option value="sub-apply.html" selected>전시회 참가신청</option>
+        </select>
+      </li>
       <li>
         <select class="loc-select" onchange="if(this.value) location.href=this.value;">
           <option value="sub-apply.html">참가신청</option>
@@ -616,5 +723,23 @@ function renderTable(data) {
 }
 </script>
 
+<script>
+(function() {
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav = document.getElementById('mobileNav');
+  if (!hamburger || !mobileNav) return;
+  hamburger.addEventListener('click', function() {
+    var isOpen = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('open');
+    });
+  });
+})();
+</script>
 </body>
 </html>
