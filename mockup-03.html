@@ -33,7 +33,7 @@
     color: #333;
     line-height: 1.7;
     background: #fff;
-    min-width: 1280px;
+    min-width: 0;
   }
 
   a { text-decoration: none; color: inherit; }
@@ -962,36 +962,93 @@
   }
 
   /* ===== MOBILE RESPONSIVE ===== */
+
+  /* --- Tablet & Mobile (≤768px) --- */
   @media (max-width: 768px) {
+    /* General */
+    .container { padding: 0 16px; }
+
+    /* Utility bar */
     .utility-bar { display: none; }
+
+    /* Header */
     .site-header { position: sticky; }
     .header-inner { position: relative; }
     .gnb-wrap { display: none; }
     .search-btn { display: none; }
     .hamburger-wrap { display: flex; align-items: center; margin-left: auto; }
 
-    .hero-main-title { font-size: 26px; }
+    /* Hero */
     .main-visual { min-height: 380px; }
+    .main-visual-content { padding: 48px 16px 64px; }
+    .hero-main-title { font-size: 26px; }
+    .hero-sub-desc { font-size: 17px; }
 
+    /* 마케팅 서비스 — program rows */
+    .program-row { flex-direction: column; }
+    .program-num {
+      width: 100%;
+      height: 44px;
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      flex-direction: row;
+      justify-content: flex-start;
+      padding-left: 16px;
+      gap: 8px;
+    }
+    .program-num-circle { width: 28px; height: 28px; font-size: 14px; }
+    .program-thumb { width: 100%; height: 180px; }
+    .program-thumb img,
+    .program-thumb svg { min-height: unset; height: 100%; object-fit: cover; }
+    .program-body { padding: 16px; }
+    .program-action { padding: 0 16px 16px; }
 
-    .program-row { flex-wrap: wrap; }
-    .program-thumb { width: 100%; height: 140px; }
-    .program-action { padding: 0 16px 20px; }
-    .program-num { width: 48px; }
+    /* 서비스 소개 — phase steps */
+    .phase-steps-grid { grid-template-columns: 1fr; gap: 12px; }
+    .phase-step-card { padding: 20px; }
+    .phase-block { padding: 40px 0; }
 
-    .phase-steps-grid { grid-template-columns: 1fr; }
-
+    /* 컨설팅 서비스 */
     .consulting-inner { grid-template-columns: 1fr; }
+    .consulting-callout {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 20px;
+      padding: 24px 20px !important;
+    }
+    .consulting-badges { flex-wrap: wrap; }
+    .region-tiles { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* 기업조회 */
     .check-cards { grid-template-columns: 1fr; }
 
+    /* Section headings */
     .section-title { font-size: 22px; }
 
+    /* Footer */
     .footer-main { grid-template-columns: 1fr; gap: 28px; padding: 36px 20px; }
+    .footer-policy-bar .container { flex-wrap: wrap; gap: 4px; }
+    .footer-policy-bar a { line-height: 1.8; }
   }
 
+  /* --- Mobile only (≤480px) --- */
   @media (max-width: 480px) {
-    .program-row { flex-direction: column; }
-    .program-num { width: 100%; height: 40px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+    /* Hero */
+    .main-visual { min-height: 320px; }
+    .hero-main-title { font-size: 22px; }
+    .hero-data-line { font-size: 15px; }
+
+    /* Section headings */
+    .section-title { font-size: 20px; }
+
+    /* 마케팅 서비스 */
+    .program-thumb { height: 140px; }
+
+    /* 컨설팅 region tiles */
+    .region-tiles { grid-template-columns: 1fr !important; }
+
+    /* 기업조회 card images */
+    .check-card-img { height: 120px; }
   }
 </style>
 </head>
@@ -1222,13 +1279,13 @@
     </div>
 
     <!-- TOTAL CALLOUT BOX -->
-    <div style="background:#2A5A14; display:flex; justify-content:space-between; align-items:center; padding:28px 36px;">
+    <div class="consulting-callout" style="background:#2A5A14; display:flex; justify-content:space-between; align-items:center; padding:28px 36px;">
       <div>
         <div style="color:rgba(255,255,255,0.7); font-size:16px;">글로벌 기업 데이터 총 보유 현황</div>
         <div style="color:#fff; font-weight:700; font-size:36px; margin:6px 0;">553,609,651건</div>
         <div style="color:#F2A800; font-size:16px;">6개 지역 · 실시간 업데이트</div>
       </div>
-      <div style="display:flex; gap:8px;">
+      <div class="consulting-badges" style="display:flex; gap:8px;">
         <div style="border:1px solid rgba(255,255,255,0.3); padding:8px 16px; color:#fff; font-size:17px; border-radius:2px;">수출바우처 지원기관</div>
         <div style="border:1px solid rgba(255,255,255,0.3); padding:8px 16px; color:#fff; font-size:17px; border-radius:2px;">AI 매칭 서비스</div>
         <div style="border:1px solid rgba(255,255,255,0.3); padding:8px 16px; color:#fff; font-size:17px; border-radius:2px;">글로벌 DB</div>
@@ -1236,7 +1293,7 @@
     </div>
 
     <!-- REGION TILES 3×2 GRID -->
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin:2px 0;">
+    <div class="region-tiles" style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin:2px 0;">
       <div style="background:#fff; padding:20px 24px; border:1px solid #E0EED8; border-top:3px solid #4A9425;">
         <div style="color:#4A9425; font-size:17px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;">Asia Pacific</div>
         <div style="color:#1a1a1a; font-size:22px; font-weight:700; margin:8px 0 4px; font-variant-numeric:tabular-nums;">180,161,374건</div>

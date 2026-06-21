@@ -17,7 +17,7 @@
       color: #333;
       line-height: 1.7;
       background: #fff;
-      min-width: 1280px;
+      min-width: 0;
     }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
@@ -1019,6 +1019,88 @@
       .lk-cards-4col { grid-template-columns: 1fr; }
       .lk-step-grid { grid-template-columns: 1fr; }
     }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESPONSIVE — Hero inner
+    ════════════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      /* Hero */
+      .hero__inner {
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+        padding: 40px 20px !important;
+        gap: 28px !important;
+        height: auto !important;
+      }
+      section[aria-label="메인 비주얼"] {
+        height: auto !important;
+        min-height: 520px;
+      }
+      .hero__inner > div:first-child {
+        max-width: 100% !important;
+        flex: none !important;
+      }
+      .hero__inner > div:last-child {
+        width: 100% !important;
+        flex-shrink: unset !important;
+      }
+
+      /* 마케팅 서비스 rows */
+      .biz-row { flex-direction: column !important; }
+      .biz-row--reverse { flex-direction: column !important; }
+      .biz-row__img {
+        flex: none !important;
+        max-width: 100% !important;
+        max-height: 200px !important;
+        width: 100% !important;
+      }
+      .biz-row__text { padding: 24px 20px !important; }
+
+      /* 서비스 소개 steps — collapse 2 columns to 1 */
+      .steps-grid {
+        flex-direction: column !important;
+        gap: 0 !important;
+      }
+
+      /* 컨설팅 서비스 */
+      .consult-layout {
+        grid-template-columns: 1fr !important;
+      }
+      .consult-table-wrap { width: 100% !important; }
+      .consult-card { width: 100% !important; }
+
+      /* 기업조회 3-col → 1-col */
+      .check-grid { grid-template-columns: 1fr !important; }
+
+      /* Footer body */
+      .footer-body { flex-direction: column; gap: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      /* Hero */
+      section[aria-label="메인 비주얼"] { min-height: 0; }
+      .hero__inner { padding: 32px 16px !important; gap: 20px !important; }
+
+      /* Hero big number */
+      .hero__inner > div:first-child > div[style*="font-size:58px"] {
+        font-size: 40px !important;
+      }
+      /* Hero h1 */
+      .hero__inner > div:first-child > h1 {
+        font-size: 20px !important;
+      }
+      /* Stats box numbers */
+      .hero__inner > div:last-child div[style*="font-size:28px"] {
+        font-size: 22px !important;
+      }
+
+      /* 기업조회 */
+      .check-grid { grid-template-columns: 1fr; }
+
+      /* Section titles */
+      .lk-section__header h2 { font-size: 22px; }
+    }
   </style>
 </head>
 <body>
@@ -1078,7 +1160,7 @@
 <section style="position:relative; height:480px; overflow:hidden;" aria-label="메인 비주얼">
   <img src="https://picsum.photos/seed/m04hero/1400/520" alt="글로벌 바이어 발굴" style="position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;">
   <div style="position:absolute;inset:0;background:rgba(0,15,50,0.70);"></div>
-  <div class="inner" style="position:relative;height:100%;display:flex;align-items:center;gap:40px;justify-content:space-between;">
+  <div class="inner hero__inner" style="position:relative;height:100%;display:flex;align-items:center;gap:40px;justify-content:space-between;">
     <!-- Left text block -->
     <div style="flex:1;max-width:580px;">
       <p style="font-size:16px;font-weight:700;color:var(--ctp-yellow);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px;">NICE D&amp;B · 글로벌 바이어 발굴 플랫폼</p>
@@ -1118,11 +1200,11 @@
     </div>
 
     <!-- Row 1: Photo left + Text right -->
-    <div style="display:flex;align-items:stretch;margin-bottom:0;border:1px solid #e0e0e0;">
-      <div style="flex:0 0 40%;max-width:40%;overflow:hidden;max-height:220px;">
+    <div class="biz-row" style="display:flex;align-items:stretch;margin-bottom:0;border:1px solid #e0e0e0;">
+      <div class="biz-row__img" style="flex:0 0 40%;max-width:40%;overflow:hidden;max-height:220px;">
         <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=220&fit=crop&auto=format" alt="빅바이어 마케팅" style="width:100%;height:220px;object-fit:cover;display:block;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
       </div>
-      <div style="flex:1;padding:32px 36px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #e0e0e0;">
+      <div class="biz-row__text" style="flex:1;padding:32px 36px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #e0e0e0;">
         <div style="display:inline-block;background:var(--ctp-blue);color:#fff;font-size:15px;font-weight:700;padding:2px 10px;margin-bottom:12px;letter-spacing:0.04em;">빅데이터</div>
         <h3 style="font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:10px;line-height:1.4;">빅바이어 마케팅</h3>
         <p style="font-size:18px;color:#444;line-height:1.85;margin-bottom:18px;">NICE D&amp;B가 보유한 5억 개 이상의 해외기업 DB POOL을 활용하여, 잠재된 바이어들에게 마케팅 서비스를 제공합니다.</p>
@@ -1131,24 +1213,24 @@
     </div>
 
     <!-- Row 2: Text left + Photo right -->
-    <div style="display:flex;align-items:stretch;border:1px solid #e0e0e0;border-top:none;">
-      <div style="flex:1;padding:32px 36px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid #e0e0e0;background:#FAFAFA;">
+    <div class="biz-row biz-row--reverse" style="display:flex;align-items:stretch;border:1px solid #e0e0e0;border-top:none;">
+      <div class="biz-row__text" style="flex:1;padding:32px 36px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid #e0e0e0;background:#FAFAFA;">
         <div style="display:inline-block;background:var(--ctp-sky);color:#fff;font-size:15px;font-weight:700;padding:2px 10px;margin-bottom:12px;letter-spacing:0.04em;">컨설팅</div>
         <h3 style="font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:10px;line-height:1.4;">수출바우처 컨설팅</h3>
         <p style="font-size:18px;color:#444;line-height:1.85;margin-bottom:18px;">전문 MD가 귀사를 위한 맞춤 컨설팅을 무료로 제공해 드립니다.</p>
         <a href="#" style="font-size:17px;font-weight:700;color:var(--ctp-sky);text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">자세히 보기 →</a>
       </div>
-      <div style="flex:0 0 40%;max-width:40%;overflow:hidden;max-height:220px;">
+      <div class="biz-row__img" style="flex:0 0 40%;max-width:40%;overflow:hidden;max-height:220px;">
         <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=220&fit=crop&auto=format" alt="수출바우처 컨설팅" style="width:100%;height:220px;object-fit:cover;display:block;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
       </div>
     </div>
 
     <!-- Row 3: Photo left + Text right -->
-    <div style="display:flex;align-items:stretch;border:1px solid #e0e0e0;border-top:none;">
-      <div style="flex:0 0 40%;max-width:40%;overflow:hidden;max-height:220px;">
+    <div class="biz-row" style="display:flex;align-items:stretch;border:1px solid #e0e0e0;border-top:none;">
+      <div class="biz-row__img" style="flex:0 0 40%;max-width:40%;overflow:hidden;max-height:220px;">
         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=220&fit=crop&auto=format" alt="해외기업 보고서" style="width:100%;height:220px;object-fit:cover;display:block;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
       </div>
-      <div style="flex:1;padding:32px 36px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #e0e0e0;">
+      <div class="biz-row__text" style="flex:1;padding:32px 36px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #e0e0e0;">
         <div style="display:inline-block;background:var(--ctp-dark-blue);color:#fff;font-size:15px;font-weight:700;padding:2px 10px;margin-bottom:12px;letter-spacing:0.04em;">글로벌</div>
         <h3 style="font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:10px;line-height:1.4;">해외기업 보고서</h3>
         <p style="font-size:18px;color:#444;line-height:1.85;margin-bottom:18px;">D&amp;B의 글로벌 네트워크를 통해 모든 국가 내 대상 기업을 조회하고 보고서를 발급받으세요.</p>
@@ -1157,14 +1239,14 @@
     </div>
 
     <!-- Row 4: Text left + Photo right -->
-    <div style="display:flex;align-items:stretch;border:1px solid #e0e0e0;border-top:none;">
-      <div style="flex:1;padding:32px 36px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid #e0e0e0;background:#FAFAFA;">
+    <div class="biz-row biz-row--reverse" style="display:flex;align-items:stretch;border:1px solid #e0e0e0;border-top:none;">
+      <div class="biz-row__text" style="flex:1;padding:32px 36px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid #e0e0e0;background:#FAFAFA;">
         <div style="display:inline-block;background:var(--ctp-orange);color:#fff;font-size:15px;font-weight:700;padding:2px 10px;margin-bottom:12px;letter-spacing:0.04em;">검증</div>
         <h3 style="font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:10px;line-height:1.4;">바이어 확인</h3>
         <p style="font-size:18px;color:#444;line-height:1.85;margin-bottom:18px;">사기바이어를 실시간으로 확인할 수 있습니다.</p>
         <a href="#" style="font-size:17px;font-weight:700;color:var(--ctp-orange);text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">자세히 보기 →</a>
       </div>
-      <div style="flex:0 0 40%;max-width:40%;overflow:hidden;max-height:220px;">
+      <div class="biz-row__img" style="flex:0 0 40%;max-width:40%;overflow:hidden;max-height:220px;">
         <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=220&fit=crop&auto=format" alt="바이어 확인" style="width:100%;height:220px;object-fit:cover;display:block;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
       </div>
     </div>
@@ -1181,7 +1263,7 @@
       <h2 style="font-size:20px;font-weight:700;color:var(--ctp-blue);display:inline-block;padding-bottom:8px;border-bottom:3px solid var(--ctp-blue);">서비스 소개</h2>
     </div>
 
-    <div style="display:flex;gap:24px;align-items:stretch;">
+    <div class="steps-grid" style="display:flex;gap:24px;align-items:stretch;">
 
       <!-- Left column: STEP 01-03 -->
       <div style="flex:1;display:flex;flex-direction:column;gap:0;">
@@ -1301,11 +1383,11 @@
       <h2 style="font-size:20px;font-weight:700;color:var(--ctp-blue);display:inline-block;padding-bottom:8px;border-bottom:3px solid var(--ctp-blue);">컨설팅 서비스</h2>
     </div>
 
-    <div style="display:grid;grid-template-columns:3fr 2fr;gap:28px;align-items:start;">
+    <div class="consult-layout" style="display:grid;grid-template-columns:3fr 2fr;gap:28px;align-items:start;">
 
       <!-- Left: Government-style data table -->
-      <div>
-        <table style="width:100%;border-collapse:collapse;font-size:17px;">
+      <div class="consult-table-wrap" style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:17px;min-width:360px;">
           <thead>
             <tr>
               <th style="background:var(--ctp-blue);color:#fff;padding:12px 16px;text-align:left;border:1px solid var(--ctp-blue);">구분</th>
@@ -1356,7 +1438,7 @@
       </div>
 
       <!-- Right: Info card -->
-      <div style="background:var(--ctp-blue);color:#fff;padding:32px;">
+      <div class="consult-card" style="background:var(--ctp-blue);color:#fff;padding:32px;">
         <div style="font-size:15px;color:var(--ctp-yellow);letter-spacing:0.05em;">수출바우처 컨설팅 지원</div>
         <div style="font-size:28px;font-weight:700;margin:12px 0 4px;font-variant-numeric:tabular-nums;">553,609,651건</div>
         <div style="font-size:17px;color:rgba(255,255,255,0.7);">전 세계 6개 지역</div>
@@ -1382,7 +1464,7 @@
       공공/민간 각 부문이 보유한 해외기업의 중요 거래정보(불량/우량정보, 위험정보 등)를 실시간 공유합니다.
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+    <div class="check-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
 
       <!-- 금융기관 -->
       <div style="border:1px solid #ddd;background:#fff;overflow:hidden;">
@@ -1434,16 +1516,16 @@
 <footer class="site-footer" aria-label="사이트 푸터">
   <div class="inner">
     <!-- Top policy links -->
-    <div style="display:flex;gap:0;padding:20px 0 16px;border-bottom:1px solid rgba(255,255,255,0.15);">
+    <div class="footer-policy" style="display:flex;gap:0;padding:20px 0 16px;border-bottom:1px solid rgba(255,255,255,0.15);flex-wrap:wrap;">
       <a href="#" style="font-size:17px;color:#e74c3c;font-weight:700;padding-right:16px;border-right:1px solid rgba(255,255,255,0.2);">개인정보처리방침</a>
       <a href="#" style="font-size:17px;color:rgba(255,255,255,0.65);padding:0 16px;border-right:1px solid rgba(255,255,255,0.2);">이용약관</a>
       <a href="#" style="font-size:17px;color:rgba(255,255,255,0.65);padding:0 16px;border-right:1px solid rgba(255,255,255,0.2);">신용정보활용체제공시</a>
       <a href="#" style="font-size:17px;color:rgba(255,255,255,0.65);padding-left:16px;">이메일무단수집거부</a>
     </div>
     <!-- Main footer body -->
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:32px 0 28px;gap:40px;">
+    <div class="footer-body" style="display:flex;align-items:flex-start;justify-content:space-between;padding:32px 0 28px;gap:40px;flex-wrap:wrap;">
       <!-- Left: logo + address -->
-      <div style="flex:1;">
+      <div style="flex:1;min-width:200px;">
         <img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="NICE D&B 로고" style="height:40px;margin-bottom:16px;filter:brightness(0) invert(1);">
         <p style="font-size:17px;color:rgba(255,255,255,0.65);line-height:2;">
           (04535) 서울특별시 중구 소공로 70, 포스트타워 16층 (주)NICE디앤비<br>
