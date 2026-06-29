@@ -516,9 +516,16 @@ footer {
 }
 .hvb-slide p { font-size: 17px; color: var(--gray-4); line-height: 1.75; }
 .hvb-slide p strong { color: var(--blue); font-weight: 700; }
-.hvb-dots { display: flex; gap: 6px; margin-top: 14px; position: absolute; bottom: -24px; left: 0; }
+.hvb-dots { display: flex; align-items: center; gap: 6px; margin-top: 14px; position: absolute; bottom: -24px; left: 0; }
 .hvb-dot { height: 3px; width: 22px; border-radius: 2px; background: var(--gray-3); transition: background .35s, width .35s; cursor: pointer; }
 .hvb-dot.active { background: var(--blue); width: 36px; }
+.hvb-play-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--gray-3); font-size: 14px; padding: 0 0 0 6px;
+  display: flex; align-items: center; line-height: 1;
+  transition: color .2s;
+}
+.hvb-play-btn:hover { color: var(--blue); }
 .hvb-btn {
   display: inline-flex; align-items: center;
   background: var(--blue); color: #fff;
@@ -653,8 +660,8 @@ footer {
     </h1>
     <nav>
       <ul class="gnb">
-        <li><a href="#">빅바이어 마케팅</a></li>
-        <li><a href="sub-apply.html">전시회 참가신청</a></li>
+        <li><a href="sub-bigbuyer-finder.html">빅바이어 마케팅</a></li>
+        <li><a href="sub-apply.html">사업 참가신청</a></li>
       </ul>
     </nav>
     <div class="util">
@@ -670,7 +677,7 @@ footer {
 <!-- ── 모바일 내비게이션 ── -->
 <div class="mobile-nav" id="mobileNav">
   <ul>
-    <li><a href="#">빅바이어 마케팅</a></li>
+    <li><a href="sub-bigbuyer-finder.html">빅바이어 마케팅</a></li>
     <li><a href="#">공지사항</a></li>
   </ul>
   <div class="m-util">
@@ -708,9 +715,12 @@ footer {
             <span class="hvb-dot active"></span>
             <span class="hvb-dot"></span>
             <span class="hvb-dot"></span>
+            <button class="hvb-play-btn" id="hvbPlayBtn" aria-label="슬라이드 정지">
+              <i class="fa-solid fa-pause"></i>
+            </button>
           </div>
         </div>
-        <a href="sub-bigbuyer.html" class="hvb-btn">서비스 바로가기</a>
+        <a href="sub-bigbuyer-finder.html" class="hvb-btn">서비스 바로가기</a>
       </div>
       <!-- 오른쪽: 슬라이드 연동 비주얼 -->
       <div class="hvb-map-wrap">
@@ -1337,11 +1347,38 @@ footer {
     if (visuals[cur]) visuals[cur].classList.add('active');
   }
 
+  var timer = null;
+  var playing = true;
+  var playBtn = document.getElementById('hvbPlayBtn');
+
+  function startTimer() {
+    timer = setInterval(function() { show(cur + 1); }, 3600);
+    playing = true;
+    if (playBtn) playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    if (playBtn) playBtn.setAttribute('aria-label', '슬라이드 정지');
+  }
+
+  function stopTimer() {
+    clearInterval(timer);
+    playing = false;
+    if (playBtn) playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    if (playBtn) playBtn.setAttribute('aria-label', '슬라이드 재생');
+  }
+
   dots.forEach(function(dot, i) {
-    dot.addEventListener('click', function() { show(i); });
+    dot.addEventListener('click', function() {
+      show(i);
+      if (playing) { clearInterval(timer); startTimer(); }
+    });
   });
 
-  setInterval(function() { show(cur + 1); }, 3600);
+  if (playBtn) {
+    playBtn.addEventListener('click', function() {
+      if (playing) stopTimer(); else startTimer();
+    });
+  }
+
+  startTimer();
 })();
 </script>
 

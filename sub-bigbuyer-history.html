@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>신청내역 - LINKER NICE D&B</title>
+<title>임시저장내역 - LINKER NICE D&B</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -274,6 +274,24 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
 }
 .result-table td.left { text-align: left; }
 
+/* 발송하기 버튼 */
+.btn-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 14px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background .2s;
+  white-space: nowrap;
+}
+.btn-send:hover { background: var(--blue-d); color: #fff; }
+
 /* 빈 결과 */
 .empty-result {
   padding: 80px 0;
@@ -434,8 +452,8 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
     </h1>
     <nav>
       <ul class="gnb">
-        <li><a href="sub-bigbuyer-finder.html">빅바이어 마케팅</a></li>
-        <li><a href="sub-apply.html" style="color:#1A6FD8;">사업 참가신청</a></li>
+        <li><a href="sub-bigbuyer-finder.html" style="color:#1A6FD8;">빅바이어 마케팅</a></li>
+        <li><a href="sub-apply.html">사업 참가신청</a></li>
       </ul>
     </nav>
     <div class="util">
@@ -448,8 +466,8 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 
 <div class="mobile-nav" id="mobileNav">
   <ul>
-    <li><a href="sub-bigbuyer-finder.html">빅바이어 마케팅</a></li>
-    <li><a href="sub-apply.html" style="color:#1A6FD8;">사업 참가신청</a></li>
+    <li><a href="sub-bigbuyer-finder.html" style="color:#1A6FD8;">빅바이어 마케팅</a></li>
+    <li><a href="sub-apply.html">사업 참가신청</a></li>
   </ul>
   <div class="m-util">
     <a href="#" class="m-login">로그인</a>
@@ -459,8 +477,8 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 
 <section class="page-banner" aria-label="페이지 배너">
   <div class="wrap banner-inner">
-    <h1 class="banner-title">사업 참가신청</h1>
-    <p class="banner-sub">국내외 전시회 참가를 통해 글로벌 시장 진출의 기회를 잡으세요</p>
+    <h1 class="banner-title">임시저장내역</h1>
+    <p class="banner-sub">마케팅 메시지 임시저장 내역을 관리합니다</p>
   </div>
 </section>
 
@@ -470,14 +488,15 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
       <li><a href="index.html" class="loc-home" aria-label="홈"><i class="fa-solid fa-house" style="font-size:16px;"></i></a></li>
       <li>
         <select class="loc-select" onchange="if(this.value) location.href=this.value;">
-          <option value="sub-bigbuyer-finder.html">빅바이어마케팅</option>
-          <option value="sub-apply.html" selected>사업 참가신청</option>
+          <option value="sub-bigbuyer-finder.html" selected>빅바이어마케팅</option>
+          <option value="sub-apply.html">사업 참가신청</option>
         </select>
       </li>
       <li>
         <select class="loc-select" onchange="if(this.value) location.href=this.value;">
-          <option value="sub-apply.html">참가신청</option>
-          <option value="sub-apply-history.html" selected>신청내역</option>
+          <option value="sub-bigbuyer-finder.html">빅데이터 바이어 발굴</option>
+          <option value="sub-bigbuyer-send.html">마케팅 메시지 발송</option>
+          <option value="sub-bigbuyer-history.html" selected>임시저장내역</option>
         </select>
       </li>
     </ul>
@@ -488,63 +507,11 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   <div class="wrap">
 
     <div class="page-title-area">
-      <h2>신청내역</h2>
-      <p>전시회 참가 신청 내역을 조회합니다.</p>
+      <h2>임시저장내역</h2>
+      <p>작성 중인 마케팅 메시지 임시저장 내역을 조회합니다.</p>
     </div>
 
-    <!-- ── 검색 패널 ── -->
-    <div class="search-panel">
-      <div class="search-grid">
-
-        <!-- 신청기간 -->
-        <div class="search-row">
-          <div class="search-label">신청기간</div>
-          <div class="search-field">
-            <div class="date-range">
-              <input type="date" class="search-input" id="dateFrom">
-              <span class="date-sep">~</span>
-              <input type="date" class="search-input" id="dateTo">
-            </div>
-          </div>
-        </div>
-
-        <!-- 품목 -->
-        <div class="search-row">
-          <div class="search-label">품목</div>
-          <div class="search-field">
-            <input type="text" class="search-input" id="searchItem" placeholder="품목 입력">
-          </div>
-        </div>
-
-        <!-- 기업명 -->
-        <div class="search-row">
-          <div class="search-label">기업명</div>
-          <div class="search-field">
-            <input type="text" class="search-input" id="searchCompany" placeholder="기업명 입력">
-          </div>
-        </div>
-
-        <!-- 담당자명 -->
-        <div class="search-row">
-          <div class="search-label">담당자명</div>
-          <div class="search-field">
-            <input type="text" class="search-input" id="searchManager" placeholder="담당자명 입력">
-          </div>
-        </div>
-
-      </div>
-
-      <div class="search-btn-area">
-        <button type="button" class="btn-reset" onclick="resetSearch()">
-          <i class="fa-solid fa-rotate-left"></i> 초기화
-        </button>
-        <button type="button" class="btn-search" onclick="doSearch()">
-          <i class="fa-solid fa-magnifying-glass"></i> 검색
-        </button>
-      </div>
-    </div>
-
-    <!-- ── 검색 결과 ── -->
+    <!-- ── 목록 ── -->
     <div class="result-area" id="resultArea">
       <div class="result-header">
         <p class="result-count">총 <strong id="totalCount">5</strong>건</p>
@@ -555,68 +522,53 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
           <thead>
             <tr>
               <th style="width:60px;">No</th>
-              <th style="width:110px;">신청일</th>
-              <th>전시회명</th>
-              <th style="width:140px;">품목명</th>
-              <th style="width:160px;">참가기업명</th>
-              <th style="width:120px;">담당자명</th>
-              <th style="width:100px;">접수상태</th>
+              <th style="width:110px;">저장일</th>
+              <th>제목</th>
+              <th style="width:140px;">카테고리</th>
+              <th style="width:100px;">발송건수</th>
+              <th style="width:120px;">관리</th>
             </tr>
           </thead>
           <tbody id="resultBody">
             <tr>
-              <td>6</td>
-              <td>2025.06.21</td>
-              <td class="left">싱가포르 TECH WEEK (9/29~30)<br>홍콩 Beauty &amp; Wellness (8/13~17)</td>
-              <td>뷰티 디바이스</td>
-              <td>㈜코스모텍</td>
-              <td>한소희</td>
-              <td>접수완료</td>
-            </tr>
-            <tr>
               <td>5</td>
-              <td>2025.06.20</td>
-              <td class="left">싱가포르 TECH WEEK (9/29~30)</td>
-              <td>스마트 센서</td>
-              <td>㈜테크이노베이션</td>
-              <td>김지훈</td>
-              <td>접수완료</td>
+              <td>2025.06.28</td>
+              <td class="left">홈&amp;키친 바이어 대상 신제품 소개</td>
+              <td>Home &amp; Kitchen &gt; Home</td>
+              <td>50건</td>
+              <td><a href="sub-bigbuyer-send.html" class="btn-send">발송하기</a></td>
             </tr>
             <tr>
               <td>4</td>
-              <td>2025.06.18</td>
-              <td class="left">홍콩 Beauty &amp; Wellness (8/13~17)</td>
-              <td>기능성 화장품</td>
-              <td>㈜뷰티랩코리아</td>
-              <td>이수진</td>
-              <td>검토중</td>
+              <td>2025.06.25</td>
+              <td class="left">뷰티 디바이스 프로모션 안내</td>
+              <td>Beauty &amp; Personal Care</td>
+              <td>30건</td>
+              <td><a href="sub-bigbuyer-send.html" class="btn-send">발송하기</a></td>
             </tr>
             <tr>
               <td>3</td>
-              <td>2025.06.15</td>
-              <td class="left">싱가포르 TECH WEEK (9/29~30)</td>
-              <td>IoT 디바이스</td>
-              <td>㈜글로벌커넥트</td>
-              <td>박민서</td>
-              <td>승인</td>
+              <td>2025.06.22</td>
+              <td class="left">스마트 센서 수출 제안</td>
+              <td>Electronic Products</td>
+              <td>100건</td>
+              <td><a href="sub-bigbuyer-send.html" class="btn-send">발송하기</a></td>
             </tr>
             <tr>
               <td>2</td>
-              <td>2025.06.10</td>
-              <td class="left">홍콩 Beauty &amp; Wellness (8/13~17)</td>
-              <td>헤어케어 제품</td>
-              <td>㈜헤어플러스</td>
-              <td>최유나</td>
-              <td>승인</td>
+              <td>2025.06.18</td>
+              <td class="left">식품 바이어 미팅 요청</td>
+              <td>Food &amp; Beverage</td>
+              <td>10건</td>
+              <td><a href="sub-bigbuyer-send.html" class="btn-send">발송하기</a></td>
             </tr>
             <tr>
               <td>1</td>
-              <td>2025.06.05</td>
-              <td class="left">싱가포르 TECH WEEK (9/29~30)</td>
-              <td>반도체 부품</td>
-              <td>㈜세미텍</td>
-              <td>정현우</td>
-              <td>반려</td>
+              <td>2025.06.10</td>
+              <td class="left">패션 신상품 컬렉션 발송</td>
+              <td>Fashion</td>
+              <td>50건</td>
+              <td><a href="sub-bigbuyer-send.html" class="btn-send">발송하기</a></td>
             </tr>
           </tbody>
         </table>
@@ -665,52 +617,20 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 
 <script>
 var allData = [
-  { no:6, date:'2025.06.21', exhibition:['싱가포르 TECH WEEK (9/29~30)', '홍콩 Beauty & Wellness (8/13~17)'], item:'뷰티 디바이스',  company:'㈜코스모텍',     manager:'한소희', statusLabel:'접수완료' },
-  { no:5, date:'2025.06.20', exhibition:['싱가포르 TECH WEEK (9/29~30)'],                                     item:'스마트 센서',    company:'㈜테크이노베이션', manager:'김지훈', statusLabel:'접수완료' },
-  { no:4, date:'2025.06.18', exhibition:['홍콩 Beauty & Wellness (8/13~17)'],                                  item:'기능성 화장품',  company:'㈜뷰티랩코리아', manager:'이수진', statusLabel:'검토중'   },
-  { no:3, date:'2025.06.15', exhibition:['싱가포르 TECH WEEK (9/29~30)'],                                     item:'IoT 디바이스',   company:'㈜글로벌커넥트', manager:'박민서', statusLabel:'승인'     },
-  { no:2, date:'2025.06.10', exhibition:['홍콩 Beauty & Wellness (8/13~17)'],                                  item:'헤어케어 제품',  company:'㈜헤어플러스',   manager:'최유나', statusLabel:'승인'     },
-  { no:1, date:'2025.06.05', exhibition:['싱가포르 TECH WEEK (9/29~30)'],                                     item:'반도체 부품',    company:'㈜세미텍',       manager:'정현우', statusLabel:'반려'     }
+  { no:5, date:'2025.06.28', title:'홈&키친 바이어 대상 신제품 소개',   category:'Home & Kitchen > Home',  count:'50건'  },
+  { no:4, date:'2025.06.25', title:'뷰티 디바이스 프로모션 안내',        category:'Beauty & Personal Care',  count:'30건'  },
+  { no:3, date:'2025.06.22', title:'스마트 센서 수출 제안',               category:'Electronic Products',     count:'100건' },
+  { no:2, date:'2025.06.18', title:'식품 바이어 미팅 요청',               category:'Food & Beverage',         count:'10건'  },
+  { no:1, date:'2025.06.10', title:'패션 신상품 컬렉션 발송',             category:'Fashion',                 count:'50건'  }
 ];
 
-function doSearch() {
-  var item    = document.getElementById('searchItem').value.trim().toLowerCase();
-  var company = document.getElementById('searchCompany').value.trim().toLowerCase();
-  var manager = document.getElementById('searchManager').value.trim().toLowerCase();
-  var from    = document.getElementById('dateFrom').value;
-  var to      = document.getElementById('dateTo').value;
-
-  var filtered = allData.filter(function(d) {
-    if (item    && d.item.toLowerCase().indexOf(item) < 0)       return false;
-    if (company && d.company.toLowerCase().indexOf(company) < 0) return false;
-    if (manager && d.manager.toLowerCase().indexOf(manager) < 0) return false;
-    if (from || to) {
-      var dDate = d.date.replace(/\./g, '-');
-      if (from && dDate < from) return false;
-      if (to   && dDate > to)   return false;
-    }
-    return true;
-  });
-
-
-  renderTable(filtered);
-}
-
-function resetSearch() {
-  document.getElementById('searchItem').value    = '';
-  document.getElementById('searchCompany').value = '';
-  document.getElementById('searchManager').value = '';
-  document.getElementById('dateFrom').value      = '';
-  document.getElementById('dateTo').value        = '';
-  renderTable(allData);
-}
 
 function renderTable(data) {
   document.getElementById('totalCount').textContent = data.length;
   var tbody = document.getElementById('resultBody');
 
   if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="7" style="padding:60px 0;color:#aaa;font-size:16px;">검색 결과가 없습니다.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="padding:60px 0;color:#aaa;font-size:16px;">검색 결과가 없습니다.</td></tr>';
     return;
   }
 
@@ -718,11 +638,10 @@ function renderTable(data) {
     return '<tr>' +
       '<td>' + d.no + '</td>' +
       '<td>' + d.date + '</td>' +
-      '<td class="left">' + d.exhibition.join('<br>') + '</td>' +
-      '<td>' + d.item + '</td>' +
-      '<td>' + d.company + '</td>' +
-      '<td>' + d.manager + '</td>' +
-      '<td>' + d.statusLabel + '</td>' +
+      '<td class="left">' + d.title + '</td>' +
+      '<td>' + d.category + '</td>' +
+      '<td>' + d.count + '</td>' +
+      '<td><a href="sub-bigbuyer-send.html" class="btn-send">발송하기</a></td>' +
     '</tr>';
   }).join('');
 }

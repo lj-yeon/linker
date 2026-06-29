@@ -256,22 +256,6 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 .step-row + .step-row {
   border-top: 1px dashed #E0E8F0;
 }
-.step-connector-line {
-  position: absolute;
-  left: 35px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: #DCE6F0;
-  z-index: 0;
-}
-.step-row:first-child .step-connector-line {
-  top: 58px;
-}
-#step3 .step-connector-line {
-  bottom: auto;
-  height: 54px;
-}
 .step-header {
   display: flex;
   align-items: center;
@@ -280,22 +264,39 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   position: relative;
   z-index: 1;
 }
-.step-num {
+.step-header.accordion-hd {
+  cursor: pointer;
+  user-select: none;
+  border-radius: 0;
+  transition: background .15s;
+}
+.step-header.accordion-hd:hover {
+  background: rgba(61,90,138,.04);
+}
+.step-chevron {
+  margin-left: auto;
+  color: #AEBAC9;
+  font-size: 13px;
+  transition: transform .25s ease;
+  flex-shrink: 0;
+}
+.step-row.open .step-chevron {
+  transform: rotate(180deg);
+}
+.step-icon {
   width: 36px;
   height: 36px;
-  border-radius: 50%;
+  border-radius: 10px;
   background: var(--slate-mid);
   color: white;
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  letter-spacing: 0;
   position: relative;
   z-index: 2;
-  box-shadow: 0 2px 8px rgba(61,90,138,0.30);
+  box-shadow: 0 2px 8px rgba(61,90,138,0.25);
 }
 .step-title {
   font-size: 18px;
@@ -314,10 +315,33 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   border: 1px solid #DDE4EE;
   margin-left: 4px;
 }
+.step-req-badge {
+  display: inline-block;
+  background: #FFF0F0;
+  color: #E53935;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 20px;
+  border: 1px solid #FFCDD2;
+  margin-left: 4px;
+}
 .step-body {
   padding: 4px 24px 22px 74px;
   position: relative;
   z-index: 1;
+}
+.step-body.collapsible {
+  overflow: hidden;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: max-height .3s ease, padding .3s ease;
+}
+.step-row.open .step-body.collapsible {
+  max-height: 700px;
+  padding-top: 4px;
+  padding-bottom: 22px;
 }
 
 /* ── 키워드 카운터 ── */
@@ -545,6 +569,8 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 .criteria-kw-chip button { background: none; border: none; cursor: pointer; color: rgba(255,255,255,.8); font-size: 17px; line-height: 1; padding: 0; }
 .criteria-cat-chip { display: inline-flex; align-items: center; gap: 6px; background: #1B8A6B; color: #fff; border-radius: 20px; padding: 6px 14px; font-size: 16px; font-weight: 500; }
 .criteria-cat-chip button { background: none; border: none; cursor: pointer; color: rgba(255,255,255,.8); font-size: 17px; line-height: 1; padding: 0; }
+.criteria-country-chip { display: inline-flex; align-items: center; gap: 6px; background: #C05C00; color: #fff; border-radius: 20px; padding: 6px 14px; font-size: 16px; font-weight: 500; }
+.criteria-country-chip button { background: none; border: none; cursor: pointer; color: rgba(255,255,255,.8); font-size: 17px; line-height: 1; padding: 0; }
 
 /* ── 2열 검색 레이아웃 ── */
 .search-layout {
@@ -587,6 +613,26 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sidebar-section-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: #C9D2DC;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.sidebar-section-count.has-items {
+  background: #3D5A8A;
 }
 .sidebar-chips {
   display: flex;
@@ -637,13 +683,13 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 /* ── AI 검색 결과 패널 (sub5 슬레이트 컨셉) ── */
 .search-result-panel {
   margin-top: 28px;
-  border: 1px solid #C8D4E3;
+  border: 1px solid #0A7080;
   border-radius: 6px;
   overflow: hidden;
   background: #fff;
 }
 .result-panel-hd {
-  background: #192840;
+  background: #3D5A8A;
   color: white;
   padding: 16px 24px;
   font-size: 16px;
@@ -661,6 +707,8 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   padding: 28px 20px;
   border-right: 1px solid #E8EFF7;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 .result-stat:last-child { border-right: none; }
 .result-stat-label {
@@ -668,11 +716,12 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   color: #7A8AA0;
   margin-bottom: 10px;
   line-height: 1.4;
+  flex: 1;
 }
 .result-stat-value {
   font-size: 40px;
   font-weight: 900;
-  color: var(--slate);
+  color: var(--blue);
   line-height: 1;
 }
 .result-stat-unit {
@@ -683,68 +732,77 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 }
 .result-cta {
   padding: 24px 24px 28px;
-  background: var(--slate-bg);
-  border-top: 3px solid var(--slate-mid);
-}
-.result-cta-top {
+  background: #fff;
+  border-top: 3px solid #3D5A8A;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
 }
-.result-cta-desc {
-  font-size: 16px;
-  color: #4A5A6A;
-  line-height: 1.6;
-}
-.result-cta-select-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.result-cta-select-label {
-  font-size: 16px;
+.cta-title {
+  font-size: 15px;
   font-weight: 700;
-  color: var(--slate);
-  white-space: nowrap;
+  color: #1B2535;
+  margin-bottom: 14px;
+  text-align: center;
 }
-.result-send-select {
-  height: 46px;
-  border: 2px solid var(--slate-mid);
-  border-radius: 8px;
-  padding: 0 14px;
-  font-size: 16px;
+.cta-send-row {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 16px;
+}
+.cta-send-select {
+  width: 200px;
+  height: 66px;
+  border: 2px solid #C9D2DC;
+  border-radius: 12px;
+  padding: 0 40px 0 18px;
+  font-size: 18px;
+  font-weight: 700;
   font-family: inherit;
-  background: white;
+  color: #2C3A4A;
+  background: #FAFBFD;
   cursor: pointer;
-  min-width: 160px;
   outline: none;
-  color: var(--slate);
-  font-weight: 600;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238997A8'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: border-color .18s;
 }
-.result-send-select:focus { border-color: var(--slate); box-shadow: 0 0 0 3px rgba(43,63,110,.12); }
+.cta-send-select:focus { border-color: #3D5A8A; }
 .btn-marketing-write {
-  width: 100%;
-  height: 68px;
-  background: var(--slate);
+  flex-shrink: 0;
+  height: 66px;
+  padding: 0 36px;
+  background: linear-gradient(135deg, #2B6CB0 0%, #1A4A8A 100%);
   color: white;
   border: none;
   border-radius: 12px;
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 19px;
+  font-weight: 900;
   cursor: pointer;
   font-family: inherit;
-  transition: all .25s ease;
+  transition: all .22s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  letter-spacing: 0.02em;
-  box-shadow: 0 4px 14px rgba(43,63,110,.20);
+  gap: 10px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 18px rgba(26,74,138,.35);
 }
-.btn-marketing-write svg { width: 22px; height: 22px; flex-shrink: 0; }
-.btn-marketing-write:hover { background: #1E2D50; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(43,63,110,.35); }
+.btn-marketing-write svg { width: 20px; height: 20px; flex-shrink: 0; }
+.btn-marketing-write:disabled {
+  background: #C9D2DC;
+  color: #8997A8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.btn-marketing-write:not(:disabled):hover {
+  background: linear-gradient(135deg, #3A7BC8 0%, #2356A0 100%);
+  box-shadow: 0 8px 28px rgba(26,74,138,.45);
+}
 
 /* ── 반응형 ── */
 @media (max-width: 900px) {
@@ -762,7 +820,6 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   .content-header { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 32px; }
   /* 스텝 레이아웃 */
   .step-body { padding-left: 54px; }
-  .step-connector-line { left: 27px; }
   /* 브레드크럼 모바일 */
   .loc-bar { padding: 0; position: sticky; top: 66px; z-index: 90; background: #fff; border-bottom: 1px solid #e0e0e0; }
   .loc-inner { width: 100%; margin: 0; padding: 0; }
@@ -776,8 +833,6 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   .page-banner { padding: 36px 0; }
   .page-banner h1 { font-size: 26px; padding-bottom: 2.5rem; }
   .page-banner-sub { font-size: 14px; }
-  /* 스텝 연결선 모바일 제거 */
-  .step-connector-line { display: none; }
   /* 스텝 본문 */
   .step-body { padding-left: 14px; padding-right: 14px; }
   .step-header { padding: 14px; }
@@ -788,12 +843,9 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   .result-stat { border-right: none; border-bottom: 1px solid #E8EFF7; padding: 20px 16px; }
   .result-stat:last-child { border-bottom: none; }
   .result-stat-value { font-size: 32px; }
-  /* CTA 세로 배치 */
-  .result-cta { padding: 18px 16px 22px; }
-  .result-cta-top { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .result-cta-select-row { width: 100%; }
-  .result-send-select { width: 100%; min-width: unset; }
-  .btn-marketing-write { font-size: 17px; height: 54px; }
+  .result-cta { padding: 16px 16px 20px; }
+  .cta-send-select { height: 56px; font-size: 16px; width: 160px; }
+  .btn-marketing-write { height: 56px; padding: 0 24px; font-size: 16px; }
 }
 </style>
 </head>
@@ -808,8 +860,8 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
       <a href="index.html"><img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스"></a>
     </h1>
     <nav><ul class="gnb">
-      <li><a href="#">빅바이어 마케팅</a></li>
-      <li><a href="sub-apply.html">전시회 참가신청</a></li>
+      <li><a href="sub-bigbuyer-finder.html">빅바이어 마케팅</a></li>
+      <li><a href="sub-apply.html">사업 참가신청</a></li>
     </ul></nav>
     <div class="util"><a href="#">로그인</a><a href="#">회원가입</a></div>
     <div class="hamburger"><span></span><span></span><span></span></div>
@@ -834,15 +886,21 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   <div class="loc-inner">
     <ul class="loc-path" aria-label="현재 위치">
       <li>
-        <a href="#" class="loc-home" aria-label="홈">
+        <a href="index.html" class="loc-home" aria-label="홈">
           <i class="fa-solid fa-house" style="font-size:16px;"></i>
         </a>
       </li>
       <li>
         <select class="loc-select" onchange="if(this.value) location.href=this.value;">
-          <option value="sub-bigbuyer.html" selected>빅바이어마케팅</option>
-          <option value="sub-apply.html">전시회 참가신청</option>
-          <option value="sub-apply-history.html">신청내역</option>
+          <option value="sub-bigbuyer-finder.html" selected>빅바이어마케팅</option>
+          <option value="sub-apply.html">사업 참가신청</option>
+        </select>
+      </li>
+      <li>
+        <select class="loc-select" onchange="if(this.value) location.href=this.value;">
+          <option value="sub-bigbuyer-finder.html" selected>빅데이터 바이어 발굴</option>
+          <option value="sub-bigbuyer-send.html">마케팅 메시지 발송</option>
+          <option value="sub-bigbuyer-history.html">임시저장내역</option>
         </select>
       </li>
     </ul>
@@ -871,19 +929,17 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
            STEP 1: 검색어 입력
       ───────────────────────────────── -->
       <div class="step-row" id="step1">
-        <!-- 세로 연결선 -->
-        <div class="step-connector-line" aria-hidden="true"></div>
-
         <!-- 스텝 헤더 -->
-        <div class="step-header">
-          <div class="step-num" aria-label="STEP 1">01</div>
+        <div class="step-header accordion-hd" id="step1Hd">
+          <div class="step-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
           <span class="step-title">검색어 입력</span>
           <span class="step-opt-badge">선택 사항</span>
           <span class="keyword-counter" id="kwCounter">0 / 5</span>
+          <i class="fa-solid fa-chevron-down step-chevron"></i>
         </div>
 
         <!-- 스텝 본문 -->
-        <div class="step-body">
+        <div class="step-body collapsible" id="step1Body">
           <div class="search-input-wrap">
             <input
               type="text"
@@ -905,16 +961,15 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
            STEP 2: 카테고리 선택
       ───────────────────────────────── -->
       <div class="step-row" id="step2">
-        <div class="step-connector-line" aria-hidden="true"></div>
-
-        <div class="step-header">
-          <div class="step-num" aria-label="STEP 2">02</div>
+        <div class="step-header accordion-hd" id="step2Hd">
+          <div class="step-icon"><i class="fa-solid fa-layer-group"></i></div>
           <span class="step-title">카테고리 선택</span>
           <span class="step-opt-badge">선택 사항</span>
           <span class="keyword-counter" id="catCounter">0 / 3</span>
+          <i class="fa-solid fa-chevron-down step-chevron"></i>
         </div>
 
-        <div class="step-body">
+        <div class="step-body collapsible" id="step2Body">
 
           <!-- 3단 카테고리 그리드 -->
           <div class="category-grid" role="group" aria-label="카테고리 선택">
@@ -925,7 +980,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
               <div id="cat1List" class="cat-list" role="listbox" aria-label="1차 카테고리">
                 <div class="cat-item" role="option" tabindex="0">Beauty &amp; Personal Care</div>
                 <div class="cat-item" role="option" tabindex="0">Food &amp; Beverage</div>
-                <div class="cat-item active" role="option" aria-selected="true" tabindex="0">Home &amp; Kitchen</div>
+                <div class="cat-item" role="option" tabindex="0">Home &amp; Kitchen</div>
                 <div class="cat-item" role="option" tabindex="0">Fashion</div>
                 <div class="cat-item" role="option" tabindex="0">Stationery &amp; Printing</div>
                 <div class="cat-item" role="option" tabindex="0">Health &amp; Medical</div>
@@ -944,7 +999,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
             <div class="cat-col">
               <div class="cat-col-header">2차 카테고리</div>
               <div id="cat2List" class="cat-list" role="listbox" aria-label="2차 카테고리">
-                <div class="cat-item active" role="option" aria-selected="true" tabindex="0">Home</div>
+                <div class="cat-item" role="option" tabindex="0">Home</div>
                 <div class="cat-item" role="option" tabindex="0">Kitchen</div>
               </div>
             </div>
@@ -954,7 +1009,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
               <div class="cat-col-header">3차 카테고리</div>
               <div id="cat3List" class="cat-list" role="listbox" aria-label="3차 카테고리">
                 <div class="cat-item" role="option" tabindex="0">Baby Supplies &amp; Products</div>
-                <div class="cat-item active" role="option" aria-selected="true" tabindex="0">Bathroom</div>
+                <div class="cat-item" role="option" tabindex="0">Bathroom</div>
                 <div class="cat-item" role="option" tabindex="0">Bedding</div>
                 <div class="cat-item" role="option" tabindex="0">Cleaning Supplies</div>
                 <div class="cat-item" role="option" tabindex="0">Doors &amp; Windows</div>
@@ -981,12 +1036,11 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
            STEP 3: 국가 선택
       ───────────────────────────────── -->
       <div class="step-row" id="step3">
-        <div class="step-connector-line" aria-hidden="true"></div>
-
         <div class="step-header">
-          <div class="step-num" aria-label="STEP 3">03</div>
+          <div class="step-icon"><i class="fa-solid fa-earth-asia"></i></div>
           <span class="step-title">국가 선택</span>
-          <span class="step-opt-badge">선택 사항</span>
+          <span class="step-req-badge">필수</span>
+          <span class="keyword-counter" id="countryCounter">0 / 3</span>
         </div>
 
         <div class="step-body">
@@ -1041,15 +1095,6 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
       <!-- ─────────────────────────────────
            제출 섹션
       ───────────────────────────────── -->
-      <div class="submit-section">
-        <p class="submit-guide">입력한 검색어와 선택한 카테고리를 합산하여 AI가 최적의 바이어를 발굴합니다</p>
-        <button class="btn-ai-search" type="button" id="searchBtn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          AI 바이어 발굴
-        </button>
-      </div>
 
     </div>
     <!-- /search-card -->
@@ -1062,29 +1107,30 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
         <div class="sidebar-panel-hd">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           선택된 검색 조건
-          <span class="unified-badge" id="criteriaBadge" style="margin-left:auto;">키워드 0 · 카테고리 0</span>
         </div>
         <div class="sidebar-panel-body">
           <!-- 키워드 섹션 -->
           <div>
-            <div class="sidebar-section-label">검색어</div>
+            <div class="sidebar-section-label">검색어 <span class="sidebar-section-count" id="kwSectionCount">0</span></div>
             <div class="sidebar-chips" id="sidebarKwChips">
-              <span class="sidebar-empty-hint">아직 입력된 검색어가 없습니다</span>
+              <span class="sidebar-empty-hint">검색어를 입력하세요.</span>
             </div>
           </div>
           <hr class="sidebar-divider">
           <!-- 카테고리 섹션 -->
           <div>
-            <div class="sidebar-section-label">카테고리</div>
+            <div class="sidebar-section-label">카테고리 <span class="sidebar-section-count" id="catSectionCount">0</span></div>
             <div class="sidebar-chips" id="sidebarCatChips">
-              <span class="sidebar-empty-hint">카테고리를 선택하세요</span>
+              <span class="sidebar-empty-hint">카테고리를 선택하세요.</span>
             </div>
           </div>
           <hr class="sidebar-divider">
           <!-- 국가 섹션 -->
           <div>
-            <div class="sidebar-section-label">국가</div>
-            <div id="sidebarCountryText" class="sidebar-empty-hint">선택된 국가가 없습니다</div>
+            <div class="sidebar-section-label">국가 <span class="sidebar-section-count" id="countrySectionCount">0</span></div>
+            <div class="sidebar-chips" id="sidebarCountryChips">
+              <span class="sidebar-empty-hint">국가를 선택하세요.</span>
+            </div>
           </div>
           <!-- 발굴 버튼 -->
           <button class="sidebar-submit-btn" type="button" id="sidebarSearchBtn">
@@ -1120,24 +1166,21 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
         </div>
       </div>
       <div class="result-cta">
-        <div class="result-cta-top">
-          <p class="result-cta-desc">발굴된 바이어에게 마케팅 메시지를 직접 발송하세요.</p>
-          <div class="result-cta-select-row">
-            <span class="result-cta-select-label">발송 건수</span>
-            <select class="result-send-select" id="sendCount">
-              <option value="">건수 선택</option>
-              <option value="10">10건</option>
-              <option value="30">30건</option>
-              <option value="50">50건</option>
-              <option value="100">100건</option>
-              <option value="150">150건</option>
-            </select>
-          </div>
+        <p class="cta-title">발굴된 바이어에게 마케팅 메시지 발송</p>
+        <div class="cta-send-row">
+          <select class="cta-send-select" id="sendCount">
+            <option value="">발송 건수 선택</option>
+            <option value="10">10건</option>
+            <option value="30">30건</option>
+            <option value="50">50건</option>
+            <option value="100">100건</option>
+            <option value="150">150건</option>
+          </select>
+          <a href="sub-bigbuyer-send.html" class="btn-marketing-write" id="btnMarketingWrite">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            마케팅 메시지 발송
+          </a>
         </div>
-        <button class="btn-marketing-write" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          마케팅 메시지 작성하기
-        </button>
       </div>
     </div>
 
@@ -1286,10 +1329,9 @@ function showResultPanel() {
 
 function renderCriteria() {
   var chipsEl = document.getElementById('criteriaChips');
-  var badgeEl = document.getElementById('criteriaBadge');
   var sidebarKwChips = document.getElementById('sidebarKwChips');
   var sidebarCatChips = document.getElementById('sidebarCatChips');
-  if (!chipsEl && !badgeEl && !sidebarKwChips && !sidebarCatChips) return;
+  if (!chipsEl && !sidebarKwChips && !sidebarCatChips) return;
 
   var catCount = catCombos.length;
 
@@ -1308,7 +1350,6 @@ function renderCriteria() {
       var e = document.createElement('span'); e.className = 'unified-empty';
       e.textContent = '검색어를 입력하거나 카테고리를 선택하면 여기에 모입니다';
       chipsEl.appendChild(e);
-      if (badgeEl) badgeEl.textContent = '키워드 0 · 카테고리 0';
     } else {
       kwArr.forEach(function(kw, idx) {
         var chip = document.createElement('span'); chip.className = 'criteria-kw-chip';
@@ -1326,10 +1367,7 @@ function renderCriteria() {
         }); })(idx);
         catChip.appendChild(catBtn); chipsEl.appendChild(catChip);
       });
-      if (badgeEl) badgeEl.textContent = '키워드 ' + kwArr.length + ' · 카테고리 ' + catCount;
     }
-  } else {
-    if (badgeEl) badgeEl.textContent = '키워드 ' + kwArr.length + ' · 카테고리 ' + catCount;
   }
 
   /* ── 사이드바 키워드 칩 ── */
@@ -1337,7 +1375,7 @@ function renderCriteria() {
     sidebarKwChips.innerHTML = '';
     if (kwArr.length === 0) {
       var ekw = document.createElement('span'); ekw.className = 'sidebar-empty-hint';
-      ekw.textContent = '아직 입력된 검색어가 없습니다'; sidebarKwChips.appendChild(ekw);
+      ekw.textContent = '검색어를 입력하세요.'; sidebarKwChips.appendChild(ekw);
     } else {
       kwArr.forEach(function(kw, idx) {
         var chip = document.createElement('span'); chip.className = 'criteria-kw-chip';
@@ -1348,13 +1386,18 @@ function renderCriteria() {
       });
     }
   }
+  var kwCountEl = document.getElementById('kwSectionCount');
+  if (kwCountEl) {
+    kwCountEl.textContent = kwArr.length;
+    kwCountEl.classList.toggle('has-items', kwArr.length > 0);
+  }
 
   /* ── 사이드바 카테고리 칩 ── */
   if (sidebarCatChips) {
     sidebarCatChips.innerHTML = '';
     if (catCount === 0) {
       var ecat = document.createElement('span'); ecat.className = 'sidebar-empty-hint';
-      ecat.textContent = '카테고리를 선택하세요'; sidebarCatChips.appendChild(ecat);
+      ecat.textContent = '카테고리를 선택하세요.'; sidebarCatChips.appendChild(ecat);
     } else {
       catCombos.forEach(function(combo, idx) {
         var chip = document.createElement('span'); chip.className = 'criteria-cat-chip';
@@ -1367,6 +1410,11 @@ function renderCriteria() {
       });
     }
   }
+  var catCountEl = document.getElementById('catSectionCount');
+  if (catCountEl) {
+    catCountEl.textContent = catCount;
+    catCountEl.classList.toggle('has-items', catCount > 0);
+  }
 }
 
 /* ── 국가 커스텀 멀티셀렉트 ── */
@@ -1377,51 +1425,72 @@ function renderCriteria() {
   var chipsEl  = document.getElementById('cmsChips');
   var searchEl = document.getElementById('cmsSearchInput');
   var opts     = document.querySelectorAll('.cms-opt');
-  var sidebarCountryText = document.getElementById('sidebarCountryText');
   if (!trigger) return;
 
   function updateSidebar() {
-    if (!sidebarCountryText) return;
-    var vals = Object.values(selected);
-    if (vals.length) {
-      sidebarCountryText.className = 'sidebar-country-text';
-      sidebarCountryText.textContent = vals.join(', ');
+    var sidebarCountryChips = document.getElementById('sidebarCountryChips');
+    if (!sidebarCountryChips) return;
+    sidebarCountryChips.innerHTML = '';
+    var keys = Object.keys(selected);
+    if (!keys.length) {
+      var e = document.createElement('span'); e.className = 'sidebar-empty-hint';
+      e.textContent = '국가를 선택하세요.'; sidebarCountryChips.appendChild(e);
     } else {
-      sidebarCountryText.className = 'sidebar-empty-hint';
-      sidebarCountryText.textContent = '선택된 국가가 없습니다';
+      keys.forEach(function(v) {
+        var chip = document.createElement('span'); chip.className = 'criteria-country-chip';
+        chip.textContent = selected[v];
+        var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = '×';
+        (function(val) {
+          btn.addEventListener('click', function() {
+            delete selected[val];
+            opts.forEach(function(o) { if (o.dataset.value === val) o.classList.remove('sel'); });
+            renderChips(); updateSidebar(); updateCountryCounter();
+          });
+        })(v);
+        chip.appendChild(btn); sidebarCountryChips.appendChild(chip);
+      });
     }
+    var cntEl = document.getElementById('countrySectionCount');
+    if (cntEl) {
+      cntEl.textContent = keys.length;
+      cntEl.classList.toggle('has-items', keys.length > 0);
+    }
+  }
+
+  var MAX_COUNTRY = 3;
+  var countryCounterEl = document.getElementById('countryCounter');
+
+  function updateCountryCounter() {
+    var cnt = Object.keys(selected).length;
+    if (countryCounterEl) {
+      countryCounterEl.textContent = cnt + ' / ' + MAX_COUNTRY;
+      countryCounterEl.className = 'keyword-counter' + (cnt >= MAX_COUNTRY ? ' at-max' : '');
+    }
+    opts.forEach(function (o) {
+      if (!o.classList.contains('sel')) {
+        o.style.pointerEvents = cnt >= MAX_COUNTRY ? 'none' : '';
+        o.style.opacity = cnt >= MAX_COUNTRY ? '0.4' : '';
+      }
+    });
   }
 
   function renderChips() {
     chipsEl.innerHTML = '';
     var keys = Object.keys(selected);
-    if (!keys.length) {
-      var ph = document.createElement('span');
-      ph.className = 'cms-placeholder';
-      ph.textContent = '국가 선택 (복수 선택 가능)';
-      chipsEl.appendChild(ph);
+    var ph = document.createElement('span');
+    ph.className = 'cms-placeholder';
+    if (keys.length >= MAX_COUNTRY) {
+      ph.textContent = '최대 3개 선택 완료';
     } else {
-      keys.forEach(function (v) {
-        var chip = document.createElement('span');
-        chip.className = 'cms-chip';
-        chip.textContent = selected[v];
-        var rm = document.createElement('button');
-        rm.type = 'button'; rm.className = 'cms-chip-rm'; rm.textContent = '×';
-        (function (val) {
-          rm.addEventListener('click', function (e) {
-            e.stopPropagation();
-            delete selected[val];
-            opts.forEach(function (o) { if (o.dataset.value === val) o.classList.remove('sel'); });
-            renderChips(); updateSidebar();
-          });
-        })(v);
-        chip.appendChild(rm); chipsEl.appendChild(chip);
-      });
+      ph.textContent = '국가 선택 (최대 3개)';
     }
+    chipsEl.appendChild(ph);
     updateSidebar();
+    updateCountryCounter();
   }
 
   trigger.addEventListener('click', function () {
+    if (Object.keys(selected).length >= MAX_COUNTRY) return;
     var opening = panel.hidden;
     panel.hidden = !opening;
     trigger.classList.toggle('open', opening);
@@ -1448,7 +1517,7 @@ function renderCriteria() {
       e.stopPropagation();
       var v = opt.dataset.value, l = opt.dataset.label;
       if (opt.classList.contains('sel')) { opt.classList.remove('sel'); delete selected[v]; }
-      else { opt.classList.add('sel'); selected[v] = l; }
+      else if (Object.keys(selected).length < MAX_COUNTRY) { opt.classList.add('sel'); selected[v] = l; }
       renderChips();
     });
   });
@@ -1460,6 +1529,40 @@ function renderCriteria() {
 
   window.getSelectedCountries = function () { return Object.values(selected); };
   renderChips();
+}());
+
+
+/* ── 검색어/카테고리 아코디언 토글 ── */
+(function () {
+  var s1 = document.getElementById('step1');
+  var s2 = document.getElementById('step2');
+  var h1 = document.getElementById('step1Hd');
+  var h2 = document.getElementById('step2Hd');
+  if (!s1 || !s2 || !h1 || !h2) return;
+
+  function openStep(target, other) {
+    other.classList.remove('open');
+    target.classList.add('open');
+  }
+
+  h1.addEventListener('click', function () {
+    if (s1.classList.contains('open')) {
+      s1.classList.remove('open');
+    } else {
+      openStep(s1, s2);
+    }
+  });
+
+  h2.addEventListener('click', function () {
+    if (s2.classList.contains('open')) {
+      s2.classList.remove('open');
+    } else {
+      openStep(s2, s1);
+    }
+  });
+
+  /* 기본: 검색어 섹션 열린 상태로 시작 */
+  s1.classList.add('open');
 }());
 </script>
 

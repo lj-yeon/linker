@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마케팅 메시지 발송 - LINKER NICE D&B</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #1A6FD8; --blue-l: #E8F1FD; --blue-d: #0F4AA3;
+  --gray-1: #F8FAFB; --gray-2: #EFF2F5; --gray-3: #C9D2DC; --gray-4: #8997A8;
+  --dark: #1B2535; --text: #2C3A4A;
+  --r: 14px; --trans: .25s ease;
+  --primary:     #005B99;
+  --primary-d:   #003B71;
+  --border:      #D0D8E4;
+  --text-mid:    #555555;
+  --text-light:  #888888;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; min-width: 360px; }
+a { text-decoration: none; color: inherit; }
+img { display: block; }
+ul { list-style: none; }
+.wrap { width: min(1280px, calc(100% - 40px)); margin: 0 auto; }
+
+/* ── 헤더 ── */
+header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid var(--gray-2); height: 66px; display: flex; align-items: center; }
+.header-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; }
+.header-logo { flex-shrink: 0; margin-right: 40px; }
+.header-logo img { height: 38px; object-fit: contain; display: block; }
+.gnb { display: none; gap: 0; align-items: center; list-style: none; font-size: 18px; font-weight: 700; }
+.gnb li { position: relative; }
+.gnb > li > a { display: block; color: var(--text); padding: 0 24px; line-height: 66px; transition: color var(--trans); white-space: nowrap; }
+.gnb > li:hover > a { color: var(--blue); }
+.gnb .sub { position: absolute; top: 66px; left: 0; background: #fff; border: 1px solid var(--gray-2); border-top: 2px solid var(--blue); border-radius: 0 0 var(--r) 0; box-shadow: 0 8px 24px rgba(0,0,0,.1); min-width: 170px; opacity: 0; visibility: hidden; transition: opacity var(--trans), visibility var(--trans); list-style: none; padding: 8px 0; }
+.gnb li:hover .sub { opacity: 1; visibility: visible; }
+.gnb .sub li a { display: block; padding: 10px 20px; font-size: 16px; font-weight: 500; color: var(--text); white-space: nowrap; }
+.gnb .sub li a:hover { background: var(--gray-1); color: var(--blue); }
+.util { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.util a { font-size: 16px; color: var(--gray-4); font-weight: 500; padding: 7px 14px; border-radius: 6px; transition: all var(--trans); white-space: nowrap; }
+.util a:hover { background: var(--gray-1); color: var(--blue); }
+.hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 9px 10px; background: var(--blue-l); border-radius: 8px; border: 1px solid rgba(26,111,216,.2); }
+.hamburger span { display: block; width: 20px; height: 2px; background: var(--blue); border-radius: 2px; }
+@media (min-width: 768px) { .gnb { display: flex; } .hamburger { display: none; } }
+@media (max-width: 767px) { .util { display: none; } }
+
+/* ── 페이지 배너 ── */
+.page-banner {
+  position: relative;
+  background:
+    radial-gradient(circle at 20% 60%, rgba(0,220,180,0.3) 0%, transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(0,150,255,0.25) 0%, transparent 40%),
+    linear-gradient(145deg, #042A30 0%, #085060 40%, #0A7080 75%, #0C8A90 100%);
+  padding: 80px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+}
+.page-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -52deg,
+    transparent,
+    transparent 22px,
+    rgba(255,255,255,0.04) 22px,
+    rgba(255,255,255,0.04) 23px
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+.banner-inner { position: relative; z-index: 2; width: 100%; text-align: center; }
+.banner-title {
+  font-size: 56px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  letter-spacing: 0px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  padding-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+}
+.banner-title::after {
+  position: absolute;
+  content: '●   ●   ●';
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 9px;
+  color: rgba(0,220,180,0.95);
+  letter-spacing: 6px;
+  bottom: 1.3rem;
+  left: 0;
+  text-shadow: 0 0 8px rgba(0,220,180,0.8);
+  line-height: 1;
+}
+.banner-sub { font-size: 20px; color: rgba(200,255,245,0.9); font-weight: 400; letter-spacing: 0.02em; }
+
+/* ── 브레드크럼 ── */
+.loc-bar { width: 100%; background: transparent; padding: 32px 0 22px; }
+.loc-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; }
+.loc-path { display: flex; align-items: center; list-style: none; }
+.loc-path > li { position: relative; border: 1px solid #ccc; background-color: transparent; }
+.loc-path > li + li { border-left: 0; }
+.loc-home { display: flex; align-items: center; justify-content: center; width: 53px; height: 49px; color: #555; text-decoration: none; transition: background-color .2s; }
+.loc-home:hover { background-color: #f1ebff; }
+.loc-btn { display: flex; align-items: center; justify-content: space-between; width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 500; color: #222; text-decoration: none; transition: background-color .2s; white-space: nowrap; gap: 8px; }
+.loc-btn:hover { background-color: #f1ebff; }
+.loc-none { display: flex; align-items: center; width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 700; color: #111; white-space: nowrap; }
+.loc-arrow { font-size: 15px; color: #888; flex-shrink: 0; }
+.loc-select { width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 700; color: #111; font-family: inherit; border: none; background: transparent; cursor: pointer; outline: none; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+
+/* ── 메인 콘텐츠 ── */
+.page-content { padding: 44px 0 80px; background: #fff; }
+.page-title-area { margin-bottom: 32px; display: flex; align-items: baseline; gap: 20px; }
+.page-title-area h2 { font-size: 32px; font-weight: 800; color: #1A2A40; flex-shrink: 0; }
+.page-title-area p { font-size: 16px; color: var(--text-mid); line-height: 1.75; }
+
+/* ── 액션 바 ── */
+.send-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.send-action-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.send-action-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 42px;
+  padding: 0 20px;
+  background: #fff;
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: background .15s, border-color .15s, color .15s;
+  white-space: nowrap;
+}
+.btn-outline:hover { background: #f5f5f5; border-color: #888; color: #111; }
+.send-count-select {
+  width: 200px;
+  height: 66px;
+  border: 2px solid #C9D2DC;
+  border-radius: 12px;
+  padding: 0 40px 0 18px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #2C3A4A;
+  background: #FAFBFD;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238997A8'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: border-color .18s;
+}
+.send-count-select:focus { border-color: #3D5A8A; }
+.send-count-select-top {
+  height: 42px;
+  padding: 0 32px 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #333;
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: border-color .15s, background .15s;
+}
+.send-count-select-top:hover { background-color: #f5f5f5; border-color: #888; }
+.send-count-select-top:focus { border-color: #3D5A8A; }
+.btn-send-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 24px;
+  background: linear-gradient(135deg, #2B6CB0 0%, #1A4A8A 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  box-shadow: 0 2px 10px rgba(26,74,138,.3);
+  transition: all .2s ease;
+}
+.btn-send-primary:hover {
+  background: linear-gradient(135deg, #3A7BC8 0%, #2356A0 100%);
+  box-shadow: 0 4px 16px rgba(26,74,138,.4);
+}
+
+/* ── 폼 카드 ── */
+.send-form-card {
+  border-top: 2px solid #222;
+  margin-bottom: 40px;
+}
+.form-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #e0e0e0;
+}
+.form-label {
+  width: 130px;
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  background: #FAFBFC;
+  border-right: 1px solid #e0e0e0;
+}
+.form-field {
+  flex: 1;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.form-field.align-top {
+  align-items: flex-start;
+}
+.form-input {
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 0 12px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+  max-width: 480px;
+}
+.form-input:focus { border-color: #888; }
+.form-input::placeholder { color: #bbb; }
+.editor-wrap {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.editor-wrap:focus-within { border-color: #888; }
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 10px;
+  background: #F8F9FB;
+  border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+}
+.tb-btn {
+  width: 30px; height: 28px;
+  background: none; border: 1px solid transparent;
+  border-radius: 4px; cursor: pointer;
+  font-size: 13px; font-family: inherit;
+  color: #444; display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.tb-btn:hover { background: #fff; border-color: #ccc; }
+.tb-btn.active { background: #E8F1FD; border-color: #AACAF5; color: #1A6FD8; }
+.tb-sep { width: 1px; height: 18px; background: #ddd; margin: 0 4px; flex-shrink: 0; }
+.tb-select {
+  height: 28px; padding: 0 6px;
+  border: 1px solid #ddd; border-radius: 4px;
+  font-size: 13px; font-family: inherit; color: #444;
+  background: #fff; cursor: pointer; outline: none;
+}
+.tb-select:hover { border-color: #aaa; }
+.editor-body {
+  min-height: 240px;
+  padding: 14px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  line-height: 1.75;
+  word-break: break-word;
+}
+.editor-body:empty::before {
+  content: attr(data-placeholder);
+  color: #bbb;
+  pointer-events: none;
+}
+
+/* ── 뱃지 스타일 ── */
+.criteria-cat-chip { display: inline-flex; align-items: center; gap: 6px; background: #1B8A6B; color: #fff; border-radius: 20px; padding: 6px 14px; font-size: 15px; font-weight: 500; }
+.criteria-country-chip { display: inline-flex; align-items: center; gap: 6px; background: #C05C00; color: #fff; border-radius: 20px; padding: 6px 14px; font-size: 15px; font-weight: 500; }
+.readonly-note {
+  font-size: 13px;
+  color: #999;
+  margin-left: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── 파일 첨부 ── */
+.file-attach-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-file-choose {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 18px;
+  background: #fff;
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s, border-color .15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-file-choose:hover { background: #f5f5f5; border-color: #888; }
+.file-name-display {
+  font-size: 15px;
+  color: #666;
+}
+.file-list {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.file-list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #1A6FD8;
+}
+.file-list-item i { font-size: 13px; color: #8997A8; flex-shrink: 0; }
+.file-list-item .file-remove {
+  background: none; border: none; cursor: pointer;
+  color: #AEBAC9; font-size: 14px; padding: 0; line-height: 1;
+  transition: color .15s;
+}
+.file-list-item .file-remove:hover { color: #E53935; }
+.file-attach-hint { font-size: 13px; color: #999; margin-top: 6px; }
+input[type="file"] { display: none; }
+
+/* ── 템플릿 모달 ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.hidden { display: none; }
+.modal-box {
+  background: #fff; border-radius: 14px;
+  width: 100%; max-width: 560px;
+  box-shadow: 0 12px 48px rgba(0,0,0,.22);
+  overflow: hidden;
+}
+.modal-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px 18px;
+  border-bottom: 1px solid #EEF1F6;
+}
+.modal-hd h3 { font-size: 18px; font-weight: 800; color: #1B2535; }
+.modal-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 28px; color: #8997A8; line-height: 1; padding: 4px 6px;
+  transition: color .15s;
+}
+.modal-close:hover { color: #1B2535; }
+.modal-body { padding: 20px 24px; }
+.modal-info {
+  background: #F5F7FA; border-radius: 8px;
+  padding: 14px 16px; margin-bottom: 20px;
+}
+.modal-info p { font-size: 14px; color: #4A5A6A; line-height: 1.7; }
+.modal-info p + p { margin-top: 4px; }
+.modal-info .info-limit { color: #E07B00; font-weight: 600; }
+.template-list { display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow-y: auto; margin-bottom: 20px; }
+.template-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border: 1px solid #E0E8F0;
+  border-radius: 8px; cursor: pointer;
+  transition: all .15s;
+}
+.template-item:hover { border-color: #3D5A8A; background: #F5F7FA; }
+.template-item i { color: #8997A8; font-size: 15px; flex-shrink: 0; }
+.template-item-name { flex: 1; font-size: 15px; font-weight: 600; color: #1B2535; }
+.template-item-date { font-size: 13px; color: #AEBAC9; flex-shrink: 0; }
+.template-item-del {
+  background: none; border: none; cursor: pointer;
+  color: #C9D2DC; font-size: 16px; padding: 0; line-height: 1;
+  transition: color .15s; flex-shrink: 0;
+}
+.template-item-del:hover { color: #E53935; }
+.template-empty { text-align: center; padding: 32px 0; color: #AEBAC9; font-size: 15px; }
+.modal-save-row { display: flex; gap: 8px; }
+/* ── 나의 파일함 모달 ── */
+.myfile-upload-row { margin-bottom: 12px; }
+.btn-myfile-upload {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 42px; padding: 0 20px; background: #3D5A8A; color: #fff;
+  border: none; border-radius: 8px; font-size: 15px; font-weight: 700;
+  font-family: inherit; cursor: pointer; transition: background .18s;
+}
+.btn-myfile-upload:hover { background: #2B3F6E; }
+.myfile-count { font-size: 13px; color: var(--text-light); text-align: right; margin-bottom: 8px; }
+.myfile-list { display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow-y: auto; }
+.myfile-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border: 1px solid #E0E8F0; border-radius: 8px;
+}
+.myfile-item i { color: #8997A8; font-size: 16px; flex-shrink: 0; }
+.myfile-item-name { flex: 1; font-size: 14px; font-weight: 600; color: #1B2535; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.myfile-item-size { font-size: 13px; color: #AEBAC9; flex-shrink: 0; }
+.myfile-item-del {
+  background: none; border: none; cursor: pointer;
+  color: #C9D2DC; font-size: 15px; padding: 0; line-height: 1;
+  transition: color .15s; flex-shrink: 0;
+}
+.myfile-item-del:hover { color: #E53935; }
+.myfile-empty { text-align: center; padding: 32px 0; color: #AEBAC9; font-size: 15px; }
+.modal-save-input {
+  flex: 1; height: 42px; border: 1px solid #C9D2DC; border-radius: 8px;
+  padding: 0 14px; font-size: 15px; font-family: inherit; color: #2C3A4A;
+  outline: none; transition: border-color .18s;
+}
+.modal-save-input:focus { border-color: #3D5A8A; }
+.modal-save-btn {
+  height: 42px; padding: 0 20px; background: #3D5A8A; color: #fff;
+  border: none; border-radius: 8px; font-size: 15px; font-weight: 700;
+  font-family: inherit; cursor: pointer; white-space: nowrap;
+  transition: background .18s;
+}
+.modal-save-btn:hover { background: #2B3F6E; }
+.tip-modal-box {
+  background: #fff; border-radius: 14px;
+  width: 100%; max-width: 860px;
+  box-shadow: 0 12px 48px rgba(0,0,0,.22);
+  overflow: hidden;
+  max-height: 90vh;
+  display: flex; flex-direction: column;
+}
+.tip-img-wrap {
+  flex: 1; overflow-y: auto;
+  background: #F5F7FA;
+  padding: 24px 28px;
+}
+.tip-img-wrap img { width: 100%; height: auto; display: block; border-radius: 6px; }
+.tip-modal-ft {
+  padding: 16px 24px;
+  display: flex; justify-content: center;
+  border-top: 1px solid #EEF1F6;
+}
+.btn-download {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 52px; padding: 0 36px;
+  background: #3D5A8A; color: #fff;
+  border: none; border-radius: 8px;
+  font-size: 18px; font-weight: 700; font-family: inherit;
+  cursor: pointer; text-decoration: none;
+  transition: background .18s;
+}
+.btn-download:hover { background: #2B3F6E; }
+
+/* ── 하단 버튼 영역 ── */
+.form-bottom-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 0;
+  flex-wrap: wrap;
+}
+.btn-bottom-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 66px;
+  padding: 0 36px;
+  background: #fff;
+  color: #333;
+  font-size: 19px;
+  font-weight: 700;
+  border: 1px solid #bbb;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s, border-color .15s;
+  white-space: nowrap;
+}
+.btn-bottom-outline:hover { background: #f5f5f5; border-color: #888; }
+.btn-bottom-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 66px;
+  padding: 0 36px;
+  background: linear-gradient(135deg, #2B6CB0 0%, #1A4A8A 100%);
+  color: #fff;
+  font-size: 19px;
+  font-weight: 900;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  box-shadow: 0 2px 10px rgba(26,74,138,.3);
+  transition: all .2s ease;
+}
+.btn-bottom-primary:hover {
+  background: linear-gradient(135deg, #3A7BC8 0%, #2356A0 100%);
+  box-shadow: 0 4px 16px rgba(26,74,138,.4);
+}
+
+/* ── 푸터 ── */
+footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding: 40px 0 28px; }
+.footer__inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; position: relative; }
+.fnb { position: absolute; top: 0; right: 0; }
+.fnb__wrap { display: flex; list-style: none; align-items: center; padding: 0; margin: 0; flex-wrap: wrap; gap: 2px; }
+.fnb__wrap li + li::before { content: '|'; margin: 0 10px; color: var(--gray-3); font-weight: 400; }
+.fnb__link { font-size: 16px; font-weight: 700; color: var(--text); text-decoration: none; transition: color var(--trans); }
+.fnb__link:hover { color: var(--blue); }
+.footer__logo { display: block; min-height: 36px; }
+.footer__logo img { height: 30px; width: auto; object-fit: contain; }
+.footer__info-row { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 20px; }
+.site-address { font-size: 16px; line-height: 22px; color: var(--gray-4); font-style: normal; }
+.footer__info-row select { border: 1px solid var(--gray-2); background: #fff; color: var(--text); padding: 0 14px; font-size: 16px; width: 200px; height: 38px; border-radius: 8px; cursor: pointer; outline: none; flex-shrink: 0; transition: border-color var(--trans); }
+.footer__info-row select:hover { border-color: var(--blue); }
+.copyright { margin-top: 18px; font-size: 12px; color: var(--gray-4); opacity: .75; }
+
+/* ── 햄버거 애니메이션 ── */
+.hamburger span { transition: transform .25s ease, opacity .25s ease; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── 모바일 내비게이션 패널 ── */
+.mobile-nav {
+  position: fixed; top: 66px; left: 0; right: 0; z-index: 99;
+  background: #fff; border-bottom: 1px solid var(--gray-2);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  transform: translateY(-110%);
+  transition: transform .3s ease;
+  pointer-events: none;
+}
+.mobile-nav.open { transform: translateY(0); pointer-events: auto; }
+.mobile-nav > ul { list-style: none; }
+.mobile-nav > ul li a {
+  display: block; padding: 15px 20px;
+  font-size: 16px; font-weight: 700; color: var(--text);
+  border-bottom: 1px solid var(--gray-2);
+}
+.mobile-nav > ul li a:active { background: var(--gray-1); }
+.mobile-nav .m-util { display: flex; gap: 8px; padding: 12px 20px 16px; }
+.mobile-nav .m-util a {
+  flex: 1; text-align: center; font-size: 15px; font-weight: 600;
+  color: var(--gray-4); padding: 9px; border: 1px solid var(--gray-2);
+  border-radius: 6px; transition: all var(--trans);
+}
+.mobile-nav .m-util .m-login { color: var(--blue); border-color: rgba(26,111,216,.3); }
+@media (min-width: 768px) { .mobile-nav { display: none !important; } }
+
+/* ── 반응형 ── */
+@media (max-width: 768px) {
+  body { min-width: 360px; }
+
+  /* 배너 */
+  .page-banner { padding: 40px 0; }
+  .banner-title { font-size: 32px; padding-bottom: 2.5rem; }
+  .banner-sub { font-size: 15px; max-width: 260px; margin: 0 auto; line-height: 1.7; }
+
+  /* 브레드크럼 */
+  .loc-bar { padding: 0; position: sticky; top: 66px; z-index: 90; background: #fff; border-bottom: 1px solid #e0e0e0; }
+  .loc-inner { width: 100%; margin: 0; padding: 0; }
+  .loc-path > li:first-child { display: none; }
+  .loc-path { width: 100%; }
+  .loc-path > li { flex: 1; border: none; }
+  .loc-path > li + li { border-left: 1px solid #ccc; }
+  .loc-btn { width: 100%; height: 44px; font-size: 14px; padding: 0 12px; justify-content: space-between; }
+  .loc-select { width: 100%; height: 44px; font-size: 14px; padding: 0 12px; }
+
+  /* 페이지 타이틀 */
+  .page-title-area { flex-direction: column; gap: 6px; }
+  .page-title-area h2 { font-size: 24px; }
+
+  /* 액션 바 */
+  .send-action-bar { flex-direction: column; align-items: flex-start; }
+  .send-action-right { width: 100%; justify-content: flex-start; }
+
+  /* 폼 */
+  .form-row { flex-direction: column; }
+  .form-label { width: 100%; padding: 14px 16px 8px; border-right: none; border-bottom: 1px solid #e0e0e0; background: #F5F7FA; }
+  .form-field { padding: 12px 16px 16px; }
+  .readonly-note { display: block; margin-left: 0; margin-top: 6px; }
+
+  /* 푸터 */
+  .fnb { position: static; margin-bottom: 16px; }
+  .fnb__wrap { flex-wrap: wrap; }
+  .footer__info-row { flex-direction: column; gap: 14px; margin-top: 16px; }
+  .footer__info-row select { width: 100%; max-width: 280px; }
+  .site-address { font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+  .banner-title { font-size: 26px; }
+  .page-content { padding: 24px 0 48px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1 class="header-logo">
+      <a href="index.html"><img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스"></a>
+    </h1>
+    <nav>
+      <ul class="gnb">
+        <li><a href="sub-bigbuyer-finder.html" style="color:#1A6FD8;">빅바이어 마케팅</a></li>
+        <li><a href="sub-apply.html">사업 참가신청</a></li>
+      </ul>
+    </nav>
+    <div class="util">
+      <a href="#">로그인</a>
+      <a href="#">회원가입</a>
+    </div>
+    <div class="hamburger" id="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="sub-bigbuyer-finder.html" style="color:#1A6FD8;">빅바이어 마케팅</a></li>
+    <li><a href="sub-apply.html">사업 참가신청</a></li>
+  </ul>
+  <div class="m-util">
+    <a href="#" class="m-login">로그인</a>
+    <a href="#">회원가입</a>
+  </div>
+</div>
+
+<section class="page-banner" aria-label="페이지 배너">
+  <div class="wrap banner-inner">
+    <h1 class="banner-title">마케팅 메시지 발송</h1>
+    <p class="banner-sub">발굴된 바이어에게 마케팅 메시지를 발송합니다</p>
+  </div>
+</section>
+
+<div class="loc-bar">
+  <div class="loc-inner">
+    <ul class="loc-path" aria-label="현재 위치">
+      <li><a href="index.html" class="loc-home" aria-label="홈"><i class="fa-solid fa-house" style="font-size:16px;"></i></a></li>
+      <li>
+        <select class="loc-select" onchange="if(this.value) location.href=this.value;">
+          <option value="sub-bigbuyer-finder.html" selected>빅바이어마케팅</option>
+          <option value="sub-apply.html">사업 참가신청</option>
+        </select>
+      </li>
+      <li>
+        <select class="loc-select" onchange="if(this.value) location.href=this.value;">
+          <option value="sub-bigbuyer-finder.html">빅데이터 바이어 발굴</option>
+          <option value="sub-bigbuyer-send.html" selected>마케팅 메시지 발송</option>
+          <option value="sub-bigbuyer-history.html">임시저장내역</option>
+        </select>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<main class="page-content">
+  <div class="wrap">
+
+    <div class="page-title-area">
+      <h2>마케팅 메시지 발송</h2>
+      <p>발굴된 바이어에게 전달할 마케팅 메시지를 작성하고 발송하세요.</p>
+    </div>
+
+    <!-- ── 상단 액션 바 ── -->
+    <div class="send-action-bar">
+      <!-- 좌측 버튼 3개 -->
+      <div class="send-action-left">
+<button type="button" class="btn-outline" onclick="handleTempSave()">
+          <i class="fa-regular fa-floppy-disk"></i> 임시저장
+        </button>
+        <a href="sub-bigbuyer-history.html" class="btn-outline">
+          <i class="fa-solid fa-clock-rotate-left"></i> 임시저장내역
+        </a>
+        <button type="button" class="btn-outline" onclick="openTemplateModal()">
+          <i class="fa-solid fa-layer-group"></i> 템플릿
+        </button>
+        <button type="button" class="btn-outline" onclick="openTipModal()">
+          <i class="fa-regular fa-lightbulb"></i> 작성팁
+        </button>
+      </div>
+
+      <!-- 우측: 건수 선택 + 발송 버튼 -->
+      <div class="send-action-right">
+        <select class="send-count-select-top" id="sendCountSelect" onchange="updateSendBtn()">
+          <option value="">건수 선택</option>
+          <option value="10">10건</option>
+          <option value="30">30건</option>
+          <option value="50">50건</option>
+          <option value="100">100건</option>
+          <option value="150">150건</option>
+        </select>
+        <button type="button" class="btn-send-primary" id="sendBtn" onclick="handleSend()">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span id="sendBtnText">마케팅 메시지 0건 발송</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── 폼 영역 ── -->
+    <div class="send-form-card">
+
+      <!-- 카테고리 (읽기 전용) -->
+      <div class="form-row">
+        <div class="form-label">카테고리</div>
+        <div class="form-field" style="flex-wrap: wrap; gap: 8px;">
+          <span class="criteria-cat-chip">Home &amp; Kitchen &gt; Home &gt; Bathroom</span>
+          <span class="readonly-note">(빅데이터 바이어 발굴에서 선택된 항목으로 수정 불가)</span>
+        </div>
+      </div>
+
+      <!-- 국가 (읽기 전용) -->
+      <div class="form-row">
+        <div class="form-label">국가</div>
+        <div class="form-field" style="flex-wrap: wrap; gap: 8px;">
+          <span class="criteria-country-chip">미국</span>
+          <span class="criteria-country-chip">일본</span>
+          <span class="criteria-country-chip">독일</span>
+          <span class="readonly-note">(빅데이터 바이어 발굴에서 선택된 항목으로 수정 불가)</span>
+        </div>
+      </div>
+
+      <!-- 발신자 -->
+      <div class="form-row">
+        <div class="form-label">발신자</div>
+        <div class="form-field">
+          <input type="text" class="form-input" id="senderName" value="sender@example.com" readonly style="background:#F5F7FA; color:#4A5A6A; cursor:default;">
+        </div>
+      </div>
+
+      <!-- 파일첨부 -->
+      <div class="form-row">
+        <div class="form-label">파일첨부</div>
+        <div class="form-field">
+          <div class="file-attach-wrap">
+            <button type="button" class="btn-file-choose" onclick="document.getElementById('fileInput').click()">
+              <i class="fa-solid fa-paperclip"></i> 파일 선택
+            </button>
+            <button type="button" class="btn-file-choose" onclick="openMyFilesModal()">
+              <i class="fa-solid fa-folder-open"></i> 나의 파일함
+            </button>
+            <span class="file-attach-hint" style="margin-top:0;">pdf, jpg, jpeg, gif, png, txt, html, xlsx, xls, csv, ppt, pptx, doc, docx 파일만 첨부 가능합니다.</span>
+            <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.gif,.png,.txt,.html,.xlsx,.xls,.csv,.ppt,.pptx,.doc,.docx" onchange="handleFileChange(this)">
+          </div>
+          <div class="file-list" id="fileList"></div>
+        </div>
+      </div>
+
+      <!-- 제목 -->
+      <div class="form-row">
+        <div class="form-label">제목</div>
+        <div class="form-field">
+          <input type="text" class="form-input" id="msgTitle" placeholder="메시지 제목을 입력하세요">
+        </div>
+      </div>
+
+      <!-- 내용 -->
+      <div class="form-row">
+        <div class="form-label" style="align-items: flex-start; padding-top: 20px;">내용</div>
+        <div class="form-field align-top" style="padding-top: 18px;">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <!-- 폰트 크기 -->
+              <select class="tb-select" id="tbFontSize" title="글자 크기">
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16" selected>16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+                <option value="24">24</option>
+                <option value="28">28</option>
+                <option value="32">32</option>
+              </select>
+              <div class="tb-sep"></div>
+              <!-- 서식 -->
+              <button type="button" class="tb-btn" id="tbBold" title="굵게" onclick="editorCmd('bold')"><b>B</b></button>
+              <button type="button" class="tb-btn" id="tbItalic" title="기울임" onclick="editorCmd('italic')"><i>I</i></button>
+              <button type="button" class="tb-btn" id="tbUnderline" title="밑줄" onclick="editorCmd('underline')"><u>U</u></button>
+              <div class="tb-sep"></div>
+              <!-- 정렬 -->
+              <button type="button" class="tb-btn" title="왼쪽 정렬" onclick="editorCmd('justifyLeft')"><i class="fa-solid fa-align-left"></i></button>
+              <button type="button" class="tb-btn" title="가운데 정렬" onclick="editorCmd('justifyCenter')"><i class="fa-solid fa-align-center"></i></button>
+              <button type="button" class="tb-btn" title="오른쪽 정렬" onclick="editorCmd('justifyRight')"><i class="fa-solid fa-align-right"></i></button>
+            </div>
+            <div class="editor-body" id="msgContent" contenteditable="true"
+              data-placeholder="바이어에게 전달할 메시지 내용을 입력하세요"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /send-form-card -->
+
+    <!-- ── 하단 버튼 영역 ── -->
+    <div class="form-bottom-btns">
+      <button type="button" class="btn-bottom-outline" onclick="handleTempSave()">
+        <i class="fa-regular fa-floppy-disk"></i> 임시저장
+      </button>
+      <select class="send-count-select" id="sendCountBottom" onchange="updateSendBtnBottom()">
+        <option value="">발송 건수 선택</option>
+        <option value="10">10건</option>
+        <option value="30">30건</option>
+        <option value="50">50건</option>
+        <option value="100">100건</option>
+        <option value="150">150건</option>
+      </select>
+      <button type="button" class="btn-bottom-primary" onclick="handleSend()">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span id="sendBtnTextBottom">마케팅 메시지 0건 발송</span>
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<!-- 작성팁 모달 -->
+<div class="modal-overlay hidden" id="tipModal" onclick="closeTipModalOutside(event)">
+  <div class="tip-modal-box">
+    <div class="modal-hd">
+      <h3><i class="fa-regular fa-lightbulb" style="color:#E07B00;margin-right:8px;"></i>작성팁</h3>
+      <button type="button" class="modal-close" onclick="closeTipModal()">×</button>
+    </div>
+    <div class="tip-img-wrap">
+      <p style="font-size:14px;color:#4A5A6A;margin-bottom:14px;">"샘플 다운로드"를 통해 아래 양식을 이용할 수 있습니다.</p>
+      <img src="linker_eDM_des.d6ac8dbc.png" alt="eDM 작성팁">
+    </div>
+    <div class="tip-modal-ft">
+      <a href="linker_eDM_sample.pptx" download class="btn-download">
+        <i class="fa-solid fa-download"></i> 샘플 파일 다운로드
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- 템플릿 저장 모달 -->
+<div class="modal-overlay hidden" id="templateModal" onclick="closeTemplateModalOutside(event)">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <h3><i class="fa-solid fa-layer-group" style="color:#3D5A8A;margin-right:8px;"></i>마케팅 템플릿</h3>
+      <button type="button" class="modal-close" onclick="closeTemplateModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-info">
+        <p>마케팅 입력에서 등록한 마케팅 템플릿 관리함 입니다.</p>
+        <p class="info-limit">템플릿은 최대 20개까지 저장할 수 있습니다.</p>
+      </div>
+      <div class="template-list" id="templateList"></div>
+      <div class="modal-save-row">
+        <input type="text" class="modal-save-input" id="templateNameInput" placeholder="템플릿 이름 입력 후 저장">
+        <button type="button" class="modal-save-btn" onclick="saveTemplate()">저장</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 나의 파일함 모달 -->
+<div class="modal-overlay hidden" id="myFilesModal" onclick="closeMyFilesModalOutside(event)">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <h3><i class="fa-solid fa-folder-open" style="color:#3D5A8A;margin-right:8px;"></i>나의 파일함</h3>
+      <button type="button" class="modal-close" onclick="closeMyFilesModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-info">
+        <p>회원님이 등록한 파일 관리함 입니다.</p>
+        <p class="info-limit">파일 업로드 시, 파일 개수 10개, 용량 최대 20MB이하로 등록해 주세요.</p>
+        <p style="font-size:13px;color:var(--text-mid);margin-top:6px;">허용 확장자 : pdf, jpg, jpeg, gif, png, txt, html, xlsx, xls, csv, ppt, pptx, doc, docx</p>
+      </div>
+      <div class="myfile-upload-row">
+        <button type="button" class="btn-myfile-upload" onclick="document.getElementById('myFileInput').click()">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i> 파일 업로드
+        </button>
+        <input type="file" id="myFileInput" multiple
+          accept=".pdf,.jpg,.jpeg,.gif,.png,.txt,.html,.xlsx,.xls,.csv,.ppt,.pptx,.doc,.docx"
+          style="display:none;" onchange="handleMyFileUpload(this)">
+      </div>
+      <div class="myfile-count" id="myFileCount">0 / 10개</div>
+      <div class="myfile-list" id="myFileList"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer__inner">
+    <div class="fnb">
+      <ul class="fnb__wrap">
+        <li><a href="#" class="fnb__link" style="color:red;">개인정보처리방침</a></li>
+        <li><a href="#" class="fnb__link">이용약관</a></li>
+        <li><a href="#" class="fnb__link">신용정보활용체제공시</a></li>
+        <li><a href="#" class="fnb__link">이메일무단수집거부</a></li>
+      </ul>
+    </div>
+    <div class="footer__logo">
+      <img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스">
+    </div>
+    <div class="footer__info-row">
+      <address class="site-address">
+        (04535) 서울특별시 중구 소공로 70, 포스트타워 16층 (주)NICE디앤비<br>
+        통신판매업신고: 제2024-서울중구-1736호 사업자등록번호: 107-86-24874 TEL: 02-2122-0233 FAX: 02-2122-2591
+      </address>
+      <select id="familySite" name="familySite">
+        <option value="" disabled selected>Family site</option>
+        <option value="https://www.nicednb.com">나이스디앤비 홈페이지</option>
+        <option value="https://global.nicednb.com">나이스디앤비 글로벌 홈페이지</option>
+      </select>
+    </div>
+    <p class="copyright">ⓒ 2023. NICE D&amp;B Co.,Ltd. ALL RIGHTS RESERVED.</p>
+  </div>
+</footer>
+
+<script>
+/* ── 발송 건수 select → 버튼 텍스트 업데이트 ── */
+function syncCount(count) {
+  var label = '마케팅 메시지 ' + (count || '0') + '건 발송';
+  var t1 = document.getElementById('sendBtnText');
+  var t2 = document.getElementById('sendBtnTextBottom');
+  if (t1) t1.textContent = label;
+  if (t2) t2.textContent = label;
+  var top = document.getElementById('sendCountSelect');
+  var bot = document.getElementById('sendCountBottom');
+  if (top && count) top.value = count;
+  if (bot && count) bot.value = count;
+}
+function updateSendBtn() {
+  var sel = document.getElementById('sendCountSelect');
+  syncCount(sel ? sel.value : '');
+}
+function updateSendBtnBottom() {
+  var sel = document.getElementById('sendCountBottom');
+  syncCount(sel ? sel.value : '');
+}
+
+/* ── 파일 첨부 ── */
+var selectedFiles = [];
+
+function handleFileChange(input) {
+  var list = document.getElementById('fileList');
+  if (!list) return;
+  Array.from(input.files).forEach(function(f) {
+    selectedFiles.push(f);
+  });
+  input.value = '';
+  renderFileList();
+}
+
+function renderFileList() {
+  var list = document.getElementById('fileList');
+  list.innerHTML = '';
+  selectedFiles.forEach(function(f, i) {
+    var item = document.createElement('div');
+    item.className = 'file-list-item';
+    item.innerHTML =
+      '<i class="fa-solid fa-file"></i>' +
+      '<span>' + f.name + '</span>' +
+      '<button type="button" class="file-remove" aria-label="삭제" onclick="removeFile(' + i + ')">×</button>';
+    list.appendChild(item);
+  });
+}
+
+function removeFile(idx) {
+  selectedFiles.splice(idx, 1);
+  renderFileList();
+}
+
+/* ── 작성팁 모달 ── */
+function openTipModal() {
+  document.getElementById('tipModal').classList.remove('hidden');
+}
+function closeTipModal() {
+  document.getElementById('tipModal').classList.add('hidden');
+}
+function closeTipModalOutside(e) {
+  if (e.target === document.getElementById('tipModal')) closeTipModal();
+}
+
+/* ── 템플릿 모달 ── */
+var templates = [];
+var MAX_TEMPLATE = 20;
+
+function openTemplateModal() {
+  renderTemplateList();
+  document.getElementById('templateModal').classList.remove('hidden');
+  var saveRow = document.querySelector('#templateModal .modal-save-row');
+  var list = document.getElementById('templateList');
+  if (saveRow) saveRow.style.display = 'flex';
+  if (list) list.style.display = '';
+  document.getElementById('templateNameInput').focus();
+}
+function closeTemplateModal() {
+  document.getElementById('templateModal').classList.add('hidden');
+}
+function closeTemplateModalOutside(e) {
+  if (e.target === document.getElementById('templateModal')) closeTemplateModal();
+}
+
+var myFiles = [];
+
+function openMyFilesModal() {
+  renderMyFileList();
+  document.getElementById('myFilesModal').classList.remove('hidden');
+}
+function closeMyFilesModal() {
+  document.getElementById('myFilesModal').classList.add('hidden');
+}
+function closeMyFilesModalOutside(e) {
+  if (e.target === document.getElementById('myFilesModal')) closeMyFilesModal();
+}
+function handleMyFileUpload(input) {
+  var newFiles = Array.from(input.files);
+  var MAX_COUNT = 10;
+  var MAX_BYTES = 20 * 1024 * 1024;
+  var remaining = MAX_COUNT - myFiles.length;
+  if (remaining <= 0) {
+    alert('파일은 최대 10개까지 등록할 수 있습니다.');
+    input.value = '';
+    return;
+  }
+  var currentSize = myFiles.reduce(function(s, f) { return s + f.size; }, 0);
+  var added = [];
+  for (var i = 0; i < newFiles.length; i++) {
+    if (added.length >= remaining) { alert('파일은 최대 10개까지 등록할 수 있습니다.'); break; }
+    if (currentSize + newFiles[i].size > MAX_BYTES) { alert('전체 파일 용량이 20MB를 초과합니다.'); break; }
+    currentSize += newFiles[i].size;
+    added.push(newFiles[i]);
+  }
+  myFiles = myFiles.concat(added);
+  input.value = '';
+  renderMyFileList();
+}
+function removeMyFile(idx) {
+  myFiles.splice(idx, 1);
+  renderMyFileList();
+}
+function getMyFileIcon(name) {
+  var ext = (name.split('.').pop() || '').toLowerCase();
+  if (['jpg','jpeg','gif','png'].indexOf(ext) >= 0) return 'fa-solid fa-file-image';
+  if (ext === 'pdf') return 'fa-solid fa-file-pdf';
+  if (['xlsx','xls','csv'].indexOf(ext) >= 0) return 'fa-solid fa-file-excel';
+  if (['ppt','pptx'].indexOf(ext) >= 0) return 'fa-solid fa-file-powerpoint';
+  if (['doc','docx'].indexOf(ext) >= 0) return 'fa-solid fa-file-word';
+  if (ext === 'html') return 'fa-solid fa-file-code';
+  return 'fa-solid fa-file';
+}
+function formatMyBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+function renderMyFileList() {
+  var list = document.getElementById('myFileList');
+  var countEl = document.getElementById('myFileCount');
+  if (!countEl) return;
+  countEl.textContent = myFiles.length + ' / 10개';
+  if (!myFiles.length) {
+    list.innerHTML = '<div class="myfile-empty"><i class="fa-regular fa-folder-open" style="font-size:32px;display:block;margin-bottom:10px;"></i>등록된 파일이 없습니다.</div>';
+    return;
+  }
+  list.innerHTML = myFiles.map(function(f, i) {
+    return '<div class="myfile-item">' +
+      '<i class="' + getMyFileIcon(f.name) + '"></i>' +
+      '<span class="myfile-item-name" title="' + f.name + '">' + f.name + '</span>' +
+      '<span class="myfile-item-size">' + formatMyBytes(f.size) + '</span>' +
+      '<button type="button" class="myfile-item-del" onclick="removeMyFile(' + i + ')" title="삭제"><i class="fa-solid fa-trash-can"></i></button>' +
+    '</div>';
+  }).join('');
+}
+
+function renderTemplateList() {
+  var list = document.getElementById('templateList');
+  if (!templates.length) {
+    list.innerHTML = '<div class="template-empty"><i class="fa-regular fa-folder-open" style="font-size:32px;display:block;margin-bottom:10px;"></i>저장된 템플릿이 없습니다.</div>';
+    return;
+  }
+  list.innerHTML = templates.map(function(t, i) {
+    return '<div class="template-item">' +
+      '<i class="fa-regular fa-file-lines"></i>' +
+      '<span class="template-item-name">' + t.name + '</span>' +
+      '<span class="template-item-date">' + t.date + '</span>' +
+      '<button type="button" class="template-item-del" onclick="deleteTemplate(' + i + ')" title="삭제">×</button>' +
+    '</div>';
+  }).join('');
+}
+
+function saveTemplate() {
+  var input = document.getElementById('templateNameInput');
+  var name = input.value.trim();
+  if (!name) { input.focus(); return; }
+  if (templates.length >= MAX_TEMPLATE) {
+    alert('템플릿은 최대 ' + MAX_TEMPLATE + '개까지 저장할 수 있습니다.');
+    return;
+  }
+  var today = new Date();
+  var date = today.getFullYear() + '.' +
+    String(today.getMonth()+1).padStart(2,'0') + '.' +
+    String(today.getDate()).padStart(2,'0');
+  templates.push({ name: name, date: date });
+  input.value = '';
+  renderTemplateList();
+}
+
+function deleteTemplate(idx) {
+  templates.splice(idx, 1);
+  renderTemplateList();
+}
+
+function handlePreview() {
+  alert('미리보기 기능은 준비 중입니다.');
+}
+
+/* ── 임시저장 ── */
+function handleTempSave() {
+  alert('임시저장 되었습니다.');
+}
+
+/* ── 발송 ── */
+function handleSend() {
+  var select = document.getElementById('sendCountSelect');
+  var count = select && select.value ? select.value : null;
+  if (!count) {
+    alert('발송 건수를 선택해 주세요.');
+    return;
+  }
+  alert(count + '건 발송을 진행합니다.');
+}
+
+/* ── 햄버거 메뉴 ── */
+(function () {
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav = document.getElementById('mobileNav');
+  if (!hamburger || !mobileNav) return;
+  hamburger.addEventListener('click', function () {
+    var isOpen = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+  });
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('open');
+    });
+  });
+}());
+
+/* ── 에디터 툴바 ── */
+function editorCmd(cmd) {
+  document.getElementById('msgContent').focus();
+  document.execCommand(cmd, false, null);
+  updateToolbarState();
+}
+
+document.getElementById('tbFontSize').addEventListener('change', function() {
+  document.getElementById('msgContent').focus();
+  document.execCommand('fontSize', false, '7');
+  var els = document.getElementById('msgContent').querySelectorAll('font[size="7"]');
+  els.forEach(function(el) {
+    el.removeAttribute('size');
+    el.style.fontSize = this.value + 'px';
+  }.bind(this));
+  updateToolbarState();
+});
+
+function updateToolbarState() {
+  document.getElementById('tbBold').classList.toggle('active', document.queryCommandState('bold'));
+  document.getElementById('tbItalic').classList.toggle('active', document.queryCommandState('italic'));
+  document.getElementById('tbUnderline').classList.toggle('active', document.queryCommandState('underline'));
+}
+
+document.getElementById('msgContent').addEventListener('keyup', updateToolbarState);
+document.getElementById('msgContent').addEventListener('mouseup', updateToolbarState);
+</script>
+</body>
+</html>
