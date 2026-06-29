@@ -54,9 +54,9 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
 .page-banner {
   position: relative;
   background:
-    radial-gradient(circle at 15% 40%, rgba(100,160,255,0.35) 0%, transparent 40%),
-    radial-gradient(circle at 85% 60%, rgba(80,40,200,0.25) 0%, transparent 35%),
-    linear-gradient(135deg, #0D1E3A 0%, #0F3575 50%, #1A5ABF 100%);
+    radial-gradient(circle at 20% 60%, rgba(0,220,180,0.3) 0%, transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(0,150,255,0.25) 0%, transparent 40%),
+    linear-gradient(145deg, #042A30 0%, #085060 40%, #0A7080 75%, #0C8A90 100%);
   padding: 80px 0;
   display: flex;
   align-items: center;
@@ -67,8 +67,13 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.14) 1.5px, transparent 1.5px);
-  background-size: 28px 28px;
+  background: repeating-linear-gradient(
+    -52deg,
+    transparent,
+    transparent 22px,
+    rgba(255,255,255,0.04) 22px,
+    rgba(255,255,255,0.04) 23px
+  );
   z-index: 1;
   pointer-events: none;
 }
@@ -79,35 +84,36 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
   text-align: center;
 }
 .banner-title {
-  font-size: 60px;
-  font-weight: 900;
+  font-size: 56px;
+  font-weight: 800;
   color: #fff;
-  letter-spacing: -0.5px;
   line-height: 1.3;
-  margin-bottom: 16px;
-  text-shadow: 0 0 40px rgba(80,160,255,0.55), 0 4px 12px rgba(0,0,0,0.7);
+  margin-bottom: 14px;
+  letter-spacing: 0px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
   padding-bottom: 3rem;
   position: relative;
   display: inline-block;
 }
 .banner-title::after {
   position: absolute;
-  content: '';
+  content: '●   ●   ●';
   display: block;
-  width: 72px;
-  height: 3px;
-  background: linear-gradient(90deg, #4AADFF 0%, #00D4FF 100%);
-  border-radius: 2px;
-  box-shadow: 0 0 14px rgba(0,212,255,0.9);
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 1.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 9px;
+  color: rgba(0,220,180,0.95);
+  letter-spacing: 6px;
+  bottom: 1.3rem;
+  left: 0;
+  text-shadow: 0 0 8px rgba(0,220,180,0.8);
+  line-height: 1;
 }
 .banner-sub {
   font-size: 20px;
-  color: rgba(180,220,255,0.85);
+  color: rgba(200,255,245,0.9);
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 
 /* ── 브레드크럼 ── */
@@ -445,7 +451,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 <header>
   <div class="header-inner">
     <h1 class="header-logo">
-      <a href="/"><img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스"></a>
+      <a href="index.html"><img src="https://www.ctp.or.kr/css/egovframework/img/userpage/header-logo.png" alt="CTP 수출지원서비스"></a>
     </h1>
     <nav>
       <ul class="gnb">
