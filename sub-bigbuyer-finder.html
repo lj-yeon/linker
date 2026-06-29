@@ -690,6 +690,35 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   .search-sidebar { position: static; }
 }
 
+/* ── AI 발굴 로딩 스피너 ── */
+.search-spinner {
+  margin-top: 28px;
+  border: 1px solid #0A7080;
+  border-radius: 6px;
+  background: #fff;
+  padding: 64px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.search-spinner[hidden] { display: none !important; }
+.spinner-ring {
+  width: 56px;
+  height: 56px;
+  border: 4px solid #E8EFF7;
+  border-top-color: #3D5A8A;
+  border-radius: 50%;
+  animation: spinRing .85s linear infinite;
+}
+@keyframes spinRing { to { transform: rotate(360deg); } }
+.spinner-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #3D5A8A;
+  letter-spacing: 0.02em;
+}
+
 /* ── AI 검색 결과 패널 (sub5 슬레이트 컨셉) ── */
 .search-result-panel {
   margin-top: 28px;
@@ -827,7 +856,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   .page-banner h1 { font-size: 36px; }
   .page-banner-sub { font-size: 17px; }
   /* 페이지 타이틀 세로 배치 */
-  .content-header { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 32px; }
+  .content-header { position: static; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 32px; }
   /* 스텝 레이아웃 */
   .step-body { padding-left: 54px; }
   /* 브레드크럼 모바일 */
@@ -1157,6 +1186,12 @@ header { transition: background .2s, backdrop-filter .2s; }header.is-scrolled { 
     </div>
     <!-- /search-layout -->
 
+    <!-- ── AI 발굴 스피너 ── -->
+    <div class="search-spinner" id="searchSpinner" hidden>
+      <div class="spinner-ring"></div>
+      <p class="spinner-text">AI 바이어 발굴 중...</p>
+    </div>
+
     <!-- ── AI 검색 결과 패널 ── -->
     <div class="search-result-panel" id="searchResultPanel" hidden>
       <div class="result-panel-hd">
@@ -1332,10 +1367,21 @@ var resultPanel = document.getElementById('searchResultPanel');
 
 function showResultPanel() {
   if (!resultPanel) return;
-  resultPanel.hidden = false;
-  setTimeout(function () {
-    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 50);
+  var spinner = document.getElementById('searchSpinner');
+  resultPanel.hidden = true;
+  if (spinner) {
+    spinner.hidden = false;
+    setTimeout(function() {
+      spinner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  }
+  setTimeout(function() {
+    if (spinner) spinner.hidden = true;
+    resultPanel.hidden = false;
+    setTimeout(function() {
+      resultPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  }, 1500);
 }
 
 
