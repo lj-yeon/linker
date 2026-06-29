@@ -37,7 +37,7 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
 .gnb li { position: relative; }
 .gnb > li > a { display: block; color: var(--text); padding: 0 24px; line-height: 66px; transition: color var(--trans); white-space: nowrap; }
 .gnb > li:hover > a { color: var(--blue); }
-.gnb .sub { position: absolute; top: 66px; left: 0; background: #fff; border: 1px solid var(--gray-2); border-top: 2px solid var(--blue); border-radius: 0 0 var(--r) 0; box-shadow: 0 8px 24px rgba(0,0,0,.1); min-width: 170px; opacity: 0; visibility: hidden; transition: opacity var(--trans), visibility var(--trans); list-style: none; padding: 8px 0; }
+.gnb .sub { position: absolute; top: 66px; left: 0; background: #fff; border: 1px solid var(--gray-2); border-top: 2px solid var(--blue); border-radius: 0 0 var(--r) 0; box-shadow: 0 8px 24px rgba(0,0,0,.1); min-width: 170px; opacity: 0; visibility: hidden; transition: opacity var(--trans), visibility var(--trans); list-style: none; padding: 8px 0 4px; }
 .gnb li:hover .sub { opacity: 1; visibility: visible; }
 .gnb .sub li a { display: block; padding: 10px 20px; font-size: 16px; font-weight: 500; color: var(--text); white-space: nowrap; }
 .gnb .sub li a:hover { background: var(--gray-1); color: var(--blue); }
@@ -106,7 +106,7 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
 .banner-sub { font-size: 20px; color: rgba(200,255,245,0.9); font-weight: 400; letter-spacing: 0.02em; }
 
 /* ── 브레드크럼 ── */
-.loc-bar { width: 100%; background: transparent; padding: 32px 0 22px; }
+.loc-bar { width: 100%; background: transparent; padding: 32px 0 22px; position: sticky; top: 66px; z-index: 90; }
 .loc-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; }
 .loc-path { display: flex; align-items: center; list-style: none; }
 .loc-path > li { position: relative; border: 1px solid #ccc; background-color: transparent; }
@@ -121,7 +121,7 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
 
 /* ── 메인 콘텐츠 ── */
 .page-content { padding: 44px 0 80px; background: #fff; }
-.page-title-area { margin-bottom: 32px; display: flex; align-items: baseline; gap: 20px; }
+.page-title-area { margin-bottom: 32px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; position: sticky; top: 169px; z-index: 89; background: transparent; padding: 0 0 8px; }
 .page-title-area h2 { font-size: 32px; font-weight: 800; color: #1A2A40; flex-shrink: 0; }
 .page-title-area p { font-size: 16px; color: var(--text-mid); line-height: 1.75; }
 
@@ -423,6 +423,8 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
   .page-content { padding: 24px 0 48px; }
   .search-panel { padding: 0; }
 }
+
+header { transition: background .2s, backdrop-filter .2s; }header.is-scrolled { background: rgba(255,255,255,0.78) !important; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }.loc-bar { transition: padding .2s, background .2s, backdrop-filter .2s; }.loc-bar.is-sticky { background: rgba(255,255,255,0.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 8px 0 4px; }.page-title-area, .content-header { transition: background .2s; }.page-title-area.is-sticky, .content-header.is-sticky { background: rgba(255,255,255,0.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }.page-title-area::after, .content-header::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 100vw; top: 0; bottom: 0; z-index: -1; box-shadow: 0 8px 8px -8px rgba(0,0,0,.12); opacity: 0; transition: opacity .2s; pointer-events: none; }.page-title-area.is-sticky::after, .content-header.is-sticky::after { opacity: 1; }
 </style>
 </head>
 <body>
@@ -460,7 +462,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 <section class="page-banner" aria-label="페이지 배너">
   <div class="wrap banner-inner">
     <h1 class="banner-title">사업 참가신청</h1>
-    <p class="banner-sub">국내외 전시회 참가를 통해 글로벌 시장 진출의 기회를 잡으세요</p>
+    <p class="banner-sub">국내외 사업 참가를 통해 글로벌 시장 진출의 기회를 잡으세요</p>
   </div>
 </section>
 
@@ -489,7 +491,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 
     <div class="page-title-area">
       <h2>신청내역</h2>
-      <p>전시회 참가 신청 내역을 조회합니다.</p>
+      <p>사업 참가 신청 내역을 조회합니다.</p>
     </div>
 
     <!-- ── 검색 패널 ── -->
@@ -556,7 +558,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
             <tr>
               <th style="width:60px;">No</th>
               <th style="width:110px;">신청일</th>
-              <th>전시회명</th>
+              <th>사업명</th>
               <th style="width:140px;">품목명</th>
               <th style="width:160px;">참가기업명</th>
               <th style="width:120px;">담당자명</th>
@@ -564,7 +566,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
             </tr>
           </thead>
           <tbody id="resultBody">
-            <tr>
+            <tr onclick="location.href='sub-apply-detail.html'" style="cursor:pointer;">
               <td>6</td>
               <td>2025.06.21</td>
               <td class="left">싱가포르 TECH WEEK (9/29~30)<br>홍콩 Beauty &amp; Wellness (8/13~17)</td>
@@ -573,7 +575,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
               <td>한소희</td>
               <td>접수완료</td>
             </tr>
-            <tr>
+            <tr onclick="location.href='sub-apply-detail.html'" style="cursor:pointer;">
               <td>5</td>
               <td>2025.06.20</td>
               <td class="left">싱가포르 TECH WEEK (9/29~30)</td>
@@ -582,7 +584,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
               <td>김지훈</td>
               <td>접수완료</td>
             </tr>
-            <tr>
+            <tr onclick="location.href='sub-apply-detail.html'" style="cursor:pointer;">
               <td>4</td>
               <td>2025.06.18</td>
               <td class="left">홍콩 Beauty &amp; Wellness (8/13~17)</td>
@@ -591,7 +593,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
               <td>이수진</td>
               <td>검토중</td>
             </tr>
-            <tr>
+            <tr onclick="location.href='sub-apply-detail.html'" style="cursor:pointer;">
               <td>3</td>
               <td>2025.06.15</td>
               <td class="left">싱가포르 TECH WEEK (9/29~30)</td>
@@ -600,7 +602,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
               <td>박민서</td>
               <td>승인</td>
             </tr>
-            <tr>
+            <tr onclick="location.href='sub-apply-detail.html'" style="cursor:pointer;">
               <td>2</td>
               <td>2025.06.10</td>
               <td class="left">홍콩 Beauty &amp; Wellness (8/13~17)</td>
@@ -609,7 +611,7 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
               <td>최유나</td>
               <td>승인</td>
             </tr>
-            <tr>
+            <tr onclick="location.href='sub-apply-detail.html'" style="cursor:pointer;">
               <td>1</td>
               <td>2025.06.05</td>
               <td class="left">싱가포르 TECH WEEK (9/29~30)</td>
@@ -746,5 +748,39 @@ function renderTable(data) {
   });
 })();
 </script>
+<script>
+(function() {
+  var locBar = document.querySelector(".loc-bar");
+  var titleEl = document.querySelector(".page-title-area") || document.querySelector(".content-header");
+  if (!locBar) return;
+  var threshold = locBar.offsetTop - 66;
+  function update() {
+    var stuck = window.scrollY > threshold;
+    locBar.classList.toggle("is-sticky", stuck);
+    if (titleEl) titleEl.classList.toggle("is-sticky", stuck);
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+})();
+</script>
+<script>
+(function(){
+  var locBar = document.querySelector('.loc-bar');
+  var titleEl = document.querySelector('.page-title-area') || document.querySelector('.content-header');
+  if (!locBar) return;
+  var threshold = locBar.offsetTop - 66;
+  function update() {
+    var stuck = window.scrollY > threshold;
+    locBar.classList.toggle('is-sticky', stuck);
+    if (titleEl) {
+      titleEl.classList.toggle('is-sticky', stuck);
+      titleEl.style.top = stuck ? (66 + locBar.offsetHeight) + 'px' : '';
+    }
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
+<script>(function(){var h=document.querySelector("header");if(!h)return;function u(){h.classList.toggle("is-scrolled",window.scrollY>0);}window.addEventListener("scroll",u,{passive:true});u();})();</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>임시저장내역 - LINKER NICE D&B</title>
+<title>신청 상세 내역 - LINKER NICE D&B</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -16,13 +16,14 @@
   --r: 14px; --trans: .25s ease;
   --primary:     #005B99;
   --primary-d:   #003B71;
+  --primary-l:   #E6EFF7;
   --border:      #D0D8E4;
   --text-mid:    #555555;
   --text-light:  #888888;
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; min-width: 360px; }
+  font-size: 16px; background: #fff; color: var(--text); line-height: 1.6; }
 a { text-decoration: none; color: inherit; }
 img { display: block; }
 ul { list-style: none; }
@@ -30,7 +31,7 @@ ul { list-style: none; }
 
 /* ── 헤더 ── */
 header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid var(--gray-2); height: 66px; display: flex; align-items: center; }
-.header-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; }
+.header-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; gap: 0; }
 .header-logo { flex-shrink: 0; margin-right: 40px; }
 .header-logo img { height: 38px; object-fit: contain; display: block; }
 .gnb { display: none; gap: 0; align-items: center; list-style: none; font-size: 18px; font-weight: 700; }
@@ -48,6 +49,15 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
 .hamburger span { display: block; width: 20px; height: 2px; background: var(--blue); border-radius: 2px; }
 @media (min-width: 768px) { .gnb { display: flex; } .hamburger { display: none; } }
 @media (max-width: 767px) { .util { display: none; } }
+
+/* ── 모바일 메뉴 ── */
+.mobile-nav { display: none; position: fixed; top: 66px; left: 0; right: 0; z-index: 99; background: #fff; border-bottom: 1px solid var(--gray-2); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+.mobile-nav.open { display: block; }
+.mobile-nav ul { list-style: none; padding: 8px 0; }
+.mobile-nav ul li a { display: block; padding: 14px 20px; font-size: 16px; font-weight: 500; color: var(--text); }
+.mobile-nav ul li a:hover { background: var(--gray-1); color: var(--blue); }
+.m-util { display: flex; gap: 8px; padding: 12px 20px; border-top: 1px solid var(--gray-2); }
+.m-login { color: var(--blue) !important; font-weight: 700 !important; }
 
 /* ── 페이지 배너 ── */
 .page-banner {
@@ -108,13 +118,13 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
 /* ── 브레드크럼 ── */
 .loc-bar { width: 100%; background: transparent; padding: 32px 0 22px; position: sticky; top: 66px; z-index: 90; }
 .loc-inner { width: min(1280px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; }
-.loc-path { display: flex; align-items: center; list-style: none; }
+.loc-path { display: flex; align-items: center; list-style: none; gap: 0; }
 .loc-path > li { position: relative; border: 1px solid #ccc; background-color: transparent; }
 .loc-path > li + li { border-left: 0; }
 .loc-home { display: flex; align-items: center; justify-content: center; width: 53px; height: 49px; color: #555; text-decoration: none; transition: background-color .2s; }
 .loc-home:hover { background-color: #f1ebff; }
 .loc-btn { display: flex; align-items: center; justify-content: space-between; width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 500; color: #222; text-decoration: none; transition: background-color .2s; white-space: nowrap; gap: 8px; }
-.loc-btn:hover { background-color: #f1ebff; }
+.loc-btn:hover { background-color: #f1ebff; color: #222; }
 .loc-none { display: flex; align-items: center; width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 700; color: #111; white-space: nowrap; }
 .loc-arrow { font-size: 15px; color: #888; flex-shrink: 0; }
 .loc-select { width: 198px; height: 49px; padding: 0 15px; font-size: 16px; font-weight: 700; color: #111; font-family: inherit; border: none; background: transparent; cursor: pointer; outline: none; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
@@ -125,209 +135,122 @@ header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom
 .page-title-area h2 { font-size: 32px; font-weight: 800; color: #1A2A40; flex-shrink: 0; }
 .page-title-area p { font-size: 16px; color: var(--text-mid); line-height: 1.75; }
 
-/* ── 검색 패널 ── */
-.search-panel {
-  padding: 28px 0;
-  margin-bottom: 40px;
-}
-.search-row:first-child {
-  border-top: 2px solid #222;
-}
-.search-grid {
-  display: flex;
-  flex-direction: column;
-}
-.search-row {
-  display: flex;
-  align-items: center;
-}
-.search-label {
-  width: 130px;
-  flex-shrink: 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: #333;
-  padding: 22px 20px;
-}
-.search-field {
-  flex: 1;
-  padding: 22px 20px 22px 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid #e0e0e0;
-}
-.search-row:last-child .search-field {
-  border-bottom: none;
-}
-.search-input {
-  height: 38px;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  padding: 0 10px;
-  font-size: 16px;
-  font-family: inherit;
-  color: var(--text);
-  background: #fff;
-  outline: none;
-  transition: border-color .2s;
-  width: 100%;
-}
-.search-input:focus { border-color: #888; }
-.search-input::placeholder { color: #bbb; }
-.date-range {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.date-range .search-input { width: 160px; flex-shrink: 0; }
-.date-sep { font-size: 16px; color: #888; flex-shrink: 0; }
-.search-btn-area {
-  margin-top: 24px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-}
-.btn-search {
+/* ── 상태 뱃지 ── */
+.status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  height: 44px;
-  padding: 0 36px;
-  background: #1A2A40;
-  color: #fff;
-  font-size: 16px;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 13px;
   font-weight: 700;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background .2s;
+  vertical-align: middle;
 }
-.btn-search:hover { background: #0D1E3A; }
-.btn-reset {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 44px;
-  padding: 0 28px;
-  background: #fff;
-  color: #555;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid #bbb;
-  border-radius: 3px;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background .2s;
-}
-.btn-reset:hover { background: #f5f5f5; }
+.status-badge.complete  { background: #E8F5E9; color: #2E7D32; }
+.status-badge.review    { background: #FFF3E0; color: #E65100; }
+.status-badge.approved  { background: #E3F2FD; color: #1565C0; }
+.status-badge.rejected  { background: #FFEBEE; color: #C62828; }
 
-/* ── 결과 영역 ── */
-.result-area { margin-top: 8px; }
-.result-header {
+/* ── 상세 폼 (sub-apply.html 동일 스타일) ── */
+.detail-form-wrap {}
+
+.form-title-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
+  justify-content: flex-start;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #222;
+  margin-bottom: 0;
+  gap: 12px;
 }
-.result-count {
-  font-size: 16px;
-  color: #333;
-  font-weight: 500;
-}
-.result-count strong { color: var(--blue); font-weight: 800; }
-
-/* ── 결과 테이블 ── */
-.result-table-wrap { overflow-x: auto; }
-.result-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 16px;
-}
-.result-table thead tr {
-  background: none;
+.form-title-label {
+  font-size: 22px;
+  font-weight: 800;
   color: #1A2A40;
 }
-.result-table thead {
-  border-top: 2px solid #222;
-  border-bottom: 1px solid #aaa;
+.form-title-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-mid);
 }
-.result-table th {
-  padding: 14px 16px;
-  font-size: 15px;
-  font-weight: 700;
-  text-align: center;
-  white-space: nowrap;
-}
-.result-table tbody tr {
-  border-bottom: 1px solid #e8e8e8;
-  transition: background .15s;
-}
-.result-table tbody tr:hover { background: #f5f8fc; }
-.result-table td {
-  padding: 16px 16px;
-  text-align: center;
-  color: #333;
-  white-space: nowrap;
-}
-.result-table td.left { text-align: left; }
 
-/* 발송하기 버튼 */
-.btn-send {
+.form-section-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1A2A40;
+  margin-top: 80px;
+  margin-bottom: 0;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #222;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  min-height: 84px;
+}
+.form-label {
+  width: 160px;
+  flex-shrink: 0;
+  padding: 30px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+}
+.form-field {
+  flex: 1;
+  padding: 26px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.form-field.multiline { align-items: flex-start; padding-top: 28px; padding-bottom: 28px; }
+
+/* 사업명 뱃지 (마케팅 발송 페이지 cat-chip 동일 스타일) */
+.biz-chip {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  height: 32px;
-  padding: 0 14px;
-  background: var(--blue);
+  gap: 6px;
+  background: #1B8A6B;
   color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background .2s;
-  white-space: nowrap;
-}
-.btn-send:hover { background: var(--blue-d); color: #fff; }
-
-/* 빈 결과 */
-.empty-result {
-  padding: 80px 0;
-  text-align: center;
-  color: #aaa;
-}
-.empty-result i { font-size: 48px; margin-bottom: 16px; display: block; }
-.empty-result p { font-size: 16px; }
-
-/* ── 페이지네이션 ── */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  margin-top: 32px;
-}
-.page-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  background: #fff;
-  color: #555;
-  font-size: 14px;
-  font-family: inherit;
-  cursor: pointer;
-  transition: all .15s;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 15px;
   font-weight: 500;
 }
-.page-btn:hover { border-color: #1A2A40; color: #1A2A40; }
-.page-btn.active { background: #1A2A40; border-color: #1A2A40; color: #fff; font-weight: 700; }
-.page-btn.arrow { color: #888; }
+
+/* ── 하단 버튼 ── */
+.detail-btn-area {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--gray-2);
+}
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 28px;
+  border: 1px solid var(--gray-3);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text-mid);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-back:hover { background: var(--gray-1); border-color: #999; color: var(--text); }
 
 /* ── 푸터 ── */
 footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding: 40px 0 28px; }
@@ -344,102 +267,25 @@ footer { background: var(--gray-1); border-top: 1px solid var(--gray-2); padding
 .footer__info-row select { border: 1px solid var(--gray-2); background: #fff; color: var(--text); padding: 0 14px; font-size: 16px; width: 200px; height: 38px; border-radius: 8px; cursor: pointer; outline: none; flex-shrink: 0; transition: border-color var(--trans); }
 .footer__info-row select:hover { border-color: var(--blue); }
 .copyright { margin-top: 18px; font-size: 12px; color: var(--gray-4); opacity: .75; }
-/* ── 햄버거 애니메이션 ── */
-.hamburger span { transition: transform .25s ease, opacity .25s ease; }
-.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 768px) { .fnb { position: static; margin-bottom: 16px; } .fnb__wrap { flex-wrap: wrap; } .footer__info-row { flex-direction: column; gap: 14px; margin-top: 16px; } .footer__info-row select { width: 100%; max-width: 280px; } .site-address { font-size: 12px; } }
 
-/* ── 모바일 내비게이션 패널 ── */
-.mobile-nav {
-  position: fixed; top: 66px; left: 0; right: 0; z-index: 99;
-  background: #fff; border-bottom: 1px solid var(--gray-2);
-  box-shadow: 0 8px 24px rgba(0,0,0,.08);
-  transform: translateY(-110%);
-  transition: transform .3s ease;
-  pointer-events: none;
-}
-.mobile-nav.open { transform: translateY(0); pointer-events: auto; }
-.mobile-nav > ul { list-style: none; }
-.mobile-nav > ul li a {
-  display: block; padding: 15px 20px;
-  font-size: 16px; font-weight: 700; color: var(--text);
-  border-bottom: 1px solid var(--gray-2);
-}
-.mobile-nav > ul li a:active { background: var(--gray-1); }
-.mobile-nav .m-util { display: flex; gap: 8px; padding: 12px 20px 16px; }
-.mobile-nav .m-util a {
-  flex: 1; text-align: center; font-size: 15px; font-weight: 600;
-  color: var(--gray-4); padding: 9px; border: 1px solid var(--gray-2);
-  border-radius: 6px; transition: all var(--trans);
-}
-.mobile-nav .m-util .m-login { color: var(--blue); border-color: rgba(26,111,216,.3); }
-@media (min-width: 768px) { .mobile-nav { display: none !important; } }
-
+/* ── 반응형 ── */
 @media (max-width: 768px) {
-  body { min-width: 360px; }
-
-  /* 배너 */
-  .page-banner { padding: 40px 0; }
-  .banner-title { font-size: 32px; padding-bottom: 2.5rem; }
-  .banner-sub { font-size: 15px; max-width: 260px; margin: 0 auto; line-height: 1.7; }
-
-  /* 브레드크럼 */
-  .loc-bar { padding: 0; position: sticky; top: 66px; z-index: 90; background: #fff; border-bottom: 1px solid #e0e0e0; box-shadow: none; }
-  .loc-inner { width: 100%; margin: 0; padding: 0; }
-  .loc-path > li:first-child { display: none; }
-  .loc-path { width: 100%; }
-  .loc-path > li { flex: 1; border: none; }
-  .loc-path > li + li { border-left: 1px solid #ccc; }
-  .loc-btn { width: 100%; height: 44px; font-size: 14px; padding: 0 12px; justify-content: space-between; }
+  .loc-bar { padding: 0; position: sticky; top: 66px; z-index: 90; background: #fff; border-bottom: 1px solid #e0e0e0; }
   .loc-select { width: 100%; height: 44px; font-size: 14px; padding: 0 12px; }
-
-  /* 페이지 타이틀 */
+  .form-row { flex-direction: column; min-height: unset; }
+  .form-label { width: 100%; padding: 16px 0 4px; }
+  .form-field { padding: 0 0 16px; }
+  .detail-meta { gap: 16px; }
   .page-title-area { flex-direction: column; gap: 6px; }
   .page-title-area h2 { font-size: 24px; }
-
-  /* 검색 패널: 세로 스택 */
-  .search-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .search-label {
-    width: 100%;
-    padding: 16px 0 8px 0;
-    font-size: 15px;
-  }
-  .search-field {
-    width: 100%;
-    padding: 0 0 16px 0;
-  }
-  .search-row:first-child { border-top: 2px solid #222; }
-  .search-row:first-child .search-label { padding-top: 16px; }
-
-  /* 날짜 범위 */
-  .date-range { flex-wrap: wrap; width: 100%; }
-  .date-range .search-input { width: 100%; flex-shrink: 1; }
-
-  /* 검색 버튼 */
-  .search-btn-area { flex-direction: column; }
-  .btn-search, .btn-reset { width: 100%; justify-content: center; }
-
-  /* 결과 테이블 */
-  .result-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .result-table { min-width: 600px; font-size: 14px; }
-  .result-table th, .result-table td { padding: 10px 10px; }
-
-  /* 푸터 */
   .fnb { position: static; margin-bottom: 16px; }
-  .fnb__wrap { flex-wrap: wrap; }
-  .footer__info-row { flex-direction: column; gap: 14px; margin-top: 16px; }
   .footer__info-row select { width: 100%; max-width: 280px; }
   .site-address { font-size: 12px; }
 }
-
 @media (max-width: 480px) {
   .banner-title { font-size: 26px; }
   .page-content { padding: 24px 0 48px; }
-  .search-panel { padding: 0; }
 }
 
 header { transition: background .2s, backdrop-filter .2s; }header.is-scrolled { background: rgba(255,255,255,0.78) !important; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }.loc-bar { transition: padding .2s, background .2s, backdrop-filter .2s; }.loc-bar.is-sticky { background: rgba(255,255,255,0.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 8px 0 4px; }.page-title-area, .content-header { transition: background .2s; }.page-title-area.is-sticky, .content-header.is-sticky { background: rgba(255,255,255,0.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }.page-title-area::after, .content-header::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 100vw; top: 0; bottom: 0; z-index: -1; box-shadow: 0 8px 8px -8px rgba(0,0,0,.12); opacity: 0; transition: opacity .2s; pointer-events: none; }.page-title-area.is-sticky::after, .content-header.is-sticky::after { opacity: 1; }
@@ -454,22 +300,24 @@ header { transition: background .2s, backdrop-filter .2s; }header.is-scrolled { 
     </h1>
     <nav>
       <ul class="gnb">
-        <li><a href="sub-bigbuyer-finder.html" style="color:#1A6FD8;">빅바이어 마케팅</a></li>
-        <li><a href="sub-apply.html">사업 참가신청</a></li>
+        <li><a href="sub-bigbuyer-finder.html">빅바이어 마케팅</a></li>
+        <li><a href="sub-apply.html" style="color:#1A6FD8;">사업 참가신청</a></li>
       </ul>
     </nav>
     <div class="util">
       <a href="#">로그인</a>
       <a href="#">회원가입</a>
     </div>
-    <div class="hamburger" id="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></div>
+    <div class="hamburger" id="hamburger" aria-label="메뉴 열기">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </header>
 
 <div class="mobile-nav" id="mobileNav">
   <ul>
-    <li><a href="sub-bigbuyer-finder.html" style="color:#1A6FD8;">빅바이어 마케팅</a></li>
-    <li><a href="sub-apply.html">사업 참가신청</a></li>
+    <li><a href="sub-bigbuyer-finder.html">빅바이어 마케팅</a></li>
+    <li><a href="sub-apply.html" style="color:#1A6FD8;">사업 참가신청</a></li>
   </ul>
   <div class="m-util">
     <a href="#" class="m-login">로그인</a>
@@ -479,26 +327,30 @@ header { transition: background .2s, backdrop-filter .2s; }header.is-scrolled { 
 
 <section class="page-banner" aria-label="페이지 배너">
   <div class="wrap banner-inner">
-    <h1 class="banner-title">빅바이어 마케팅</h1>
-    <p class="banner-sub">마케팅 메시지 임시저장 내역을 관리합니다</p>
+    <h1 class="banner-title">사업 참가신청</h1>
+    <p class="banner-sub">국내외 사업 참가를 통해 글로벌 시장 진출의 기회를 잡으세요</p>
   </div>
 </section>
 
 <div class="loc-bar">
   <div class="loc-inner">
     <ul class="loc-path" aria-label="현재 위치">
-      <li><a href="index.html" class="loc-home" aria-label="홈"><i class="fa-solid fa-house" style="font-size:16px;"></i></a></li>
+      <li>
+        <a href="index.html" class="loc-home" aria-label="홈">
+          <i class="fa-solid fa-house" style="font-size:16px;"></i>
+        </a>
+      </li>
       <li>
         <select class="loc-select" onchange="if(this.value) location.href=this.value;">
-          <option value="sub-bigbuyer-finder.html" selected>빅바이어마케팅</option>
-          <option value="sub-apply.html">사업 참가신청</option>
+          <option value="sub-bigbuyer-finder.html">빅바이어마케팅</option>
+          <option value="sub-apply.html" selected>사업 참가신청</option>
         </select>
       </li>
       <li>
         <select class="loc-select" onchange="if(this.value) location.href=this.value;">
-          <option value="sub-bigbuyer-finder.html">빅데이터 바이어 발굴</option>
-          <option value="sub-bigbuyer-send.html">마케팅 메시지 발송</option>
-          <option value="sub-bigbuyer-history.html" selected>임시저장내역</option>
+          <option value="sub-apply.html">참가신청</option>
+          <option value="sub-apply-history.html">신청내역</option>
+          <option value="sub-apply-detail.html" selected>신청 상세</option>
         </select>
       </li>
     </ul>
@@ -509,70 +361,81 @@ header { transition: background .2s, backdrop-filter .2s; }header.is-scrolled { 
   <div class="wrap">
 
     <div class="page-title-area">
-      <h2>임시저장내역</h2>
-      <p>작성 중인 마케팅 메시지 임시저장 내역을 조회합니다.</p>
+      <h2>사업 참가 신청 정보</h2>
+      <p>사업 참가 신청 내역의 상세 정보를 확인합니다.</p>
     </div>
 
-    <!-- ── 목록 ── -->
-    <div class="result-area" id="resultArea">
-      <div class="result-header">
-        <p class="result-count">총 <strong id="totalCount">5</strong>건</p>
+    <!-- 상세 폼 -->
+    <div class="detail-form-wrap">
+
+      <div class="form-title-bar">
+        <div class="form-title-meta">
+          <span>2025.06.21</span>
+          <span class="status-badge complete">접수완료</span>
+        </div>
       </div>
 
-      <div class="result-table-wrap">
-        <table class="result-table">
-          <thead>
-            <tr>
-              <th style="width:60px;">No</th>
-              <th style="width:180px;">대상바이어</th>
-              <th>제목</th>
-              <th style="width:160px;">임시저장 일시</th>
-            </tr>
-          </thead>
-          <tbody id="resultBody">
-            <tr onclick="location.href='sub-bigbuyer-send.html'" style="cursor:pointer;">
-              <td>5</td>
-              <td>바이어 발굴<br><span style="font-size:13px;color:#888;font-weight:400;">(발송건수: 50건)</span></td>
-              <td class="left">홈&amp;키친 바이어 대상 신제품 소개</td>
-              <td>2025.06.28 14:32</td>
-            </tr>
-            <tr onclick="location.href='sub-bigbuyer-send.html'" style="cursor:pointer;">
-              <td>4</td>
-              <td>바이어 발굴<br><span style="font-size:13px;color:#888;font-weight:400;">(발송건수: 30건)</span></td>
-              <td class="left">뷰티 디바이스 프로모션 안내</td>
-              <td>2025.06.25 10:15</td>
-            </tr>
-            <tr onclick="location.href='sub-bigbuyer-send.html'" style="cursor:pointer;">
-              <td>3</td>
-              <td>바이어 발굴<br><span style="font-size:13px;color:#888;font-weight:400;">(발송건수: 100건)</span></td>
-              <td class="left">스마트 센서 수출 제안</td>
-              <td>2025.06.22 09:04</td>
-            </tr>
-            <tr onclick="location.href='sub-bigbuyer-send.html'" style="cursor:pointer;">
-              <td>2</td>
-              <td>바이어 발굴<br><span style="font-size:13px;color:#888;font-weight:400;">(발송건수: 10건)</span></td>
-              <td class="left">식품 바이어 미팅 요청</td>
-              <td>2025.06.18 16:50</td>
-            </tr>
-            <tr onclick="location.href='sub-bigbuyer-send.html'" style="cursor:pointer;">
-              <td>1</td>
-              <td>바이어 발굴<br><span style="font-size:13px;color:#888;font-weight:400;">(발송건수: 50건)</span></td>
-              <td class="left">패션 신상품 컬렉션 발송</td>
-              <td>2025.06.10 11:22</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- 사업명 -->
+      <div class="form-row">
+        <div class="form-label">사업명</div>
+        <div class="form-field">
+          <span class="biz-chip">싱가포르 TECH WEEK (9/29~30)</span>
+          <span class="biz-chip">홍콩 Beauty &amp; Wellness (8/13~17)</span>
+        </div>
       </div>
 
-      <!-- 페이지네이션 -->
-      <div class="pagination">
-        <button class="page-btn arrow">&#8249;</button>
-        <button class="page-btn active">1</button>
-        <button class="page-btn">2</button>
-        <button class="page-btn">3</button>
-        <button class="page-btn arrow">&#8250;</button>
+      <!-- 품목 -->
+      <div class="form-row">
+        <div class="form-label">품목</div>
+        <div class="form-field">뷰티 디바이스</div>
       </div>
+
+      <!-- 추가사항 섹션 -->
+      <p class="form-section-title">추가사항</p>
+
+      <!-- 참가기업명 -->
+      <div class="form-row">
+        <div class="form-label">참가기업명</div>
+        <div class="form-field">㈜코스모텍</div>
+      </div>
+
+      <!-- 담당자명/직함 -->
+      <div class="form-row">
+        <div class="form-label">담당자명/직함</div>
+        <div class="form-field">한소희 / 마케팅팀 팀장</div>
+      </div>
+
+      <!-- 연락처 -->
+      <div class="form-row">
+        <div class="form-label">연락처</div>
+        <div class="form-field">010-3821-9047</div>
+      </div>
+
+      <!-- 이메일 -->
+      <div class="form-row">
+        <div class="form-label">이메일</div>
+        <div class="form-field">han.sohee@cosmotech.co.kr</div>
+      </div>
+
+      <!-- 추가 문의 내용 -->
+      <div class="form-row" style="align-items:flex-start;">
+        <div class="form-label" style="padding-top:30px;">추가 문의 내용</div>
+        <div class="form-field multiline" style="border-bottom:none;">
+          부스 위치 관련 문의드립니다.<br>
+          가능하면 입구 쪽 배치를 희망하며, 전기 콘센트(220V) 2구 이상 필요합니다.<br>
+          홍콩 사업의 경우 2인 참가 예정이오니 별도 안내 부탁드립니다.
+        </div>
+      </div>
+
+      <!-- 하단 버튼 -->
+      <div class="detail-btn-area">
+        <button type="button" class="btn-back" onclick="location.href='sub-apply-history.html'">
+          <i class="fa-solid fa-arrow-left"></i> 목록으로
+        </button>
+      </div>
+
     </div>
+    <!-- /.detail-form-wrap -->
 
   </div>
 </main>
@@ -606,36 +469,6 @@ header { transition: background .2s, backdrop-filter .2s; }header.is-scrolled { 
 </footer>
 
 <script>
-var allData = [
-  { no:5, date:'2025.06.28', title:'홈&키친 바이어 대상 신제품 소개',   category:'Home & Kitchen > Home',  count:'50건'  },
-  { no:4, date:'2025.06.25', title:'뷰티 디바이스 프로모션 안내',        category:'Beauty & Personal Care',  count:'30건'  },
-  { no:3, date:'2025.06.22', title:'스마트 센서 수출 제안',               category:'Electronic Products',     count:'100건' },
-  { no:2, date:'2025.06.18', title:'식품 바이어 미팅 요청',               category:'Food & Beverage',         count:'10건'  },
-  { no:1, date:'2025.06.10', title:'패션 신상품 컬렉션 발송',             category:'Fashion',                 count:'50건'  }
-];
-
-
-function renderTable(data) {
-  document.getElementById('totalCount').textContent = data.length;
-  var tbody = document.getElementById('resultBody');
-
-  if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="4" style="padding:60px 0;color:#aaa;font-size:16px;">검색 결과가 없습니다.</td></tr>';
-    return;
-  }
-
-  tbody.innerHTML = data.map(function(d) {
-    return '<tr onclick="location.href=\'sub-bigbuyer-send.html\'" style="cursor:pointer;">' +
-      '<td>' + d.no + '</td>' +
-      '<td>바이어 발굴<br><span style="font-size:13px;color:#888;font-weight:400;">(발송건수: ' + d.count + ')</span></td>' +
-      '<td class="left">' + d.title + '</td>' +
-      '<td>' + d.date + '</td>' +
-    '</tr>';
-  }).join('');
-}
-</script>
-
-<script>
 (function() {
   var hamburger = document.getElementById('hamburger');
   var mobileNav = document.getElementById('mobileNav');
@@ -653,25 +486,11 @@ function renderTable(data) {
   });
 })();
 </script>
-<script>
-(function() {
-  var locBar = document.querySelector(".loc-bar");
-  var titleEl = document.querySelector(".page-title-area") || document.querySelector(".content-header");
-  if (!locBar) return;
-  var threshold = locBar.offsetTop - 66;
-  function update() {
-    var stuck = window.scrollY > threshold;
-    locBar.classList.toggle("is-sticky", stuck);
-    if (titleEl) titleEl.classList.toggle("is-sticky", stuck);
-  }
-  window.addEventListener("scroll", update, { passive: true });
-  update();
-})();
-</script>
+
 <script>
 (function(){
   var locBar = document.querySelector('.loc-bar');
-  var titleEl = document.querySelector('.page-title-area') || document.querySelector('.content-header');
+  var titleEl = document.querySelector('.page-title-area');
   if (!locBar) return;
   var threshold = locBar.offsetTop - 66;
   function update() {
